@@ -1,0 +1,115 @@
+output.txt
+node_modules
+dist
+.mastra
+
+# ── Secrets & Environment ─────────────────────────────────
+.env
+.env.*
+.google-mcp/
+!.env.example
+*.pem
+*.p12
+*.pfx
+*.key
+*.crt
+*.jks
+
+# ── Cloud Provider Credentials ────────────────────────────
+**/service-account*.json
+**/credentials*.json
+**/gcp-*.json
+**/firebase-*.json
+
+# ── Database files ────────────────────────────────────────
+*.db
+*.db.*
+*.db-*
+*.duckdb
+*.duckdb.*
+*.duckdb-*
+*.sqlite
+*.sqlite3
+
+# ── Deploy staging/worktrees (kopie repo) ─────────────────
+agentic-agents-staging/
+agentic-agents-worktrees/
+.deploy/
+
+# ── Build & Platform ─────────────────────────────────────
+.netlify
+.vercel
+
+# ── Generated files ──────────────────────────────────────
+pino-detection.js
+
+# ── Editor & OS ──────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/settings.json
+agent-logs.txt
+_external/
+
+# NotebookLM MCP — local Chrome profile + config (sensitive: cookies/session)
+chrome_profile_notebooklm/
+notebooklm-config.json
+
+# Playwright MCP state captures & browser artifacts
+.playwright-mcp/
+**/.playwright-mcp/
+*.log
+
+# Runtime output dir — 12GB of DBs, media and MCP state captures, nothing
+# tracked. The whole dir is ignored so stray runtime files (page snapshots,
+# scratch dumps) can't slip into a commit; the entries below are the known
+# offenders, kept for documentation.
+src/mastra/public/
+src/mastra/public/.playwright-mcp/
+src/mastra/public/film-work/
+src/mastra/public/film-output/
+src/mastra/public/design-work/
+src/mastra/public/music-work/
+src/mastra/public/projekty/
+
+
+# ── Local Deploy Config ──────────────────────────────────
+deploy.config.json
+
+# ── Clutter & Scratch ────────────────────────────────────
+scratch/
+storage/
+artifacts/
+.drafts/
+music-work/
+design-work/
+film-work/
+film-output/
+
+# Local prompt comparison/audit catalogs (kept outside Git)
+/pomysły/prompty/
+/pomysły/system prompts new/
+/pomysły/system prompts enhanced/
+/pomysły/ulepszone_prompty_agentów/
+
+# ── External downloaded repositories ──────────────────────
+/storage/downloads/*
+!/storage/downloads/deep-research-report.md
+
+# Etap 6: runtime-generated skills (distilled/quarantined/archived) — not source
+src/mastra/_skills/auto/*.md
+src/mastra/_skills/quarantine/*.md
+src/mastra/_skills/archive/*.md
+
+# Etap 8: Graphify code graph (runtime artifact — build with npm run graph:build)
+graphify-out/
+src/mastra/graphify-out/
+
+# ── Local Knowledge Base & Candidate Grounding (Private facts, CVs, business data) ──
+# Allow template knowledge structure, but ignore PDFs and private additions
+src/mastra/knowledge/personal/documents/*.pdf
+src/mastra/knowledge/personal/private/
+*.pdf

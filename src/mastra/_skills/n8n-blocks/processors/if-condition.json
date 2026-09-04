@@ -1,0 +1,30 @@
+{
+  "blockId": "if-condition",
+  "description": "Conditional branch: routes to true or false output",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "conditions": [{
+              "leftValue": "={{ $json[\"{{field}}\"] }}",
+              "rightValue": "{{value}}",
+              "operator": { "type": "string", "operation": "equals" }
+            }]
+          }
+        }
+      },
+      "id": "if_condition",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [0, 300]
+    }
+  ],
+  "params": {
+    "field": { "description": "JSON field to check", "default": "type", "required": true },
+    "value": { "description": "Value to compare against", "default": "", "required": true }
+  },
+  "outputNode": "IF",
+  "outputs": 2
+}

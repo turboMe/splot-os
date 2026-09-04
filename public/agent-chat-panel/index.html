@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Splot OS · Agentic Command & Chat Panel</title>
+
+  <!-- Modularne Arkusze Stylów CSS -->
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/chat.css">
+  <link rel="stylesheet" href="styles/steps.css">
+  <link rel="stylesheet" href="styles/inspectors.css">
+  <link rel="stylesheet" href="styles/modals.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/dashboard-tabs.css">
+</head>
+<body>
+
+<!-- POWIADOMIENIE WYSUWANE Z GÓRY (TOP NOTIFICATION BANNER - 4S) -->
+<div class="top-notification" id="top-notification"></div>
+
+<div class="app-container">
+  <!-- 1. GÓRNY PASEK NAWIGACYJNY (TOPBAR) -->
+  <header class="topbar">
+    <!-- LEWA STRONA: HAMBURGER + ZAKŁADKI -->
+    <div class="topbar-left">
+      <button class="btn-icon" id="btn-reveal-sidebar" title="Pokaż / Ukryj Wątki [H]">☰</button>
+      <nav class="nav-tabs" id="main-nav-tabs">
+        <button class="ntab active" data-view="view-chat" title="Czat Główny">
+          <svg class="ntab-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <span class="ntab-label">Czat Główny</span>
+        </button>
+
+        <button class="ntab" data-view="view-orchestration" title="Orkiestracja">
+          <svg class="ntab-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+          <span class="ntab-label">Orkiestracja</span>
+        </button>
+
+        <button class="ntab" data-view="view-evals" title="Ewaluacje">
+          <svg class="ntab-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <path d="m9 12 2 2 4-4"></path>
+          </svg>
+          <span class="ntab-label">Ewaluacje</span>
+        </button>
+
+        <button class="ntab" data-view="tab-jarvis" title="Command Center">
+          <svg class="ntab-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="6"></circle>
+            <circle cx="12" cy="12" r="2"></circle>
+          </svg>
+          <span class="ntab-label">Command Center</span>
+        </button>
+
+        <button class="ntab" data-view="tab-analytics" title="Analytics">
+          <svg class="ntab-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+          <span class="ntab-label">Analytics</span>
+        </button>
+
+        <button class="ntab" data-view="tab-workspace" title="Workspace">
+          <svg class="ntab-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span class="ntab-label">Workspace</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- ŚRODEK: DYNAMICZNA KAPSUŁA GŁOSOWA ALEXA & SPLOT OS -->
+    <div class="topbar-center">
+      <div class="voice-capsule" id="alex-capsule" title="Kliknij i przytrzymaj by mówić (lub Ctrl+Spacja) · Podwójny klik = tryb ciągły">
+        <div class="vc-orb" id="alex-orb"></div>
+        <div class="vc-content" id="alex-vc-content">
+          <span class="vc-brand">SPLOT OS</span>
+          <span class="vc-status-label" style="display:none;">Alex słucha...</span>
+          <div class="vc-waveform" style="display:none;">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+        <button class="vc-mic-btn" id="btn-alex-mic" title="Przytrzymaj by mówić">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+            <line x1="12" y1="19" x2="12" y2="23"></line>
+            <line x1="8" y1="23" x2="16" y2="23"></line>
+          </svg>
+        </button>
+        <button class="vc-menu-btn" id="btn-alex-menu" title="Menu Alexa">▾</button>
+
+        <!-- Menu Opcji Alexa (Popover) -->
+        <div class="alex-menu-popover" id="alex-menu-popover">
+          <div class="amp-item" id="opt-alex-ptt">
+            <span class="amp-icon">⏺</span>
+            <div class="amp-text">
+              <div class="amp-title">Push-to-Talk</div>
+              <div class="amp-desc">Przytrzymaj myszką lub <kbd>Ctrl</kbd>+<kbd>Spacja</kbd></div>
+            </div>
+          </div>
+          <div class="amp-item" id="opt-alex-continuous">
+            <span class="amp-icon">🎙️</span>
+            <div class="amp-text">
+              <div class="amp-title">Tryb Ciągły (Hands-free)</div>
+              <div class="amp-desc">Ciągły nasłuch w tle z VAD</div>
+            </div>
+            <span class="amp-toggle" id="alex-toggle-continuous">OFF</span>
+          </div>
+          <div class="amp-divider"></div>
+          <div class="amp-item" id="opt-alex-transcript">
+            <span class="amp-icon">📋</span>
+            <div class="amp-text">
+              <div class="amp-title">Podsumowanie & Transkrypcja</div>
+              <div class="amp-desc">Zapis dialogu, statusy i zgody</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRAWA STRONA: AKCJE -->
+    <div class="topbar-right">
+      <div class="topbar-actions">
+        <button class="btn-icon" id="btn-split" title="Włącz / Wyłącz Split View [S]">◫</button>
+        <button class="btn-icon" data-drawer="mem" title="Inspektor Pamięci [M]">🧠</button>
+        <button class="btn-icon" data-drawer="term" title="Konsola & Ledger [T]">💻</button>
+        <button class="btn-icon" data-drawer="art" title="Artefakty & Pliki [A]">📦</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. GŁÓWNY OBSZAR ROBOCZY (WORKSPACE) -->
+  <!-- Sidebar wątków startuje ZWINIĘTY na każdym ekranie (przycisk ☰ w topbarze go pokazuje).
+       Klasa jest w markupie, a nie dopinana z JS, żeby panel nie mignął przy starcie. -->
+  <main class="workspace sidebar-hidden">
+    <!-- PIONOWY PASEK IKON AGENTÓW (LEFT AGENT RAIL Z SVG) -->
+    <aside class="agent-rail" id="agent-rail"></aside>
+
+    <!-- ROZWIJANA KARTA NAJECHANIA (HOVER CARD) -->
+    <div class="agent-hover-card" id="agent-hover-card"></div>
+
+    <!-- LEWY PANEL BOCZNY (SKONSOLIDOWANE WĄTKI + TRYB USUWANIA) -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <span>WĄTKI WSZYSTKICH ROZMÓW</span>
+        <button class="sidebar-action-btn" id="btn-toggle-delete-mode" title="Włącz tryb zaznaczania wątków do usunięcia">☑</button>
+      </div>
+
+      <!-- Pasek akcji w trybie usuwania -->
+      <div class="sidebar-delete-bar" id="sidebar-delete-bar">
+        <button class="btn-del-all" id="btn-del-all">Usuń wszystko</button>
+        <button class="btn-del-selected" id="btn-del-selected">🗑 Usuń</button>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="thread-list" id="thread-list"></div>
+      </div>
+    </aside>
+
+    <!-- WIDOK 1: CZAT GŁÓWNY & SPLIT SCREEN -->
+    <section class="chat-section tab-view active" id="view-chat" style="padding:0;">
+      <div class="chat-split-container">
+        <!-- Główny wątek (Czat 1 - Domyślnie metaAgent, z możliwością wyboru i historią) -->
+        <div class="chat-pane" id="main-pane">
+          <!-- Nagłówek Czatu 1 -->
+          <div class="pane-header">
+            <div class="agent-select-box">
+              <span>Agent:</span>
+              <select class="agent-dropdown" id="main-agent-select"></select>
+              <button class="btn-history" id="btn-main-history" title="Pokaż historię wątków wybranego agenta">📜 Historia</button>
+            </div>
+            
+            <div class="pane-header-right">
+              <!-- Kapsuła pamięci Observational Memory dla Czatu 1 -->
+              <div class="om-capsule-wrapper" id="main-om-wrapper" title="Observational Memory (Pamięć Obserwacyjna)"></div>
+
+              <div class="pane-status-tag" style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px;">
+                <span style="color:var(--success);">●</span> Czat Główny
+              </div>
+            </div>
+
+            <!-- Popover historii wątków dla Czatu 1 (BEZ IKON) -->
+            <div class="history-popover" id="main-history-popover">
+              <div class="history-pop-header">
+                <span>Historia wątków agenta</span>
+              </div>
+              <div class="history-pop-list" id="main-pop-list"></div>
+            </div>
+          </div>
+
+          <div class="chat-messages" id="chat-main"></div>
+          
+          <!-- Indykator pisania / pulsowania -->
+          <div class="typing-bar" id="typing-bar" style="margin: 0 18px 8px;">
+            <div class="typing-dots">
+              <i></i><i></i><i></i>
+            </div>
+            <span>Agent analizuje zadanie...</span>
+          </div>
+
+          <!-- Główny Edytor (Composer Czat 1 z Attach & Drag/Drop) -->
+          <footer class="composer">
+            <div class="drop-overlay" id="drop-overlay">Upuść pliki tutaj, aby dołączyć do kontekstu agenta (Czat 1)</div>
+            <input type="file" id="file-input" multiple style="display:none;">
+            <div class="attach-row" id="attach-row"></div>
+            
+            <div class="composer-box">
+              <button class="btn-attach" id="btn-attach" title="Dołącz pliki">📎</button>
+              <button class="btn-voice" id="btn-voice-main" title="Mów zamiast pisać (Google Gemini Speech-to-Text)">🎙️</button>
+              <textarea class="composer-textarea" id="composer-input" rows="1" placeholder="Napisz do wybranego agenta... (Shift+Enter dla nowej linii)"></textarea>
+              <div class="composer-actions">
+                <button class="btn-icon" id="btn-expand-composer" title="Rozwiń edytor [Fullscreen]">↗</button>
+                <button class="btn-send" id="btn-send">Wyślij ↵</button>
+              </div>
+            </div>
+          </footer>
+        </div>
+
+        <!-- Boczny wątek (Czat 2 - Dedykowany Agent w Split Screen z Historią, Attach, Drag/Drop i Fullscreen) -->
+        <div class="chat-pane side-pane" id="side-pane">
+          <!-- Nagłówek Czatu 2 -->
+          <div class="pane-header">
+            <div class="agent-select-box">
+              <span>Agent:</span>
+              <select class="agent-dropdown" id="side-agent-select"></select>
+              <button class="btn-history" id="btn-side-history" title="Pokaż historię wątków wybranego agenta">📜 Historia</button>
+            </div>
+            
+            <div class="pane-header-right">
+              <!-- Kapsuła pamięci Observational Memory dla Czatu 2 -->
+              <div class="om-capsule-wrapper" id="side-om-wrapper" title="Observational Memory (Pamięć Obserwacyjna)"></div>
+
+              <div style="display:flex;align-items:center;gap:4px;">
+                <button class="btn-icon" id="btn-expand-side-composer" title="Powiększ edytor Czatu 2 [Fullscreen]" style="width:22px;height:22px;font-size:11px;">↗</button>
+                <button class="btn-icon" id="btn-close-side" title="Zamknij Czat 2" style="width:22px;height:22px;font-size:10px;">✕</button>
+              </div>
+            </div>
+
+            <!-- Popover historii wątków dla Czatu 2 (BEZ IKON) -->
+            <div class="history-popover" id="side-history-popover">
+              <div class="history-pop-header">
+                <span>Historia wątków agenta</span>
+              </div>
+              <div class="history-pop-list" id="side-pop-list"></div>
+            </div>
+          </div>
+          
+          <div class="chat-messages" id="chat-side"></div>
+
+          <!-- Edytor Czatu 2 -->
+          <footer class="composer side-composer">
+            <div class="drop-overlay" id="side-drop-overlay">Upuść pliki tutaj, aby dołączyć do kontekstu agenta (Czat 2)</div>
+            <input type="file" id="side-file-input" multiple style="display:none;">
+            <div class="attach-row" id="side-attach-row"></div>
+
+            <div class="composer-box">
+              <button class="btn-attach" id="btn-side-attach" title="Dołącz pliki do Czatu 2">📎</button>
+              <button class="btn-voice" id="btn-voice-side" title="Mów zamiast pisać (Google Gemini Speech-to-Text)">🎙️</button>
+              <textarea class="composer-textarea" id="side-composer-input" rows="1" placeholder="Napisz do wybranego agenta..."></textarea>
+              <div class="composer-actions">
+                <button class="btn-send" id="btn-side-send" style="padding:4px 12px;">Wyślij ↵</button>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </section>
+
+    <!-- WIDOK 2: ORKIESTRACJA (LANES, DURABLE JOBS & SCHEDULED TASKS) -->
+    <section class="tab-view" id="view-orchestration">
+      <div style="font-family:var(--font-mono);margin-bottom:18px;">
+        <h2 style="font-size:16px;color:var(--ink);margin-bottom:6px;display:flex;align-items:center;gap:8px;">
+          <span style="color:var(--signal);">⚡</span> Orkiestracja · Kolejki & Zadaniowość (Lanes & Durable Substrate)
+        </h2>
+        <p style="color:var(--muted);font-size:12px;">Monitoring wykonania procesów w tle, kolejkowania zadań cyklicznych i stanu workerów.</p>
+      </div>
+
+      <!-- KPI Summary Cards -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:12px;margin-bottom:20px;font-family:var(--font-mono);">
+        <div style="background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 14px;">
+          <div style="color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:0.06em;">Aktywne Kolejki (Lanes)</div>
+          <div style="font-size:20px;font-weight:700;color:var(--ink);margin:4px 0;">3 / 4</div>
+          <div style="font-size:10.5px;color:var(--success);">● Wszystkie bramki sprawne</div>
+        </div>
+        <div style="background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 14px;">
+          <div style="color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:0.06em;">Durable Jobs (30d)</div>
+          <div style="font-size:20px;font-weight:700;color:var(--ink);margin:4px 0;">862 zadania</div>
+          <div style="font-size:10.5px;color:var(--ink-2);">98.6% ukończonych sukcesem</div>
+        </div>
+        <div style="background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 14px;">
+          <div style="color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:0.06em;">Zadania Cykliczne (Cron)</div>
+          <div style="font-size:20px;font-weight:700;color:var(--ink);margin:4px 0;">6 aktywnych</div>
+          <div style="font-size:10.5px;color:var(--info);">Najbliższy start: za 18 min</div>
+        </div>
+        <div style="background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 14px;">
+          <div style="color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:0.06em;">Alokacja Pamięci Leases</div>
+          <div style="font-size:20px;font-weight:700;color:var(--ink);margin:4px 0;">18 / 50 TTL</div>
+          <div style="font-size:10.5px;color:var(--warning);">3 wpisy wygasają za < 2h</div>
+        </div>
+      </div>
+
+      <!-- Tabela Kolejek i Zadań Trwałych -->
+      <div style="background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px;font-family:var(--font-mono);margin-bottom:16px;">
+        <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:12px;">Aktywne Kolejki Wykonawcze (Execution Lanes)</div>
+        <table style="width:100%;border-collapse:collapse;font-size:11.5px;color:var(--ink-2);">
+          <thead>
+            <tr style="border-bottom:1px solid var(--line);text-align:left;color:var(--muted);">
+              <th style="padding:8px 6px;">Kolejka (Lane)</th>
+              <th style="padding:8px 6px;">Domyślny Model</th>
+              <th style="padding:8px 6px;">Zadania w toku</th>
+              <th style="padding:8px 6px;">P95 Latency</th>
+              <th style="padding:8px 6px;">Status Reconcilera</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--line);">
+              <td style="padding:8px 6px;color:var(--signal);font-weight:600;">⚡ Rapid Orchestration</td>
+              <td style="padding:8px 6px;">gemini-3.7-flash</td>
+              <td style="padding:8px 6px;">2 zadania</td>
+              <td style="padding:8px 6px;">620ms</td>
+              <td style="padding:8px 6px;color:var(--success);">✓ Synchroniczny (OK)</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line);">
+              <td style="padding:8px 6px;color:var(--accent-coding);font-weight:600;">💻 Heavy Coding & Repo</td>
+              <td style="padding:8px 6px;">deepseek-v4-pro</td>
+              <td style="padding:8px 6px;">0 (gotowość)</td>
+              <td style="padding:8px 6px;">14.2s</td>
+              <td style="padding:8px 6px;color:var(--success);">✓ Worktree czysty</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line);">
+              <td style="padding:8px 6px;color:var(--accent-automation);font-weight:600;">⚙ n8n Workflow Automation</td>
+              <td style="padding:8px 6px;">deepseek-v4-flash</td>
+              <td style="padding:8px 6px;">1 weryfikacja</td>
+              <td style="padding:8px 6px;">2.4s</td>
+              <td style="padding:8px 6px;color:var(--warning);">⚡ Auto-heal active</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 6px;color:var(--accent-researcher);font-weight:600;">🌐 Open-Web Research (PSEV)</td>
+              <td style="padding:8px 6px;">gemini-3.7-flash</td>
+              <td style="padding:8px 6px;">0 (gotowość)</td>
+              <td style="padding:8px 6px;">1.1s</td>
+              <td style="padding:8px 6px;color:var(--success);">✓ Playwright pool ready</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- WIDOK 3: EWALUACJE (TELEMETRIA & SCORERY JAKOŚCI) -->
+    <section class="tab-view" id="view-evals">
+      <div style="font-family:var(--font-mono);margin-bottom:18px;">
+        <h2 style="font-size:16px;color:var(--ink);margin-bottom:6px;display:flex;align-items:center;gap:8px;">
+          <span style="color:var(--success);">📊</span> Ewaluacje & Telemetria Agentów (Mastra Scorers & Metrics)
+        </h2>
+        <p style="color:var(--muted);font-size:12px;">Pomiary jakości scorerów, precyzji doboru narzędzi, kosztów tokenów i wskaźników halucynacji.</p>
+      </div>
+
+      <!-- Tabela Ewaluacji Agregowana z MongoDB & mastra_scorers -->
+      <div style="background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px;font-family:var(--font-mono);">
+        <table style="width:100%;border-collapse:collapse;font-size:11.5px;color:var(--ink-2);">
+          <thead>
+            <tr style="border-bottom:1px solid var(--line);text-align:left;color:var(--muted);">
+              <th style="padding:8px 6px;">Agent / Domena</th>
+              <th style="padding:8px 6px;">Model Główny</th>
+              <th style="padding:8px 6px;">Trafność Narzędzi</th>
+              <th style="padding:8px 6px;">Halucynacje</th>
+              <th style="padding:8px 6px;">Średni Czas</th>
+              <th style="padding:8px 6px;">Koszt / Run</th>
+              <th style="padding:8px 6px;">Scorer Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--line);">
+              <td style="padding:8px 6px;color:var(--accent-meta);font-weight:600;">metaAgent (Router)</td>
+              <td style="padding:8px 6px;">gemini-3.7-flash</td>
+              <td style="padding:8px 6px;">98.4%</td>
+              <td style="padding:8px 6px;color:var(--success);">0.2%</td>
+              <td style="padding:8px 6px;">420ms</td>
+              <td style="padding:8px 6px;">$0.0002</td>
+              <td style="padding:8px 6px;color:var(--success);">✓ PASS (0.98)</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line);">
+              <td style="padding:8px 6px;color:var(--accent-researcher);font-weight:600;">researcherAgent (PSEV)</td>
+              <td style="padding:8px 6px;">gemini-3.7-flash</td>
+              <td style="padding:8px 6px;">97.0%</td>
+              <td style="padding:8px 6px;color:var(--success);">0.4%</td>
+              <td style="padding:8px 6px;">1150ms</td>
+              <td style="padding:8px 6px;">$0.0570</td>
+              <td style="padding:8px 6px;color:var(--success);">✓ PASS (0.96)</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line);">
+              <td style="padding:8px 6px;color:var(--accent-analytics);font-weight:600;">analyticsAgent</td>
+              <td style="padding:8px 6px;">gemini-3.7-flash</td>
+              <td style="padding:8px 6px;">99.1%</td>
+              <td style="padding:8px 6px;color:var(--success);">0.0%</td>
+              <td style="padding:8px 6px;">780ms</td>
+              <td style="padding:8px 6px;">$0.0040</td>
+              <td style="padding:8px 6px;color:var(--success);">✓ PASS (0.99)</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line);">
+              <td style="padding:8px 6px;color:var(--accent-coding);font-weight:600;">codingAgent</td>
+              <td style="padding:8px 6px;">deepseek-v4-pro</td>
+              <td style="padding:8px 6px;">88.5%</td>
+              <td style="padding:8px 6px;color:var(--success);">0.6%</td>
+              <td style="padding:8px 6px;">14.1s</td>
+              <td style="padding:8px 6px;">$0.0640</td>
+              <td style="padding:8px 6px;color:var(--success);">✓ PASS (0.91)</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line);">
+              <td style="padding:8px 6px;color:var(--accent-automation);font-weight:600;">automationArchitect</td>
+              <td style="padding:8px 6px;">deepseek-v4-flash</td>
+              <td style="padding:8px 6px;">92.0%</td>
+              <td style="padding:8px 6px;color:var(--warning);">1.4%</td>
+              <td style="padding:8px 6px;">2400ms</td>
+              <td style="padding:8px 6px;">$0.0060</td>
+              <td style="padding:8px 6px;color:var(--warning);">⚡ RECOVERY</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 6px;color:var(--accent-chef);font-weight:600;">chefAgent (Menu Book)</td>
+              <td style="padding:8px 6px;">deepseek-v4-pro</td>
+              <td style="padding:8px 6px;">100.0%</td>
+              <td style="padding:8px 6px;color:var(--success);">0.0%</td>
+              <td style="padding:8px 6px;">1.8min</td>
+              <td style="padding:8px 6px;">$0.4860</td>
+              <td style="padding:8px 6px;color:var(--success);">✓ PASS (1.00)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 4. DOKŁADNE ZAKŁADKI Z DASHBOARD-UI (1:1 BEZ ZMIAN DANYCH) -->
+<!-- COMMAND CENTER -->
+<div id="tab-jarvis" class="tab-view app-tab-content">
+        <div id="jarvis-canvas-container">
+          <svg id="jarvis-svg">
+            <g id="canvas-transform-svg">
+              <g id="radar-layer"></g>
+              <g id="connections-layer"></g>
+              <g id="flow-layer"></g>
+              <g id="harness-layer"></g>
+              <g id="particles-layer"></g>
+            </g>
+          </svg>
+          <div id="jarvis-html-layer">
+             <div id="canvas-transform-html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform-origin: 0 0;">
+                <div id="orbits-layer"></div>
+                <div id="nodes-layer"></div>
+             </div>
+          </div>
+        </div>
+        
+        <div class="jarvis-panel panel-left">
+          <div class="jarvis-panel-title">LEGEND</div>
+          <div class="legend-item"><div class="legend-color" style="background:var(--jarvis-meta)"></div> Meta Agent (Orchestrator)</div>
+          <div class="legend-item"><div class="legend-color" style="background:var(--jarvis-domain)"></div> Domain Agents</div>
+          <div class="legend-item"><div class="legend-color" style="background:var(--jarvis-worker)"></div> Dynamic Workers</div>
+          <div class="legend-item"><div class="legend-color" style="background:var(--jarvis-wf-mastra)"></div> Mastra Workflows</div>
+          <div class="legend-item"><div class="legend-color" style="background:var(--jarvis-wf-n8n)"></div> n8n Workflows</div>
+          
+          <div id="alex-live-module" hidden>
+            <div class="jarvis-panel-title" style="margin-top:40px">ALEX LIVE</div>
+            <canvas id="voice-canvas" width="240" height="88" style="margin: 0 auto; display:block;"></canvas>
+            <div id="alex-live-slot"></div>
+          </div>
+        </div>
+        
+        <div class="jarvis-panel panel-right">
+          <div class="jarvis-panel-title">ACTIVE DELEGATIONS</div>
+          <div id="active-delegations" style="margin-bottom:30px; min-height:100px; display:flex; flex-direction:column; gap:10px;">
+            <div style="color:rgba(255,255,255,0.3); font-size:13px; font-style:italic; text-align:center; margin-top:20px;">No active delegations</div>
+          </div>
+          
+          <div class="jarvis-panel-title">LIVE EVENT FEED</div>
+          <div id="jarvis-event-feed" class="event-feed">
+            <div style="color:rgba(255,255,255,0.3); font-size:13px; font-style:italic; text-align:center; margin-top:20px;">Waiting for telemetry...</div>
+          </div>
+        </div>
+        
+        <div id="jarvis-hud">
+          <div class="hud-stat">Agents: <span id="hud-agents">0/13</span></div>
+          <div class="hud-stat">Workers: <span id="hud-workers">0</span></div>
+          <div class="hud-stat">Mastra WFs: <span id="hud-mwfs">0</span></div>
+          <div class="hud-stat">n8n WFs: <span id="hud-n8n">0 active</span></div>
+          <div class="hud-stat">Tasks (24h): <span id="hud-tasks">0</span></div>
+          <div class="hud-stat">Avg Latency: <span id="hud-latency">0ms</span></div>
+        </div>
+      </div>
+
+<!-- ANALYTICS TAB -->
+<div id="tab-analytics" class="tab-view app-tab-content">
+        
+  <header>
+    <h1><span>🤖</span> Agent Evaluation Dashboard</h1>
+    <div class="filters">
+      <label>Window:</label>
+      <select id="windowSelect">
+        <option value="24h">Last 24h</option>
+        <option value="7d" selected>Last 7 days</option>
+        <option value="14d">Last 14 days</option>
+        <option value="30d">Last 30 days</option>
+        <option value="90d">Last 90 days</option>
+      </select>
+      <label>Granularity:</label>
+      <select id="granularitySelect">
+        <option value="hour">Hour</option>
+        <option value="day" selected>Day</option>
+      </select>
+      <button class="primary" id="refreshBtn">↻ Refresh</button>
+      <label style="margin-left: 0.5rem;">
+        <input type="checkbox" id="autoRefreshToggle" />
+        Auto-refresh (30s)
+      </label>
+    </div>
+    <div class="analytics-filter-bar">
+      <label>Agent
+        <input id="agentFilterInput" type="search" placeholder="Any agent" autocomplete="off" />
+      </label>
+      <label>Model
+        <input id="modelFilterInput" type="search" placeholder="Any model" autocomplete="off" />
+      </label>
+      <label>Tool category
+        <input id="toolCategoryFilterInput" type="search" placeholder="Any category" autocomplete="off" />
+      </label>
+      <label>Risk
+        <select id="toolRiskFilter">
+          <option value="">All risks</option>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </label>
+      <label>Status
+        <select id="toolStatusFilter">
+          <option value="">All statuses</option>
+          <option value="completed">Completed</option>
+          <option value="failed">Failed</option>
+          <option value="blocked">Blocked</option>
+          <option value="started">Started</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </label>
+      <button type="button" id="clearFiltersBtn" class="ghost">Clear filters</button>
+      <span id="filterSummary" class="analytics-filter-summary">All data</span>
+    </div>
+    <div class="status-bar">
+      <span class="status-dot" id="statusDot"></span>
+      <span id="statusText">Ready</span>
+    </div>
+  </header>
+
+  <main>
+    <div id="errorContainer"></div>
+
+    <!-- ── Overview cards ─────────────────────────────────────── -->
+    <section id="section-health">
+      <h2>System Health</h2>
+      <div class="grid grid-cards" id="overviewCards">
+        <div class="loading">Loading...</div>
+      </div>
+      <div id="analyticsAlerts" class="analytics-alerts"></div>
+    </section>
+
+    <!-- ── Agents + Models ─────────────────────────────────────── -->
+    <section id="section-agents">
+      <h2>Agents & Models</h2>
+      <div id="modelFinopsCards" class="analytics-signal-grid">
+        <div class="loading">Loading...</div>
+      </div>
+      <div class="grid grid-2">
+        <div class="card chart">
+          <div class="chart-title">Canonical Agents (Success / Failure)</div>
+          <div class="chart-wrapper"><canvas id="agentsChart"></canvas></div>
+        </div>
+        <div class="card chart">
+          <div class="chart-title">Model FinOps Ranking</div>
+          <div class="chart-wrapper"><canvas id="modelsChart"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Cost & Latency ─────────────────────────────────────── -->
+    <section id="section-latency">
+      <h2>Cost & Latency</h2>
+      <div id="latencySummaryCards" class="analytics-signal-grid">
+        <div class="loading">Loading...</div>
+      </div>
+      <div class="grid grid-2">
+        <div class="card chart">
+          <div class="chart-title">Cost Trend (USD per day)</div>
+          <div class="chart-wrapper"><canvas id="costChart"></canvas></div>
+        </div>
+        <div class="card chart">
+          <div class="chart-title">Latency Long-tail by Agent</div>
+          <div class="chart-wrapper"><canvas id="latencyChart"></canvas></div>
+        </div>
+      </div>
+      <div class="grid grid-1 analytics-table-grid">
+        <div class="card">
+          <div class="chart-title">Slowest Runs & Events</div>
+          <div id="slowestRunsTable"><div class="loading">Loading...</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Tool envelopes + policy ──────────────────────────── -->
+    <section id="section-tools">
+      <h2>Tool Envelopes & Policy</h2>
+      <div id="toolsPolicyCards" class="analytics-signal-grid">
+        <div class="loading">Loading...</div>
+      </div>
+      <div class="grid grid-2">
+        <div class="card chart">
+          <div class="chart-title">Tool Execution Status</div>
+          <div class="chart-wrapper"><canvas id="toolsStatusChart"></canvas></div>
+        </div>
+        <div class="card chart">
+          <div class="chart-title">Tool Categories (failures + blocks)</div>
+          <div class="chart-wrapper"><canvas id="toolsCategoryChart"></canvas></div>
+        </div>
+      </div>
+      <div class="grid grid-3 analytics-table-grid">
+        <div class="card">
+          <div class="chart-title">Top Tool Hotspots</div>
+          <div id="toolsTable"><div class="loading">Loading...</div></div>
+        </div>
+        <div class="card">
+          <div class="chart-title">Top Failure Classes</div>
+          <div id="toolFailuresTable"><div class="loading">Loading...</div></div>
+        </div>
+        <div class="card">
+          <div class="chart-title">Hanging Executions</div>
+          <div id="hangingToolsTable"><div class="loading">Loading...</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Timeline + Skills ─────────────────────────────────── -->
+    <section id="section-activity">
+      <h2>Activity & Skills</h2>
+      <div class="grid grid-2">
+        <div class="card chart">
+          <div class="chart-title">Health Timeline</div>
+          <div class="chart-wrapper"><canvas id="timelineChart"></canvas></div>
+        </div>
+        <div class="card chart">
+          <div class="chart-title">Skill Operations</div>
+          <div class="chart-wrapper"><canvas id="skillsChart"></canvas></div>
+        </div>
+      </div>
+      <div class="grid grid-2 analytics-table-grid">
+        <div class="card">
+          <div class="chart-title">Timeline Annotations</div>
+          <div id="timelineAnnotationsTable"><div class="loading">Loading...</div></div>
+        </div>
+        <div class="card">
+          <div class="chart-title">Skill Operation Details</div>
+          <div id="skillsTable"><div class="loading">Loading...</div></div>
+        </div>
+      </div>
+      <div class="grid grid-1 analytics-table-grid">
+        <div class="card">
+          <div class="chart-title">Legacy Skill Events</div>
+          <div id="legacySkillsTable"><div class="loading">Loading...</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Quality, scorers and evals ───────────────────────── -->
+    <section id="section-quality">
+      <h2>Quality, Scorers & Evals</h2>
+      <div id="qualityCards" class="analytics-signal-grid">
+        <div class="loading">Loading...</div>
+      </div>
+      <div class="grid grid-2">
+        <div class="card chart">
+          <div class="chart-title">Score Distribution</div>
+          <div class="chart-wrapper"><canvas id="qualityDistributionChart"></canvas></div>
+        </div>
+        <div class="card chart">
+          <div class="chart-title">Quality Coverage by Agent</div>
+          <div class="chart-wrapper"><canvas id="qualityCoverageChart"></canvas></div>
+        </div>
+      </div>
+      <div class="grid grid-2 analytics-table-grid">
+        <div class="card">
+          <div class="chart-title">Scorer & Eval Summaries</div>
+          <div id="qualityScorersTable"><div class="loading">Loading...</div></div>
+        </div>
+        <div class="card">
+          <div class="chart-title">Recent Quality Failures</div>
+          <div id="qualityFailuresTable"><div class="loading">Loading...</div></div>
+        </div>
+      </div>
+      <div class="grid grid-1 analytics-table-grid">
+        <div class="card">
+          <div class="chart-title">Quality Coverage Gaps</div>
+          <div id="qualityGapsTable"><div class="loading">Loading...</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Code graph trend (Graphify Phase 2, Stream C) ─────── -->
+    <section id="section-code-graph">
+      <h2>Code Graph Trend</h2>
+      <div id="codeGraphCards" class="analytics-signal-grid">
+        <div class="loading">Loading...</div>
+      </div>
+      <div class="grid grid-2">
+        <div class="card chart">
+          <div class="chart-title">Nodes &amp; Edges Over Time</div>
+          <div class="chart-wrapper"><canvas id="codeGraphTrendChart"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="chart-title">Fastest-Growing Hubs</div>
+          <div id="codeGraphHubsTable"><div class="loading">Loading...</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Trace explorer ────────────────────────────────────── -->
+    <section id="section-traces">
+      <h2>Trace Explorer</h2>
+      <div class="analytics-filter-bar trace-filter-bar">
+        <label>Run ID
+          <input id="traceRunFilterInput" type="search" placeholder="run id" autocomplete="off" />
+        </label>
+        <label>Task ID
+          <input id="traceTaskFilterInput" type="search" placeholder="task id" autocomplete="off" />
+        </label>
+        <label>Thread ID
+          <input id="traceThreadFilterInput" type="search" placeholder="thread id" autocomplete="off" />
+        </label>
+        <label>Status
+          <select id="traceStatusFilter">
+            <option value="">All statuses</option>
+            <option value="completed">Completed</option>
+            <option value="failed">Failed</option>
+            <option value="running">Running</option>
+            <option value="unknown">Unknown</option>
+          </select>
+        </label>
+        <label>Limit
+          <select id="traceLimitSelect">
+            <option value="10">10</option>
+            <option value="25" selected>25</option>
+            <option value="50">50</option>
+          </select>
+        </label>
+        <button type="button" id="traceSearchBtn" class="primary">Search traces</button>
+        <button type="button" id="traceClearBtn" class="ghost">Clear trace filters</button>
+        <span id="traceExplorerMeta" class="analytics-filter-summary">No trace selected</span>
+      </div>
+      <div class="grid grid-2 analytics-table-grid trace-grid">
+        <div class="card">
+          <div class="chart-title">Trace List</div>
+          <div id="traceListTable"><div class="loading">Loading...</div></div>
+        </div>
+        <div class="card">
+          <div class="chart-title">Trace Detail</div>
+          <div id="traceDetailPanel"><div class="empty">Select a trace to inspect events, tool envelopes and scorer outcomes.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Live Agent Activity rail (collapsible auxiliary panel) ── -->
+    <button type="button" id="liveRailToggle" class="live-rail-toggle" aria-expanded="false" aria-controls="liveRail" title="Live Agent Activity">
+      <span class="live-dot" id="liveDot" title="Auto-refresh status"></span>
+      <span class="live-rail-toggle-label">Live</span>
+    </button>
+    <aside id="liveRail" class="live-rail collapsed" aria-hidden="true" aria-label="Live Agent Activity">
+      <div class="live-rail-header">
+        <strong>Live Agent Activity</strong>
+        <button type="button" id="liveRailClose" class="live-btn" aria-label="Collapse live rail">✕</button>
+      </div>
+      <div class="live-controls">
+        <label><input type="checkbox" id="liveAutoRefresh" checked /> Auto 2s</label>
+        <label>Okno:
+          <select id="liveWindow">
+            <option value="60">1 min</option>
+            <option value="300" selected>5 min</option>
+            <option value="900">15 min</option>
+            <option value="3600">1h</option>
+          </select>
+        </label>
+        <button id="liveClearBtn" class="live-btn">Wyczyść</button>
+      </div>
+      <div class="live-meta" id="liveMeta">—</div>
+      <div id="liveActivityList"><div class="empty">Brak aktywności w wybranym oknie</div></div>
+    </aside>
+
+    <!-- ── Tables: agents, models, scores ─────────────────────── -->
+    <section id="section-tables">
+      <h2>Detailed Tables</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="chart-title">Agents</div>
+          <div id="agentsTable"><div class="loading">Loading...</div></div>
+        </div>
+        <div class="card">
+          <div class="chart-title">Models</div>
+          <div id="modelsTable"><div class="loading">Loading...</div></div>
+        </div>
+        <div class="card">
+          <div class="chart-title">Legacy Scorers</div>
+          <div id="scoresTable"><div class="loading">Loading...</div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Analytics logic is loaded from /dashboard-ui/analytics.js. -->
+
+      </div>
+
+<!-- WORKSPACE TAB -->
+<div id="tab-workspace" class="tab-view app-tab-content">
+        
+<header>
+  <h1>Dashboard</h1>
+  <nav>
+    <button data-tab="crm" class="active">CRM</button>
+    <button data-tab="outreach">Outreach</button>
+    <button data-tab="content">Content Studio</button>
+    <button data-tab="packs">Content Packs</button>
+    <button data-tab="chef">Chef</button>
+    <button data-tab="books">Księgi Menu</button>
+    <button data-tab="writer">Writer</button>
+    <button data-tab="designer">Designer</button>
+    <button data-tab="filmmaker">Filmmaker</button>
+    <button data-tab="musician">Musician</button>
+    <button data-tab="scheduler">Scheduler</button>
+    <button data-tab="approvals">Approvals</button>
+  </nav>
+  <span class="spacer"></span>
+  <button class="btn ghost" id="reindexBtn">↻ Reindex draftów</button>
+</header>
+
+<main>
+  <!-- ══ CRM ══ -->
+  <section id="tab-crm">
+    <div class="stats" id="crmStats"></div>
+    <div class="filters">
+      <input type="text" id="crmSearch" placeholder="Szukaj firmy / emaila…" />
+      <select id="crmSegment">
+        <option value="">Wszystkie segmenty</option>
+        <option value="supplier_gb">Dostawcy GB</option>
+        <option value="restaurant_gb">Restauracje GB</option>
+        <option value="automation">Automatyzacja AI</option>
+        <option value="web_dev">Strony WWW</option>
+        <option value="gastro_consulting">Konsulting Gastro</option>
+        <option value="career_it_pl">Kariera IT (Polska)</option>
+        <option value="career_it_is">Kariera IT (Islandia)</option>
+        <option value="career_chef_pl">Kariera Chef (Polska)</option>
+        <option value="career_chef_is">Kariera Chef (Islandia)</option>
+        <option value="other">Inne</option>
+      </select>
+      <select id="crmSource"><option value="">Wszystkie źródła</option></select>
+      <button class="btn ghost" id="crmReload">Odśwież</button>
+    </div>
+    <div class="kanban" id="kanban"></div>
+  </section>
+
+  <!-- ══ CONTENT STUDIO ══ -->
+  <section id="tab-content" class="hidden">
+    <div class="panes">
+      <div class="pane" id="ideaInbox">
+        <h3>💡 Idea Inbox (sygnały)</h3>
+        <div class="filters" style="margin-bottom:10px">
+          <label style="font-size:12px;color:var(--muted)">
+            <input type="checkbox" id="onlyUnused" checked /> tylko niewykorzystane</label>
+        </div>
+        <div id="signalsList"></div>
+      </div>
+      <div class="pane">
+        <h3>📅 Kalendarz treści (LinkedIn + Instagram + TikTok)</h3>
+        <div id="calendar"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CONTENT PACKS (contentAgent) ══ -->
+  <section id="tab-packs" class="hidden">
+    <div class="panes">
+      <div class="pane"><h3>📣 Projekty Content</h3><div id="packsList"></div></div>
+      <div class="pane" id="packView"><div class="empty">Wybierz projekt content.</div></div>
+    </div>
+  </section>
+
+  <!-- ══ OUTREACH ══ -->
+  <section id="tab-outreach" class="hidden">
+    <div class="panes">
+      <div class="pane outreach-list-pane">
+        <div class="outreach-header">
+          <div class="outreach-title-row">
+            <h3>✉️ Drafty cold-email <span id="outreachCountBadge" class="count-badge">0</span></h3>
+            <button class="btn ghost btn-sm" id="btnSyncGmail" onclick="syncGmailDrafts()" title="Synchronizuj bezpośrednio z API Gmail">🔄 Gmail Sync</button>
+          </div>
+          
+          <!-- Status Filter Pills -->
+          <div class="outreach-status-pills">
+            <button class="status-pill active" data-status="all" onclick="setOutreachStatusFilter('all')">Wszystkie</button>
+            <button class="status-pill" data-status="draft" onclick="setOutreachStatusFilter('draft')">📝 Draft</button>
+            <button class="status-pill" data-status="approved" onclick="setOutreachStatusFilter('approved')">⏳ Approved</button>
+            <button class="status-pill" data-status="sent" onclick="setOutreachStatusFilter('sent')">🚀 Sent</button>
+          </div>
+
+          <!-- Controls Toolbar -->
+          <div class="outreach-toolbar">
+            <input type="text" id="outreachSearchInput" class="outreach-input" placeholder="🔍 Szukaj..." oninput="debounceOutreachSearch()" />
+            <div class="outreach-selects-row">
+              <select id="outreachSegmentSelect" class="outreach-select" onchange="setOutreachSegmentFilter(this.value)">
+                <option value="">Wszystkie segmenty</option>
+                <option value="career_it_pl">🇵🇱 IT / AI Polska</option>
+                <option value="career_it_is">🇮🇸 IT / AI Islandia</option>
+                <option value="career_chef_is">🍽️ Gastro Islandia</option>
+                <option value="career_chef_pl">🍽️ Gastro Polska</option>
+                <option value="supplier_gb">🏢 GastroBridge B2B</option>
+                <option value="automation">🤖 Automatyzacje</option>
+                <option value="other">Inne</option>
+              </select>
+              <select id="outreachSortSelect" class="outreach-select" onchange="setOutreachSort(this.value)">
+                <option value="newest">📅 Najnowsze</option>
+                <option value="oldest">📅 Najstarsze</option>
+                <option value="status">🏷️ Wg statusu</option>
+                <option value="title">🔤 Tytuł A-Z</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div id="emailList" class="outreach-items-list"></div>
+      </div>
+
+      <div class="pane" id="emailPreview">
+        <div class="empty">Wybierz draft z listy po lewej stronie.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CHEF ══ -->
+  <section id="tab-chef" class="hidden">
+    <div class="panes">
+      <div class="pane"><h3>👨‍🍳 Projekty Chef</h3><div id="chefList"></div></div>
+      <div class="pane" id="chefMenus"><div class="empty">Wybierz projekt.</div></div>
+    </div>
+  </section>
+
+  <!-- ══ MENU BOOKS (chefAgent — branded deliverables + PDF) ══ -->
+  <section id="tab-books" class="hidden">
+    <div class="panes">
+      <div class="pane"><h3>📖 Księgi Menu</h3><div id="booksList"></div></div>
+      <div class="pane" id="bookView"><div class="empty">Wybierz Księgę Menu.</div></div>
+    </div>
+  </section>
+
+  <!-- ══ WRITER MANUSCRIPTS (writerAgent) ══ -->
+  <section id="tab-writer" class="hidden">
+    <div class="panes">
+      <div class="pane"><h3>✍️ Projekty Writer</h3><div id="writerList"></div></div>
+      <div class="pane" id="writerView"><div class="empty">Wybierz projekt writerAgent.</div></div>
+    </div>
+  </section>
+
+  <!-- ══ DESIGNER OUTPUTS (designAgent) ══ -->
+  <section id="tab-designer" class="hidden">
+    <div class="panes design-panes">
+      <div class="pane"><h3>🎨 Projekty Designer</h3><div id="designList"></div></div>
+      <div class="pane design-view-pane" id="designView"><div class="empty">Wybierz projekt designAgent.</div></div>
+    </div>
+  </section>
+
+  <!-- ══ FILMMAKER VIDEOS (filmmakerAgent) ══ -->
+  <section id="tab-filmmaker" class="hidden">
+    <div class="panes film-panes">
+      <div class="pane"><h3>🎬 Projekty Filmmaker</h3><div id="filmList"></div></div>
+      <div class="pane film-view-pane" id="filmView"><div class="empty">Wybierz projekt filmmakerAgent.</div></div>
+    </div>
+  </section>
+
+  <!-- ══ MUSICIAN TRACKS (musicianAgent) ══ -->
+  <section id="tab-musician" class="hidden">
+    <div class="panes film-panes">
+      <div class="pane"><h3>🎵 Projekty Musician</h3><div id="musicList"></div></div>
+      <div class="pane film-view-pane" id="musicView"><div class="empty">Wybierz projekt musicianAgent.</div></div>
+    </div>
+  </section>
+
+  <!-- ══ SCHEDULER (Universal Task Orchestrator) ══ -->
+  <section id="tab-scheduler" class="hidden">
+    <div class="panes">
+      <div class="pane">
+        <h3>⏱️ Scheduled Tasks</h3>
+        <div style="display:flex;gap:8px;align-items:center;margin:4px 0 12px;flex-wrap:wrap">
+          <select id="schedulerStatus" onchange="loadScheduler()">
+            <option value="">All statuses</option>
+            <option value="scheduled">Scheduled</option>
+            <option value="leased">Leased</option>
+            <option value="running">Running</option>
+            <option value="failed">Failed</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+          <button class="btn ghost" onclick="loadScheduler()">↻ Odśwież</button>
+        </div>
+        <div id="schedulerSummary" style="margin-bottom:10px"></div>
+        <div id="schedulerList"><div class="empty">Ładowanie…</div></div>
+      </div>
+      <div class="pane" id="schedulerDetail"><div class="empty">Wybierz scheduled task.</div></div>
+    </div>
+  </section>
+
+  <!-- ══ APPROVALS (paid / irreversible actions awaiting user approval) ══ -->
+  <section id="tab-approvals" class="hidden">
+    <div class="panes">
+      <div class="pane">
+        <h3>✅ Oczekujące zatwierdzenia</h3>
+        <div style="margin:4px 0 12px;color:var(--muted);font-size:12px">
+          Płatne / nieodwracalne akcje czekają tu na Twoje „Zatwierdź”. Po zatwierdzeniu agent w kolejnej turze przepuszcza token do działania.
+        </div>
+        <div style="margin-bottom:10px"><button class="btn ghost" onclick="loadApprovals()">↻ Odśwież</button></div>
+        <div id="approvalsList"><div class="empty">Ładowanie…</div></div>
+      </div>
+    </div>
+  </section>
+</main>
+</div>
+<!-- /#tab-workspace -->
+
+<div id="drawerHost"></div>
+
+<!-- 3. SZUFLADY BOCZNE (DRAWERS) -->
+    <!-- Szuflada Pamięci Roboczej -->
+    <div class="drawer" id="drawer-mem">
+      <div class="drawer-header">
+        <span>🧠 PAMIĘĆ OBSERWACYJNA</span>
+        <button class="btn-close">✕</button>
+      </div>
+      <div class="drawer-body" id="mem-body"></div>
+    </div>
+
+    <!-- Szuflada Terminala i Ledgera -->
+    <div class="drawer" id="drawer-term">
+      <div class="drawer-header">
+        <span>💻 LEDGER & KONSOLA</span>
+        <button class="btn-close">✕</button>
+      </div>
+      <div class="drawer-body" id="term-body"></div>
+    </div>
+
+    <!-- Szuflada Artefaktów -->
+    <div class="drawer" id="drawer-art">
+      <div class="drawer-header">
+        <span>📦 ARTEFAKTY & PLIKI</span>
+        <button class="btn-close">✕</button>
+      </div>
+      <div class="drawer-body" id="art-body"></div>
+    </div>
+
+<!-- 4. MODALE I NAKŁADKI -->
+<!-- Modal powiększonego edytora wiadomości -->
+<div class="modal" id="modal-composer">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span>ROZSZERZONY EDYTOR WIADOMOŚCI</span>
+        <span id="modal-target-agent" style="font-size:11px;padding:2px 8px;background:var(--bg-3);border:1px solid var(--line);border-radius:var(--radius-xs);"></span>
+      </div>
+      <button class="btn-close" id="btn-modal-close">✕</button>
+    </div>
+    <div class="modal-body">
+      <textarea class="modal-textarea" id="modal-textarea" placeholder="Wprowadź rozbudowaną instrukcję lub zapytanie..."></textarea>
+    </div>
+    <div class="modal-footer">
+      <div class="modal-counters">Tryb pełnoekranowy (Shift+Enter dla nowej linii)</div>
+      <div class="modal-actions">
+        <button class="btn-voice btn-voice-modal" id="btn-voice-modal" title="Mów zamiast pisać (Google Gemini Speech-to-Text)">🎙️ Mów</button>
+        <button class="btn-secondary" id="btn-modal-cancel">Anuluj</button>
+        <button class="btn-send" id="btn-modal-send">Wyślij do Agenta ↵</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal szczegółowego podglądu artefaktu -->
+<div class="modal" id="modal-artifact-preview">
+  <div class="modal-dialog artifact-modal-dialog">
+    <div class="modal-header">
+      <div style="display:flex;align-items:center;gap:8px;min-width:0;">
+        <span id="art-modal-icon" style="font-size:16px;">📄</span>
+        <span id="art-modal-title" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700;color:var(--ink);"></span>
+        <span id="art-modal-type-badge" class="art-type-pill"></span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <button class="btn-icon" id="btn-art-modal-copy" title="Kopiuj treść artefaktu" style="padding:4px 8px;font-size:13px;height:26px;width:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:4px;">📋</button>
+        <button class="btn-close" id="btn-art-modal-close" title="Zamknij (Esc)">✕</button>
+      </div>
+    </div>
+    
+    <!-- Pasek metadanych -->
+    <div class="art-modal-meta-bar" id="art-modal-meta-bar">
+      <div style="display:flex;flex-wrap:wrap;gap:12px;width:100%;align-items:center;">
+        <span>⚡ Twórca: <strong id="art-modal-author"></strong></span>
+        <span>📅 Data: <strong id="art-modal-date"></strong></span>
+        <span>📦 Rozmiar: <strong id="art-modal-size"></strong></span>
+        <span>🔒 SHA: <code id="art-modal-sha"></code></span>
+        <span>Lane: <strong id="art-modal-lane"></strong></span>
+      </div>
+      <div class="art-modal-path-row" id="art-modal-path-row" style="display:none;width:100%;margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,0.06);align-items:center;justify-content:space-between;gap:8px;">
+        <span style="display:flex;align-items:center;gap:6px;overflow:hidden;text-overflow:ellipsis;font-size:11px;">
+          📁 Ścieżka pliku: <code id="art-modal-filepath" style="color:var(--success);word-break:break-all;"></code>
+        </span>
+        <button class="btn-icon" id="btn-art-modal-copy-path" title="Kopiuj ścieżkę do schowka" style="padding:2px 8px;font-size:10.5px;height:22px;border-radius:3px;white-space:nowrap;">Kopiuj ścieżkę</button>
+      </div>
+    </div>
+
+    <div class="modal-body art-modal-body">
+      <!-- Podsumowanie -->
+      <div class="art-modal-summary" id="art-modal-summary"></div>
+      <!-- Sformatowana zawartość -->
+      <div class="art-modal-content markdown-body" id="art-modal-content"></div>
+    </div>
+
+    <div class="modal-footer">
+      <div class="modal-counters" id="art-modal-status-text">Mastra ArtifactStore · MongoDB Engine</div>
+      <div class="modal-actions">
+        <button class="btn-secondary" id="btn-art-modal-footer-close">Zamknij</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal potwierdzenia usunięcia wątków -->
+<div class="modal" id="modal-confirm-delete">
+  <div class="modal-dialog confirm-dialog">
+    <div class="modal-header">
+      <span style="color:var(--error);display:flex;align-items:center;gap:6px;">⚠️ Potwierdzenie Usunięcia</span>
+    </div>
+    <div class="modal-body">
+      <div id="confirm-delete-msg" style="font-family:var(--font-sans);font-size:13px;line-height:1.5;color:var(--ink-2);"></div>
+    </div>
+    <div class="modal-footer">
+      <div class="modal-counters" style="color:var(--faint);">Splot OS Database</div>
+      <div class="modal-actions">
+        <button class="btn-secondary" id="btn-confirm-delete-cancel">Anuluj</button>
+        <button class="btn-danger" id="btn-confirm-delete-yes">Usuń Nieodwracalnie</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal potwierdzenia usunięcia projektu w Workspace -->
+<div class="modal" id="modal-workspace-delete" role="dialog" aria-modal="true" aria-labelledby="workspace-delete-title">
+  <div class="modal-dialog confirm-dialog">
+    <div class="modal-header">
+      <span id="workspace-delete-title" style="color:var(--error);display:flex;align-items:center;gap:6px;">⚠️ Potwierdzenie usunięcia projektu</span>
+    </div>
+    <div class="modal-body">
+      <div id="workspace-delete-message" style="font-family:var(--font-sans);font-size:13px;line-height:1.5;color:var(--ink-2);"></div>
+    </div>
+    <div class="modal-footer">
+      <div class="modal-counters" style="color:var(--faint);">Workspace · operacja nieodwracalna</div>
+      <div class="modal-actions">
+        <button class="btn-secondary" id="btn-workspace-delete-cancel">Anuluj</button>
+        <button class="btn-danger" id="btn-workspace-delete-confirm">Usuń projekt</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal podsumowania i transkrypcji dialogu z Alexem -->
+<div class="modal" id="modal-alex-transcript">
+  <div class="modal-dialog alex-transcript-dialog">
+    <div class="modal-header">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="color:var(--signal);font-weight:700;">🎙️ Alex Live Assistant</span>
+        <span style="font-size:10px;padding:2px 8px;background:rgba(46,230,168,0.15);color:var(--success);border:1px solid rgba(46,230,168,0.3);border-radius:10px;">● WebSocket Live</span>
+      </div>
+      <button class="btn-close" id="btn-alex-modal-close">✕</button>
+    </div>
+    <div class="modal-body" style="padding:16px 20px;display:flex;flex-direction:column;gap:16px;">
+      <!-- Karty parametrów sesji głosowej -->
+      <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:10px;font-family:var(--font-mono);font-size:11px;">
+        <div style="background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius-xs);padding:8px 10px;">
+          <div style="color:var(--muted);font-size:9.5px;">Model głosu</div>
+          <div style="color:var(--ink);font-weight:600;margin-top:2px;">gemini-3.1-flash-live</div>
+        </div>
+        <div style="background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius-xs);padding:8px 10px;">
+          <div style="color:var(--muted);font-size:9.5px;">Średnia latencja</div>
+          <div style="color:var(--success);font-weight:600;margin-top:2px;">280ms (Ultra-Low)</div>
+        </div>
+        <div style="background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius-xs);padding:8px 10px;">
+          <div style="color:var(--muted);font-size:9.5px;">Mostek orkiestracji</div>
+          <div style="color:var(--accent-meta);font-weight:600;margin-top:2px;">send_to_meta (Active)</div>
+        </div>
+      </div>
+
+      <!-- Zapis transkrypcji rozmowy -->
+      <div style="font-family:var(--font-mono);font-size:11px;color:var(--faint);letter-spacing:0.06em;text-transform:uppercase;">Zapis Rozmowy Głosowej i Akcji</div>
+      <div class="alex-transcript-feed" style="background:var(--bg-0);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px;display:flex;flex-direction:column;gap:12px;max-height:280px;overflow-y:auto;">
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <div style="font-family:var(--font-mono);font-size:10.5px;color:var(--muted);display:flex;justify-content:space-between;">
+            <span style="color:#FFFFFF;font-weight:600;">TY (Audio)</span>
+            <span>22:42:10</span>
+          </div>
+          <div style="font-family:var(--font-sans);font-size:13px;color:var(--ink-1);background:rgba(255,255,255,0.04);padding:8px 12px;border-radius:8px;border-left:3px solid var(--signal);">
+            „Alex, jaki jest aktualny status systemu i czy są jakieś zadania czekające na moją decyzję?”
+          </div>
+        </div>
+
+        <div style="font-family:var(--font-mono);font-size:10.5px;color:var(--signal);background:rgba(255,77,0,0.08);border:1px solid rgba(255,77,0,0.2);padding:6px 10px;border-radius:6px;display:flex;align-items:center;gap:6px;">
+          <span>⚡</span> Wywołano narzędzia: <code>get_system_status()</code> oraz <code>get_pending_approvals()</code> [120ms]
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <div style="font-family:var(--font-mono);font-size:10.5px;color:var(--muted);display:flex;justify-content:space-between;">
+            <span style="color:var(--signal);font-weight:700;">ALEX (Odpowiedź Głosowa)</span>
+            <span>22:42:12</span>
+          </div>
+          <div style="font-family:var(--font-sans);font-size:13px;color:var(--ink-1);background:rgba(255,77,0,0.05);padding:8px 12px;border-radius:8px;border-left:3px solid var(--success);">
+            „W systemie działa Lane #17 analizujący dostawców nabiału z Dolnego Śląska. Brak oczekujących zgód do podjęcia decyzji, wszystkie procesy przebiegają stabilnie.”
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="modal-counters" style="color:var(--faint);">Alex Live Engine v2.4</div>
+      <div class="modal-actions">
+        <button class="btn-secondary" id="btn-alex-copy-transcript">Kopiuj Transkrypcję</button>
+        <button class="btn-primary" id="btn-alex-close-transcript">Zamknij</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Dedykowany slot dla silnika Gemini Live Alex -->
+<div id="alex-live-module" style="display:none;" hidden>
+  <div id="alex-live-slot"></div>
+</div>
+
+<!-- Powiadomienie Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Główny Skrypt Modułowy -->
+<script src="js/dashboard-tabs.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+{
+  "_comment": "Allowlist of recipe ids to treat as LOCKED signatures (usage:'locked'). The embed script flags these so the chef agent preserves them faithfully when used (vs. 'adapt' for everything else). Fill `ids` with recipe ids like 'sosy-cieple--sos-holenderski'. Empty = everything stays 'adapt'.",
+  "ids": []
+}

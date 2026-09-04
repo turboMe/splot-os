@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GastroBridge — Dashboard Operacyjny</title>
+<style>
+  :root {
+    --bg: #0e1117; --panel: #161b22; --panel2: #1c2330; --border: #2a3140;
+    --text: #e6edf3; --muted: #8b949e; --accent: #2f81f7; --green: #3fb950;
+    --amber: #d29922; --red: #f85149; --purple: #a371f7; --pink: #db61a2;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; }
+  header { display: flex; align-items: center; gap: 16px; padding: 12px 20px;
+    border-bottom: 1px solid var(--border); background: var(--panel); position: sticky; top: 0; z-index: 10; }
+  header h1 { font-size: 16px; margin: 0; font-weight: 600; }
+  nav { display: flex; gap: 4px; margin-left: 12px; }
+  nav button { background: transparent; border: none; color: var(--muted); padding: 8px 14px;
+    border-radius: 6px; cursor: pointer; font-size: 14px; }
+  nav button.active { background: var(--panel2); color: var(--text); }
+  nav button:hover { color: var(--text); }
+  .spacer { flex: 1; }
+  .btn { background: var(--accent); color: #fff; border: none; padding: 7px 12px; border-radius: 6px;
+    cursor: pointer; font-size: 13px; }
+  .btn.ghost { background: var(--panel2); color: var(--text); border: 1px solid var(--border); }
+  .btn:hover { filter: brightness(1.1); }
+  main { padding: 16px 20px; }
+  .hidden { display: none !important; }
+
+  /* Stats bar */
+  .stats { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+  .stat { background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 14px; min-width: 110px; }
+  .stat .n { font-size: 22px; font-weight: 700; }
+  .stat .l { font-size: 12px; color: var(--muted); }
+
+  /* Filters */
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
+  select, input[type=text], textarea { background: var(--panel2); border: 1px solid var(--border);
+    color: var(--text); border-radius: 6px; padding: 7px 10px; font-size: 13px; font-family: inherit; }
+  input[type=text] { min-width: 200px; }
+
+  /* Kanban */
+  .kanban { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 12px; }
+  .col { background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+    min-width: 250px; max-width: 280px; flex-shrink: 0; display: flex; flex-direction: column; max-height: 78vh; }
+  .col h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .5px; color: var(--muted);
+    padding: 10px 12px; margin: 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; }
+  .col .body { padding: 8px; overflow-y: auto; flex: 1; }
+  .col.dragover { outline: 2px dashed var(--accent); }
+  .card { background: var(--panel2); border: 1px solid var(--border); border-radius: 6px;
+    padding: 10px; margin-bottom: 8px; cursor: grab; }
+  .card:hover { border-color: var(--accent); }
+  .card .name { font-weight: 600; margin-bottom: 4px; }
+  .card .meta { font-size: 12px; color: var(--muted); display: flex; gap: 6px; flex-wrap: wrap; }
+  .badge { font-size: 10px; padding: 2px 6px; border-radius: 10px; background: var(--border); color: var(--text); }
+  .badge.gastro { background: #1f3a2a; color: var(--green); }
+  .badge.automation { background: #2a2440; color: var(--purple); }
+  .badge.other { background: #30363d; color: var(--muted); }
+  .badge.li { background: #15324d; color: #58a6ff; }
+  .badge.ig { background: #3d1f33; color: var(--pink); }
+  .badge.tt { background: #11332f; color: #25f4ee; }
+  .badge.email { background: #3a3320; color: var(--amber); }
+  .badge.lang { background: #21262d; color: var(--muted); }
+  .pill { display: inline-block; background: var(--panel2); border: 1px solid var(--border);
+    color: var(--muted); border-radius: 6px; padding: 3px 7px; margin: 0 4px 6px 0; font-size: 12px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; background: var(--green); }
+
+  /* Two-pane (content studio / outreach) */
+  .panes { display: grid; grid-template-columns: 340px 1fr; gap: 14px; }
+  .pane { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 12px;
+    max-height: 80vh; overflow-y: auto; }
+  .pane h3 { margin: 0 0 10px; font-size: 13px; color: var(--muted); text-transform: uppercase; }
+  .signal { background: var(--panel2); border: 1px solid var(--border); border-radius: 6px; padding: 10px;
+    margin-bottom: 8px; cursor: pointer; }
+  .signal:hover { border-color: var(--accent); }
+  .signal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+  .signal-head .t { flex: 1 1 auto; font-weight: 600; margin-bottom: 4px; font-size: 13px; }
+  .signal-delete { flex: 0 0 auto; font-size: 11px; padding: 3px 7px; }
+  .signal .t { font-weight: 600; margin-bottom: 4px; font-size: 13px; }
+  .signal .s { font-size: 12px; color: var(--muted); }
+  .score { font-size: 11px; color: var(--green); }
+  .hook { font-size: 12px; background: var(--bg); border-left: 2px solid var(--accent);
+    padding: 6px 8px; margin: 4px 0; border-radius: 0 4px 4px 0; }
+
+  /* Calendar */
+  .week { margin-bottom: 16px; }
+  .week h4 { margin: 0 0 8px; font-size: 13px; color: var(--accent); }
+  .week-grid { display: flex; gap: 8px; flex-wrap: wrap; }
+  .post-card { background: var(--panel2); border: 1px solid var(--border); border-radius: 6px;
+    padding: 10px; width: 220px; cursor: pointer; }
+  .post-card:hover { border-color: var(--accent); }
+  .post-card .pt { font-size: 12px; font-weight: 600; margin: 6px 0 4px; }
+  .post-card .pb { font-size: 12px; color: var(--muted); max-height: 54px; overflow: hidden; }
+
+  /* Drawer */
+  .drawer-bg { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 50; }
+  .drawer { position: fixed; top: 0; right: 0; height: 100%; width: 540px; max-width: 92vw;
+    background: var(--panel); border-left: 1px solid var(--border); z-index: 51; overflow-y: auto; padding: 18px; }
+  .drawer h2 { margin: 0 0 4px; font-size: 18px; }
+  .drawer .close { position: absolute; top: 14px; right: 16px; cursor: pointer; color: var(--muted); font-size: 22px; }
+  .field { margin: 12px 0; }
+  .field label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  .field .v { word-break: break-word; }
+  textarea { width: 100%; min-height: 240px; resize: vertical; line-height: 1.5; }
+  .timeline { border-left: 2px solid var(--border); padding-left: 14px; margin-top: 6px; }
+  .tl-item { margin-bottom: 12px; position: relative; }
+  .tl-item::before { content: ''; position: absolute; left: -19px; top: 4px; width: 8px; height: 8px;
+    border-radius: 50%; background: var(--accent); }
+  .tl-item .ta { font-weight: 600; font-size: 12px; }
+  .tl-item .td { font-size: 13px; }
+  .tl-item .tt { font-size: 11px; color: var(--muted); }
+  .charcount { font-size: 12px; color: var(--muted); }
+  .charcount.over { color: var(--red); font-weight: 600; }
+  a { color: var(--accent); }
+  .empty { color: var(--muted); padding: 20px; text-align: center; }
+  pre.body { white-space: pre-wrap; background: var(--bg); border: 1px solid var(--border);
+    border-radius: 6px; padding: 12px; font-size: 13px; line-height: 1.5; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Dashboard</h1>
+  <nav>
+    <button data-tab="crm" class="active">CRM</button>
+    <button data-tab="outreach">Outreach</button>
+    <button data-tab="content">Content Studio</button>
+    <button data-tab="packs">Content Packs</button>
+    <button data-tab="chef">Chef</button>
+    <button data-tab="books">Księgi Menu</button>
+    <button data-tab="writer">Writer</button>
+    <button data-tab="scheduler">Scheduler</button>
+  </nav>
+  <span class="spacer"></span>
+  <button class="btn ghost" id="reindexBtn">↻ Reindex draftów</button>
+</header>
+
+<main>
+  <!-- ══ CRM ══ -->
+  <section id="tab-crm">
+    <div class="stats" id="crmStats"></div>
+    <div class="filters">
+      <input type="text" id="crmSearch" placeholder="Szukaj firmy / emaila…" />
+      <select id="crmSegment"><option value="">Wszystkie segmenty</option>
+        <option value="gastro-producer">Gastro (producent)</option>
+        <option value="automation-prospect">Automation prospect</option>
+        <option value="other">Inne</option></select>
+      <select id="crmSource"><option value="">Wszystkie źródła</option></select>
+      <button class="btn ghost" id="crmReload">Odśwież</button>
+    </div>
+    <div class="kanban" id="kanban"></div>
+  </section>
+
+  <!-- ══ CONTENT STUDIO ══ -->
+  <section id="tab-content" class="hidden">
+    <div class="panes">
+      <div class="pane" id="ideaInbox">
+        <h3>💡 Idea Inbox (sygnały)</h3>
+        <div class="filters" style="margin-bottom:10px">
+          <label style="font-size:12px;color:var(--muted)">
+            <input type="checkbox" id="onlyUnused" checked /> tylko niewykorzystane</label>
+        </div>
+        <div id="signalsList"></div>
+      </div>
+      <div class="pane">
+        <h3>📅 Kalendarz treści (LinkedIn + Instagram + TikTok)</h3>
+        <div id="calendar"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CONTENT PACKS (contentAgent) ══ -->
+  <section id="tab-packs" class="hidden">
+    <div class="panes">
+      <div class="pane"><h3>📣 Projekty Content</h3><div id="packsList"></div></div>
+      <div class="pane" id="packView"><div class="empty">Wybierz projekt content.</div></div>
+    </div>
+  </section>
+
+  <!-- ══ OUTREACH ══ -->
+  <section id="tab-outreach" class="hidden">
+    <div class="panes">
+      <div class="pane">
+        <h3>✉️ Drafty cold-email</h3>
+        <div id="emailList"></div>
+      </div>
+      <div class="pane" id="emailPreview">
+        <div class="empty">Wybierz draft z listy.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CHEF ══ -->
+  <section id="tab-chef" class="hidden">
+    <div class="panes">
+      <div class="pane"><h3>👨‍🍳 Projekty Chef</h3><div id="chefList"></div></div>
+      <div class="pane" id="chefMenus"><div class="empty">Wybierz projekt.</div></div>
+    </div>
+  </section>
+
+  <!-- ══ MENU BOOKS (chefAgent — branded deliverables + PDF) ══ -->
+  <section id="tab-books" class="hidden">
+    <div class="panes">
+      <div class="pane"><h3>📖 Księgi Menu</h3><div id="booksList"></div></div>
+      <div class="pane" id="bookView"><div class="empty">Wybierz Księgę Menu.</div></div>
+    </div>
+  </section>
+
+  <!-- ══ WRITER MANUSCRIPTS (writerAgent) ══ -->
+  <section id="tab-writer" class="hidden">
+    <div class="panes">
+      <div class="pane"><h3>✍️ Projekty Writer</h3><div id="writerList"></div></div>
+      <div class="pane" id="writerView"><div class="empty">Wybierz projekt writerAgent.</div></div>
+    </div>
+  </section>
+
+  <!-- ══ SCHEDULER ══ -->
+  <section id="tab-scheduler" class="hidden">
+    <div class="panes">
+      <div class="pane">
+        <h3>⏱️ Scheduled Tasks</h3>
+        <div class="filters" style="margin-bottom:10px">
+          <select id="schedulerStatus" onchange="loadScheduler()">
+            <option value="">Wszystkie statusy</option>
+            <option value="scheduled">Scheduled</option>
+            <option value="running">Running</option>
+            <option value="failed">Failed</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+          <button class="btn ghost" onclick="loadScheduler()">Odśwież</button>
+        </div>
+        <div id="schedulerSummary"></div>
+        <div id="schedulerList"><div class="empty">Ładowanie…</div></div>
+      </div>
+      <div class="pane" id="schedulerDetail"><div class="empty">Wybierz scheduled task.</div></div>
+    </div>
+  </section>
+</main>
+
+<div id="drawerHost"></div>
+
+<script>
+const API = '';
+const $ = (s, el=document) => el.querySelector(s);
+const $$ = (s, el=document) => [...el.querySelectorAll(s)];
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+async function api(path, opts) {
+  const r = await fetch(API + path, { headers: {'Content-Type':'application/json'}, ...opts });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}
+
+// ── Tabs ──
+const TABS = ['crm','content','packs','outreach','chef','books','writer','scheduler'];
+$$('nav button').forEach(b => b.onclick = () => switchTab(b.dataset.tab));
+function switchTab(t) {
+  $$('nav button').forEach(b => b.classList.toggle('active', b.dataset.tab === t));
+  TABS.forEach(x => $('#tab-'+x).classList.toggle('hidden', x !== t));
+  if (t === 'crm') loadCRM();
+  if (t === 'content') loadContent();
+  if (t === 'packs') loadPacks();
+  if (t === 'outreach') loadOutreach();
+  if (t === 'chef') loadChef();
+  if (t === 'books') loadBooks();
+  if (t === 'writer') loadWriter();
+  if (t === 'scheduler') loadScheduler();
+}
+
+// ══════════════ SCHEDULER ══════════════
+async function loadScheduler() {
+  const host = $('#schedulerList');
+  const summary = $('#schedulerSummary');
+  if (!host) return;
+  host.innerHTML = '<div class="empty">Ładowanie…</div>';
+  if (summary) summary.innerHTML = '';
+  try {
+    const params = new URLSearchParams({ limit: '50' });
+    const status = $('#schedulerStatus')?.value || '';
+    if (status) params.set('status', status);
+    const res = await api('/dashboard/scheduled-tasks?' + params.toString());
+    const counts = res.counts || {};
+    if (summary) {
+      summary.innerHTML = ['scheduled','running','failed','completed','cancelled'].map(k =>
+        `<span class="pill">${esc(k)}: ${counts[k] || 0}</span>`
+      ).join(' ');
+    }
+    const rows = res.data || [];
+    if (!rows.length) { host.innerHTML = '<div class="empty">Brak scheduled tasks.</div>'; return; }
+    host.innerHTML = rows.map(t => {
+      const when = t.schedule?.fireAt ? new Date(t.schedule.fireAt).toLocaleString('pl-PL') : (t.schedule?.cronExpression || '—');
+      return `<div class="item">
+        <b>${esc(t.status)}</b> · ${esc(t.targetType)}:${esc(t.targetIdentifier)}
+        <div class="s">${esc(when)} · ${esc(t.chainName || t.chainId || 'single task')} ${t.stepName ? '· ' + esc(t.stepName) : ''}</div>
+        <div class="s">${esc(t.promptPreview || '')}</div>
+        <div style="font-family:monospace;font-size:11px;opacity:.65;margin:6px 0">${esc(t.taskId)}</div>
+        <button class="btn ghost" onclick="inspectScheduledTask('${esc(t.taskId)}')">Szczegóły</button>
+        <button class="btn ghost" onclick="rescheduleScheduledTaskUi('${esc(t.taskId)}')">Przesuń</button>
+        <button class="btn ghost" onclick="cancelScheduledTaskUi('${esc(t.taskId)}', this)">Anuluj</button>
+      </div>`;
+    }).join('');
+  } catch (err) {
+    host.innerHTML = '<div class="empty">Błąd: ' + esc(err.message) + '</div>';
+  }
+}
+async function inspectScheduledTask(id) {
+  const host = $('#schedulerDetail');
+  if (!host) return;
+  host.innerHTML = '<div class="empty">Ładowanie…</div>';
+  try {
+    const res = await api('/dashboard/scheduled-tasks/' + encodeURIComponent(id));
+    const t = res.task;
+    host.innerHTML = `<h3>Scheduled Task</h3>
+      <div style="font-family:monospace;font-size:11px;opacity:.7">${esc(t.taskId)}</div>
+      <div class="field"><label>Status</label><div class="v">${esc(t.status)}</div></div>
+      <div class="field"><label>Target</label><div class="v">${esc(t.targetType)}:${esc(t.targetIdentifier)}</div></div>
+      <div class="field"><label>Schedule</label><div class="v">${esc(t.schedule?.fireAt || t.schedule?.cronExpression || '—')}</div></div>
+      <div class="field"><label>Prompt</label><div class="v">${esc(t.promptPreview || '')}</div></div>
+      ${t.lastError ? `<div class="field"><label>Error</label><div class="v">${esc(t.lastError)}</div></div>` : ''}
+      ${t.resultPreview ? `<div class="field"><label>Result</label><pre>${esc(t.resultPreview)}</pre></div>` : ''}`;
+  } catch (err) {
+    host.innerHTML = '<div class="empty">Błąd: ' + esc(err.message) + '</div>';
+  }
+}
+async function cancelScheduledTaskUi(id, btn) {
+  if (!confirm('Anulować scheduled task ' + id + '?')) return;
+  if (btn) { btn.disabled = true; btn.textContent = '…'; }
+  try {
+    await api('/dashboard/scheduled-tasks/' + encodeURIComponent(id) + '/cancel', { method:'POST' });
+    loadScheduler();
+  } catch (err) {
+    if (btn) { btn.disabled = false; btn.textContent = 'Anuluj'; }
+    alert('Nie udało się anulować: ' + err.message);
+  }
+}
+async function rescheduleScheduledTaskUi(id) {
+  const fireAt = prompt('Nowy fireAt ISO 8601', new Date(Date.now() + 3600_000).toISOString());
+  if (!fireAt) return;
+  await api('/dashboard/scheduled-tasks/' + encodeURIComponent(id) + '/reschedule', {
+    method:'POST',
+    body: JSON.stringify({ fireAt, resetRetry: true }),
+  });
+  loadScheduler();
+}
+
+// ── Drawer ──
+function openDrawer(html) {
+  $('#drawerHost').innerHTML =
+    `<div class="drawer-bg" onclick="closeDrawer()"></div><div class="drawer"><span class="close" onclick="closeDrawer()">×</span>${html}</div>`;
+}
+function closeDrawer() { $('#drawerHost').innerHTML = ''; }
+
+const STATUSES = ['new','research_needed','research_enriched','draft_gotowy','sent','replied','won','lost','parked'];
+const STATUS_LABEL = { new:'Nowy', research_needed:'Research', research_enriched:'Wzbogacony',
+  draft_gotowy:'Draft gotowy', sent:'Wysłane', replied:'Odpowiedź', won:'Wygrane', lost:'Przegrane', parked:'Wstrzymane' };
+
+// ══════════════ CRM ══════════════
+let crmLeads = [];
+async function loadCRM() {
+  const stats = await api('/ws/leads/stats');
+  $('#crmStats').innerHTML = [
+    ['Leady', stats.total],
+    ['Draft gotowy', stats.byStatus['draft_gotowy'] || 0],
+    ['Research', (stats.byStatus['research_needed']||0)+(stats.byStatus['research_enriched']||0)],
+    ['Gastro', stats.bySegment['gastro-producer'] || 0],
+    ['Automation', stats.bySegment['automation-prospect'] || 0],
+  ].map(([l,n]) => `<div class="stat"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('');
+
+  const srcSel = $('#crmSource');
+  if (srcSel.options.length <= 1) {
+    Object.keys(stats.bySource).sort().forEach(s => {
+      if (s === '(brak)') return;
+      const o = document.createElement('option'); o.value = s; o.textContent = s; srcSel.appendChild(o);
+    });
+  }
+  await reloadLeads();
+}
+async function reloadLeads() {
+  const q = $('#crmSearch').value.trim();
+  const segment = $('#crmSegment').value, source = $('#crmSource').value;
+  const params = new URLSearchParams({ limit: '1000' });
+  if (q) params.set('q', q);
+  if (segment) params.set('segment', segment);
+  if (source) params.set('source', source);
+  const res = await api('/ws/leads?' + params);
+  crmLeads = res.data;
+  renderKanban();
+}
+function renderKanban() {
+  const byStatus = {}; STATUSES.forEach(s => byStatus[s] = []);
+  crmLeads.forEach(l => { (byStatus[l.status] ??= []).push(l); });
+  $('#kanban').innerHTML = STATUSES.map(s => `
+    <div class="col" data-status="${s}" ondragover="event.preventDefault();this.classList.add('dragover')"
+         ondragleave="this.classList.remove('dragover')" ondrop="dropLead(event,'${s}')">
+      <h3><span>${STATUS_LABEL[s]||s}</span><span>${(byStatus[s]||[]).length}</span></h3>
+      <div class="body">${(byStatus[s]||[]).map(cardHTML).join('') || '<div class="empty" style="font-size:12px">—</div>'}</div>
+    </div>`).join('');
+  $$('.card').forEach(c => {
+    c.draggable = true;
+    c.ondragstart = e => e.dataTransfer.setData('id', c.dataset.id);
+    c.onclick = () => openLead(c.dataset.id);
+  });
+}
+function cardHTML(l) {
+  const seg = l.segment === 'gastro-producer' ? 'gastro' : l.segment === 'automation-prospect' ? 'automation' : 'other';
+  const segL = seg === 'gastro' ? 'Gastro' : seg === 'automation' ? 'Auto' : 'Inne';
+  return `<div class="card" data-id="${esc(l.id)}">
+    <div class="name">${esc(l.companyName)}</div>
+    <div class="meta">
+      <span class="badge ${seg}">${segL}</span>
+      ${l.region ? `<span class="badge">${esc(l.region)}</span>` : ''}
+      ${l.draft && l.draft.gmailDraftId ? '<span class="dot" title="ma draft"></span>' : ''}
+    </div></div>`;
+}
+async function dropLead(e, status) {
+  e.preventDefault();
+  $$('.col').forEach(c => c.classList.remove('dragover'));
+  const id = e.dataTransfer.getData('id');
+  const lead = crmLeads.find(l => l.id === id);
+  if (!lead || lead.status === status) return;
+  lead.status = status; renderKanban();
+  await api('/ws/leads/' + encodeURIComponent(id), { method:'PATCH', body: JSON.stringify({ status }) });
+}
+async function openLead(id) {
+  const l = await api('/ws/leads/' + encodeURIComponent(id));
+  const c = l.contact || {};
+  const olx = l.details?.olx, auto = l.details?.automation;
+  openDrawer(`
+    <h2>${esc(l.companyName)}</h2>
+    <div class="field"><span class="badge ${l.segment==='gastro-producer'?'gastro':l.segment==='automation-prospect'?'automation':'other'}">${esc(l.segment)}</span></div>
+    <div class="field"><label>Status</label>
+      <select id="leadStatus">${STATUSES.map(s=>`<option value="${s}" ${s===l.status?'selected':''}>${STATUS_LABEL[s]||s}</option>`).join('')}</select></div>
+    ${c.email?`<div class="field"><label>Email</label><div class="v">${esc(c.email)}</div></div>`:''}
+    ${c.phone?`<div class="field"><label>Telefon</label><div class="v">${esc(c.phone)}</div></div>`:''}
+    ${c.website?`<div class="field"><label>WWW</label><div class="v"><a href="${esc(c.website)}" target="_blank">${esc(c.website)}</a></div></div>`:''}
+    ${l.region?`<div class="field"><label>Region</label><div class="v">${esc(l.region)}</div></div>`:''}
+    ${olx?`<div class="field"><label>OLX</label><div class="v">${esc(olx.title||'')} — ${esc(olx.price||'')} (${esc(olx.city||'')})<br><a href="${esc(olx.url)}" target="_blank">ogłoszenie ↗</a></div></div>`:''}
+    ${auto?`<div class="field"><label>Automation</label><div class="v">Score: ${auto.qualityScore??'?'} · ~${auto.estimatedHoursSaved??'?'}h/mc<br>${esc(auto.useCaseIdea||'')}</div></div>`:''}
+    ${l.draft&&l.draft.gmailDraftId?`<div class="field"><label>Gmail draft</label><div class="v">${esc(l.draft.subject||'(bez tematu)')}<br><code>${esc(l.draft.gmailDraftId)}</code></div>${l.draft.body?`<pre class="body" style="margin-top:6px">${esc(l.draft.body)}</pre>`:''}</div>`:''}
+    <div class="field"><label>Dodaj notatkę</label>
+      <textarea id="leadNote" style="min-height:60px" placeholder="Notatka do historii…"></textarea>
+      <button class="btn" style="margin-top:6px" onclick="saveLead('${esc(l.id)}')">Zapisz</button></div>
+    <div class="field"><label>Historia (${l.history.length})</label>
+      <div class="timeline">${l.history.slice().reverse().map(h=>`
+        <div class="tl-item"><div class="ta">${esc(h.action||'')}</div>
+          <div class="td">${esc(h.description||'')}</div>
+          <div class="tt">${h.timestamp?new Date(h.timestamp).toLocaleString('pl-PL'):''} · ${esc(h.agentId||'')}</div></div>`).join('') || '<div class="empty">brak</div>'}</div></div>
+  `);
+}
+async function saveLead(id) {
+  const status = $('#leadStatus').value, note = $('#leadNote').value.trim();
+  await api('/ws/leads/' + encodeURIComponent(id), { method:'PATCH', body: JSON.stringify({ status, note: note||undefined }) });
+  closeDrawer(); reloadLeads();
+}
+$('#crmReload').onclick = reloadLeads;
+$('#crmSearch').addEventListener('keydown', e => { if (e.key==='Enter') reloadLeads(); });
+$('#crmSegment').onchange = reloadLeads;
+$('#crmSource').onchange = reloadLeads;
+
+// ══════════════ CONTENT STUDIO ══════════════
+async function loadContent() { await Promise.all([loadSignals(), loadCalendar()]); }
+async function loadSignals() {
+  const used = $('#onlyUnused').checked ? '&used=false' : '';
+  const res = await api('/ws/content/signals?limit=60' + used);
+  $('#signalsList').innerHTML = res.data.map(s => `
+    <div class="signal" onclick='openSignal(${JSON.stringify(s.signalId)})'>
+      <div class="t">${esc(s.title)}</div>
+      <div class="s">${esc(s.source||'')} · <span class="score">rel ${(s.scores?.relevance??0).toFixed?.(2) ?? s.scores?.relevance}</span>${s.used?' · ✓ użyte':''}</div>
+    </div>`).join('') || '<div class="empty">Brak sygnałów.</div>';
+}
+window.openSignal = async (id) => {
+  const s = await api('/ws/content/signals/' + encodeURIComponent(id));
+  openDrawer(`
+    <h2>${esc(s.title)}</h2>
+    <div class="field"><div class="s">${esc(s.sourceName||s.source||'')} · ${s.publishedAt?new Date(s.publishedAt).toLocaleDateString('pl-PL'):''}</div></div>
+    <div class="field"><label>Podsumowanie</label><div class="v">${esc(s.summary||'')}</div></div>
+    <div class="field"><label>Dlaczego ważne</label><div class="v">${esc(s.whyItMatters||'')}</div></div>
+    <div class="field"><label>Hooki</label>${(s.hooks||[]).map(h=>`<div class="hook"><b>${esc(h.hook)}</b><br><span class="s">${esc(h.bestFor||'')} · ${esc(h.angle||'')}</span></div>`).join('')||'—'}</div>
+    <div class="field"><label>Angle treści</label><div class="v">${(s.contentAngles||[]).map(a=>'• '+esc(a)).join('<br>')||'—'}</div></div>
+    <div class="field"><label>Tagi</label><div class="v">${(s.tags||[]).map(t=>`<span class="badge">${esc(t)}</span>`).join(' ')}</div></div>
+    ${s.canonicalUrl||s.url?`<div class="field"><a href="${esc(s.canonicalUrl||s.url)}" target="_blank">Źródło ↗</a></div>`:''}
+  `);
+};
+$('#onlyUnused').onchange = loadSignals;
+
+async function loadCalendar() {
+  const cal = await api('/ws/drafts/calendar');
+  const weeks = Object.keys(cal).sort().reverse();
+  if (!weeks.length) { $('#calendar').innerHTML = '<div class="empty">Brak draftów social. Kliknij „Reindex draftów".</div>'; return; }
+  $('#calendar').innerHTML = weeks.map(w => `
+    <div class="week"><h4>Tydzień: ${esc(w)}</h4><div class="week-grid">
+      ${cal[w].map(postCard).join('')}</div></div>`).join('');
+}
+const CH_CLASS = { linkedin:'li', instagram:'ig', tiktok:'tt', email:'email' };
+const CH_LABEL = { linkedin:'LinkedIn', instagram:'Instagram', tiktok:'TikTok', email:'Email' };
+function postCard(d) {
+  const ch = CH_CLASS[d.channel] || 'other';
+  const chL = CH_LABEL[d.channel] || d.channel;
+  return `<div class="post-card" onclick='openDraft(${JSON.stringify(d.draftId)})'>
+    <span class="badge ${ch}">${chL}</span> <span class="badge lang">${esc(d.language)}</span>
+    <div class="pt">${esc(d.title)}</div>
+    <div class="pb">${esc((d.body||'').slice(0,140))}</div>
+    <div class="s" style="margin-top:6px;font-size:11px">${d.charCount}${d.limit?'/'+d.limit:''} zn. · ${esc(d.status)}</div></div>`;
+}
+window.openDraft = async (id) => {
+  const d = await api('/ws/drafts/' + encodeURIComponent(id));
+  const over = d.limit && d.charCount > d.limit;
+  openDrawer(`
+    <h2>${esc(d.title)}</h2>
+    <div class="field">
+      <span class="badge ${CH_CLASS[d.channel]||'other'}">${esc(d.channel)}</span>
+      <span class="badge lang">${esc(d.language)}</span> <span class="badge">${esc(d.status)}</span></div>
+    ${d.imagePrompt?`<div class="field"><label>Image prompt</label><div class="v">${esc(d.imagePrompt)}</div></div>`:''}
+    <div class="field"><label>Treść (markdown)</label>
+      <textarea id="draftBody" oninput="updCount()">${esc(d.body)}</textarea>
+      <div class="charcount ${over?'over':''}" id="charcount">${d.charCount}${d.limit?' / '+d.limit:''} znaków</div></div>
+    ${(d.hashtags&&d.hashtags.length)?`<div class="field"><label>Hashtagi</label><div class="v">${esc(d.hashtags.join(' '))}</div></div>`:''}
+    ${d.rationale?`<div class="field"><label>Rationale</label><div class="v">${esc(d.rationale)}</div></div>`:''}
+    <div class="field">
+      <button class="btn" onclick="saveDraft('${esc(d.draftId)}')">💾 Zapisz</button>
+      <button class="btn ghost" onclick="setStatus('${esc(d.draftId)}','approved')">✓ Zatwierdź</button>
+    </div>`);
+  window.__draftLimit = d.limit;
+};
+window.updCount = () => {
+  const n = $('#draftBody').value.length, lim = window.__draftLimit;
+  const el = $('#charcount'); el.textContent = n + (lim?' / '+lim:'') + ' znaków';
+  el.classList.toggle('over', lim && n > lim);
+};
+window.saveDraft = async (id) => {
+  await api('/ws/drafts/' + encodeURIComponent(id), { method:'PATCH', body: JSON.stringify({ body: $('#draftBody').value }) });
+  closeDrawer(); loadCalendar();
+};
+window.setStatus = async (id, status) => {
+  await api('/ws/drafts/' + encodeURIComponent(id) + '/status', { method:'POST', body: JSON.stringify({ status }) });
+  closeDrawer(); loadCalendar();
+};
+
+// ══════════════ OUTREACH ══════════════
+async function loadOutreach() {
+  const res = await api('/ws/drafts?channel=email&limit=500');
+  $('#emailList').innerHTML = res.data.map(d => `
+    <div class="signal" onclick='showEmail(${JSON.stringify(d.draftId)})'>
+      <div class="t">${esc(d.title)}</div>
+      <div class="s">${esc(d.language)} · ${esc(d.status)}${d.gmailDraftId?' · 📧':''}</div>
+    </div>`).join('') || '<div class="empty">Brak draftów email.</div>';
+}
+window.showEmail = async (id) => {
+  const d = await api('/ws/drafts/' + encodeURIComponent(id));
+  const enr = d.enrichment || {};
+  $('#emailPreview').innerHTML = `
+    <h3>${esc(d.title)}</h3>
+    <div class="field"><span class="badge">${esc(d.status)}</span> ${d.gmailDraftId?`<code>${esc(d.gmailDraftId)}</code>`:''}</div>
+    ${enr.email?`<div class="field"><label>Kontakt</label><div class="v">${esc(enr.email)} · ${esc(enr.website||'')}</div></div>`:''}
+    ${enr.reason?`<div class="field"><label>Dlaczego ten lead</label><div class="v">${esc(enr.reason)}</div></div>`:''}
+    <div class="field"><label>Treść</label><pre class="body">${esc(d.body)}</pre></div>
+    <button class="btn ghost" onclick="setStatus('${esc(d.draftId)}','approved')">✓ Zatwierdź do wysyłki</button>`;
+};
+
+// ══════════════ CHEF ══════════════
+async function loadChef() {
+  const res = await api('/ws/chef/projects');
+  $('#chefList').innerHTML = res.data.map(p => `
+    <div class="signal" onclick='showChef(${JSON.stringify(p.id)})'>
+      <div class="signal-head">
+        <div class="t">${esc(p.name||'(projekt)')}</div>
+        <button class="btn ghost danger signal-delete" onclick='event.stopPropagation(); deleteChefProject(${JSON.stringify(p.id)})'>Usuń</button>
+      </div>
+      <div class="s">${esc(p.status||'')} · ${esc(p.profile?.establishmentType||'')}</div>
+    </div>`).join('') || '<div class="empty">Brak projektów.</div>';
+}
+window.deleteChefProject = async (id) => {
+  if (!confirm('Usunąć projekt chef ' + id + ' oraz jego pliki księgi menu z dysku? Tej operacji nie można cofnąć.')) return;
+  try {
+    await api('/ws/chef/projects/' + encodeURIComponent(id), { method: 'DELETE' });
+    $('#chefMenus').innerHTML = '<div class="empty">Projekt został usunięty.</div>';
+    $('#bookView').innerHTML = '<div class="empty">Księga menu została usunięta.</div>';
+    await loadChef();
+    await loadBooks();
+  } catch (err) {
+    alert('Błąd podczas usuwania projektu chef.');
+  }
+};
+window.showChef = async (id) => {
+  $('#chefMenus').innerHTML = '<div class="empty">Ładuję menu…</div>';
+  // Quick menu preview (structured chef_menus — the dish list, as before). The
+  // fully branded document/PDF lives in the "Księgi Menu" tab; here we just add a
+  // shortcut button so both views are one click apart.
+  try {
+    const res = await api('/ws/chef/menus/' + encodeURIComponent(id));
+    const bookBtn = `<a href="/ws/chef/book/${encodeURIComponent(id)}/html" target="_blank" rel="noopener"
+        class="btn ghost" style="text-decoration:none">📖 Otwórz Księgę Menu (HTML)</a>
+        <button class="btn ghost" onclick="switchTab('books'); showBook('${esc(id)}');" style="margin-left:8px">📖 Zobacz w Księgach Menu</button>
+        <button class="btn ghost danger" onclick="deleteChefProject('${esc(id)}');" style="margin-left:8px">Usuń projekt</button>`;
+    const list = res.data.map(m => `
+      <div class="field"><h3>${esc(m.title)} (v${m.version})</h3>
+        <div class="v" style="color:var(--muted);margin-bottom:8px">${esc(m.narrative||'')}</div>
+        ${(m.sections||[]).map(sec=>`<div style="margin:8px 0"><b>${esc(sec.name)}</b>${(sec.dishes||[]).map(dish=>`
+          <div class="hook"><b>${esc(dish.name)}</b><br><span class="s">${esc(dish.description||'')}</span></div>`).join('')}</div>`).join('')}
+      </div>`).join('');
+    $('#chefMenus').innerHTML =
+      `<div style="margin-bottom:10px">${bookBtn}</div>` +
+      (list || '<div class="empty">Brak ustrukturyzowanego menu (chef_menus) w tym projekcie.</div>');
+  } catch (err) {
+    $('#chefMenus').innerHTML = '<div class="empty">Brak danych menu dla tego projektu.</div>';
+  }
+};
+
+// ══════════════ MENU BOOKS (chefAgent — deliverables + PDF) ══════════════
+async function loadBooks() {
+  const res = await api('/ws/chef/books');
+  $('#booksList').innerHTML = res.data.map(b => {
+    const tags = [b.hasPdf ? '✓ PDF' : 'tylko MD', b.profile?.establishmentType].filter(Boolean).join(' · ');
+    const when = b.pdfUpdatedAt || b.mdUpdatedAt || b.updatedAt;
+    return `<div class="signal" onclick='showBook(${JSON.stringify(b.id)})'>
+      <div class="signal-head">
+        <div class="t">${esc(b.name||'(projekt)')}</div>
+        <button class="btn ghost danger signal-delete" onclick='event.stopPropagation(); deleteChefProject(${JSON.stringify(b.id)})'>Usuń</button>
+      </div>
+      <div class="s">${esc(b.status||'')}${tags?' · '+esc(tags):''}${when?' · '+esc(String(when).slice(0,10)):''}</div>
+    </div>`;
+  }).join('') || '<div class="empty">Brak Ksiąg Menu na dysku. Uruchom chefAgenta.</div>';
+}
+window.showBook = async (id) => {
+  $('#bookView').innerHTML = '<div class="empty">Ładuję Księgę Menu…</div>';
+  try {
+    const res = await api('/ws/chef/book/' + encodeURIComponent(id));
+    // Probe PDF availability so the button only shows when a render exists.
+    let pdfUrl = '/ws/chef/book/' + encodeURIComponent(id) + '/pdf';
+    try {
+      const head = await fetch(pdfUrl, { method: 'HEAD' });
+      if (!head.ok) pdfUrl = null;
+    } catch { pdfUrl = null; }
+    mountDocViewer('#bookView', {
+      title: '📖 Księga Menu',
+      htmlUrl: '/ws/chef/book/' + encodeURIComponent(id) + '/html',
+      rawText: res.data.content,
+      path: res.data.path,
+      pdfUrl,
+    });
+  } catch (err) {
+    $('#bookView').innerHTML = `<div class="empty">Brak Księgi Menu na dysku dla tego projektu.</div>`;
+  }
+};
+
+// ══════════════ CONTENT PACKS (contentAgent) ══════════════
+async function loadPacks() {
+  const res = await api('/ws/content/projects');
+  $('#packsList').innerHTML = res.data.map(p => {
+    const t = p.targets || {};
+    const tline = ['linkedin','instagram','tiktok'].map(k => {
+      const n = t[k] || (t.targets && t.targets[k]);
+      return n ? `${k[0].toUpperCase()}${k.slice(1)}: ${typeof n==='object'?(n.count??'?'):n}` : null;
+    }).filter(Boolean).join(' · ');
+    return `<div class="signal" onclick='showPack(${JSON.stringify(p.id)})'>
+      <div class="signal-head">
+        <div class="t">${esc(p.name||'(projekt)')}</div>
+        <button class="btn ghost danger signal-delete" onclick='event.stopPropagation(); deleteContentProject(${JSON.stringify(p.id)})'>Usuń</button>
+      </div>
+      <div class="s">${esc(p.status||'')}${p.weekDate?' · '+esc(p.weekDate):''}${tline?' · '+esc(tline):''}</div>
+    </div>`;
+  }).join('') || '<div class="empty">Brak projektów content. Uruchom contentAgenta.</div>';
+}
+window.deleteContentProject = async (id) => {
+  if (!confirm('Usunąć pakiet treści ' + id + ' z dysku i bazy? Tej operacji nie można cofnąć.')) return;
+  try {
+    await api('/ws/content/projects/' + encodeURIComponent(id), { method: 'DELETE' });
+    $('#packView').innerHTML = '<div class="empty">Pakiet treści został usunięty.</div>';
+    await loadPacks();
+  } catch (err) {
+    alert('Błąd podczas usuwania pakietu treści.');
+  }
+};
+
+// Shared branded-document viewer: iframe (HTML) + Markdown toggle + open-in-new-tab
+// + optional PDF button. Used by Content Packs, Chef menus and Menu Books.
+let docViewerSeq = 0;
+function mountDocViewer(containerSel, opts) {
+  // opts: { title, htmlUrl, rawText, path, pdfUrl, standaloneHtmlUrl, markdownUrl }
+  const uid = 'dv' + (++docViewerSeq);
+  const pdfBtn = opts.pdfUrl
+    ? `<a href="${opts.pdfUrl}" target="_blank" rel="noopener" class="btn ghost" style="text-decoration:none">📕 Otwórz PDF</a>`
+    : '';
+  const standaloneBtn = opts.standaloneHtmlUrl
+    ? `<a href="${opts.standaloneHtmlUrl}" target="_blank" rel="noopener" class="btn ghost" style="text-decoration:none">📖 Wydanie HTML</a>`
+    : '';
+  const mdBtn = opts.markdownUrl
+    ? `<a href="${opts.markdownUrl}" target="_blank" rel="noopener" class="btn ghost" style="text-decoration:none">⬇ Markdown</a>`
+    : '';
+  $(containerSel).innerHTML = `
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap">
+      <h3 style="margin:0">${esc(opts.title)}</h3>
+      <a href="${opts.htmlUrl}" target="_blank" rel="noopener" class="btn ghost" style="text-decoration:none">↗ Otwórz w nowej karcie</a>
+      ${pdfBtn}
+      ${standaloneBtn}
+      ${mdBtn}
+      <button id="${uid}-btn" class="btn ghost" data-raw="0">📄 Markdown</button>
+    </div>
+    ${opts.path ? `<div class="s" style="margin-bottom:8px;color:var(--muted)">${esc(opts.path)}</div>` : ''}
+    <iframe id="${uid}-frame" src="${opts.htmlUrl}" title="${esc(opts.title)}"
+      style="width:100%;height:72vh;border:1px solid var(--line);border-radius:12px;background:#eef2ef"></iframe>
+    <pre id="${uid}-raw" class="body" style="display:none"></pre>`;
+  const btn = document.getElementById(uid + '-btn');
+  const frame = document.getElementById(uid + '-frame');
+  const raw = document.getElementById(uid + '-raw');
+  raw.textContent = opts.rawText || '';
+  btn.onclick = () => {
+    const showingRaw = btn.dataset.raw === '1';
+    btn.dataset.raw = showingRaw ? '0' : '1';
+    frame.style.display = showingRaw ? '' : 'none';
+    raw.style.display = showingRaw ? 'none' : '';
+    btn.textContent = showingRaw ? '📄 Markdown' : '🎨 Widok HTML';
+  };
+}
+
+// ══════════════ WRITER MANUSCRIPTS (writerAgent) ══════════════
+function writerDate(value) {
+  if (!value) return '';
+  const d = new Date(value);
+  return Number.isNaN(d.getTime()) ? String(value).slice(0, 10) : d.toLocaleDateString('pl-PL');
+}
+
+function writerQualityLabel(summary) {
+  if (!summary || !summary.total) return 'bez audytów';
+  const parts = [];
+  if (summary.latestSlopScore != null) parts.push('slop ' + summary.latestSlopScore);
+  if (summary.blockingCount) parts.push(summary.blockingCount + ' blok.');
+  if (summary.latestRevisionDecision) parts.push(String(summary.latestRevisionDecision).slice(0, 24));
+  return parts.join(' · ') || (summary.latest?.ok === false ? 'wymaga uwagi' : 'OK');
+}
+
+async function loadWriter() {
+  const res = await api('/ws/writer/projects?limit=100');
+  $('#writerList').innerHTML = res.data.map(p => {
+    const tags = [
+      p.type,
+      p.deliverableLanguage,
+      p.hasDocument ? `${p.wordCount || 0} słów` : 'brak pliku',
+      writerQualityLabel(p.auditSummary),
+    ].filter(Boolean).join(' · ');
+    const when = p.documentUpdatedAt || p.updatedAt;
+    return `<div class="signal" onclick='showWriter(${JSON.stringify(p.id)})'>
+      <div class="signal-head">
+        <div class="t">${esc(p.name || '(projekt writer)')}</div>
+        <button class="btn ghost danger signal-delete" onclick='event.stopPropagation(); deleteWriterProject(${JSON.stringify(p.id)})'>Usuń</button>
+      </div>
+      <div class="s">${esc(p.status || '')}${tags ? ' · ' + esc(tags) : ''}${when ? ' · ' + esc(writerDate(when)) : ''}</div>
+    </div>`;
+  }).join('') || '<div class="empty">Brak projektów writerAgent. Zleć writerAgentowi opowiadanie, książkę, raport lub artykuł.</div>';
+}
+window.deleteWriterProject = async (id) => {
+  if (!confirm('Usunąć projekt ' + id + ' oraz jego folder manuskryptu z dysku? Tej operacji nie można cofnąć.')) return;
+  try {
+    await api('/ws/writer/projects/' + encodeURIComponent(id), { method: 'DELETE' });
+    $('#writerView').innerHTML = '<div class="empty">Projekt pisarza został usunięty.</div>';
+    await loadWriter();
+  } catch (err) {
+    alert('Błąd podczas usuwania projektu pisarza.');
+  }
+};
+
+function writerMetric(label, value) {
+  return `<div class="stat"><div class="n">${esc(value ?? '—')}</div><div class="l">${esc(label)}</div></div>`;
+}
+
+function writerPanel(bundle) {
+  const p = bundle.project || {};
+  const continuity = bundle.continuity || {};
+  const claimSummary = bundle.claimSummary || {};
+  const auditSummary = bundle.auditSummary || {};
+  const characters = Array.isArray(continuity.characters) ? continuity.characters.length : 0;
+  const timeline = Array.isArray(continuity.timeline) ? continuity.timeline.length : 0;
+  const openPromises = (continuity.promises || []).filter(x => x.status === 'open').length;
+  const openQuestions = (continuity.questions || []).filter(x => x.status === 'open').length;
+  const latestAudit = auditSummary.latest?.summary || '';
+  return `
+    <div class="stats" style="margin-bottom:12px">
+      ${writerMetric('Typ', p.type)}
+      ${writerMetric('Status', p.status)}
+      ${writerMetric('Język', p.deliverableLanguage)}
+      ${writerMetric('Słowa', p.wordCount || 0)}
+    </div>
+    <div class="panes" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-bottom:12px">
+      <div class="pane">
+        <h3>Fiction / continuity</h3>
+        <div class="s">Postacie: ${characters} · timeline: ${timeline}</div>
+        <div class="s">Otwarte obietnice: ${openPromises} · pytania: ${openQuestions}</div>
+      </div>
+      <div class="pane">
+        <h3>Fakty / claims</h3>
+        <div class="s">Źródła: ${(bundle.sources || []).length} · claims: ${claimSummary.total || 0}</div>
+        <div class="s">Unsupported high-risk: ${claimSummary.highRiskUnsupported || 0} · konflikty: ${claimSummary.conflicting || 0}</div>
+      </div>
+      <div class="pane">
+        <h3>Quality</h3>
+        <div class="s">Slop: ${auditSummary.latestSlopScore ?? '—'} · blokujące audyty: ${auditSummary.blockingCount || 0}</div>
+        <div class="s">${esc(latestAudit || writerQualityLabel(auditSummary))}</div>
+      </div>
+    </div>`;
+}
+
+window.showWriter = async (id) => {
+  $('#writerView').innerHTML = '<div class="empty">Ładuję projekt writerAgent…</div>';
+  try {
+    const res = await api('/ws/writer/projects/' + encodeURIComponent(id));
+    const bundle = res.data;
+    const doc = bundle.document;
+    $('#writerView').innerHTML = writerPanel(bundle) + '<div id="writerDocView"></div>';
+    if (doc && doc.content) {
+      mountDocViewer('#writerDocView', {
+        title: '✍️ Manuskrypt Writer',
+        htmlUrl: '/ws/writer/projects/' + encodeURIComponent(id) + '/html',
+        markdownUrl: '/ws/writer/projects/' + encodeURIComponent(id) + '/markdown',
+        pdfUrl: bundle.hasPdf ? ('/ws/writer/projects/' + encodeURIComponent(id) + '/pdf') : undefined,
+        standaloneHtmlUrl: bundle.hasStandaloneHtml ? ('/ws/writer/projects/' + encodeURIComponent(id) + '/standalone-html') : undefined,
+        rawText: doc.content,
+        path: doc.path,
+      });
+    } else {
+      $('#writerDocView').innerHTML = `<div class="empty">Ten projekt nie ma jeszcze pliku manuscript.md w ${esc(bundle.project?.projectDir || '')}.</div>`;
+    }
+  } catch (err) {
+    $('#writerView').innerHTML = '<div class="empty">Brak danych projektu writerAgent.</div>';
+  }
+};
+
+window.showPack = async (id) => {
+  $('#packView').innerHTML = '<div class="empty">Ładuję Content Pack…</div>';
+  try {
+    const res = await api('/ws/content/pack/' + encodeURIComponent(id));
+    mountDocViewer('#packView', {
+      title: '📣 Content Pack',
+      htmlUrl: '/ws/content/pack/' + encodeURIComponent(id) + '/html',
+      rawText: res.data.content,
+      path: res.data.path,
+    });
+  } catch (err) {
+    $('#packView').innerHTML = `<div class="empty">Brak Content Packu na dysku dla tego projektu (jeszcze nie zainicjowany).</div>`;
+  }
+};
+
+// ── Reindex ──
+$('#reindexBtn').onclick = async () => {
+  $('#reindexBtn').textContent = '↻ Indeksuję…';
+  const r = await api('/ws/drafts/reindex', { method:'POST' });
+  $('#reindexBtn').textContent = `↻ Reindex (${r.indexed})`;
+  setTimeout(() => $('#reindexBtn').textContent = '↻ Reindex draftów', 2500);
+  if (!$('#tab-content').classList.contains('hidden')) loadCalendar();
+  if (!$('#tab-outreach').classList.contains('hidden')) loadOutreach();
+};
+
+// ── init ──
+loadCRM();
+</script>
+</body>
+</html>

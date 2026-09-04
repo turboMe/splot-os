@@ -1,0 +1,27 @@
+{
+  "project_id": "demo-moonlit-loop",
+  "track_id": "track-01",
+  "prompt_version": "v1",
+  "generation_mode": "audio2audio",
+  "language": "en",
+  "vocal_type": "instrumental",
+  "style_prompt": "Transform the reference loop into a cinematic downtempo instrumental with 78 BPM half-time drums, felt piano fragments, soft sub bass, airy granular textures, and a clear A/B/A arc. Preserve the source's broad melodic contour while changing the arrangement, timbre, and production enough to stand alone.",
+  "lyrics": "",
+  "structure": [
+    "intro",
+    "main_theme",
+    "variation",
+    "return",
+    "outro"
+  ],
+  "length_ms": 120000,
+  "output_format": "mp3",
+  "reference_audio": [
+    {
+      "tag": "source_loop",
+      "role": "restyle_source",
+      "url": "https://example.com/reference/moonlit-loop.wav",
+      "notes": "fal supports one reference input here; use a real signed URL or workspace path at runtime."
+    }
+  ]
+}

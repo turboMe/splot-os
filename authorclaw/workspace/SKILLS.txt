@@ -1,0 +1,90 @@
+AUTHORCLAW SKILLS REFERENCE
+Auto-generated on startup — 20 skills loaded
+════════════════════════════════════════════════════════════
+
+── Core Skills (4) ──
+
+  after-action-review
+    Structured post-goal reflection that extracts lessons, evaluates quality, and feeds the self-improvement loop
+    Keywords: after action review, review goal, post mortem, what went well, what went wrong, retrospective, goal review, debrief
+
+  error-recovery
+    Intelligent error diagnosis, automatic recovery strategies, and prevention of recurring failures
+    Keywords: error, fix error, something broke, failed, not working, debug, troubleshoot, diagnose, recovery
+
+  prompt-optimizer
+    Automatically improves prompts based on output quality, user feedback, and A/B testing results
+    Keywords: optimize prompt, improve prompt, better prompt, prompt quality, test prompts, prompt a/b test, prompt lab
+
+  self-improve
+    Continuous self-improvement loop — AuthorClaw learns from mistakes, successes, and user feedback to get better over time
+    Keywords: self improve, improve yourself, learn from, what did you learn, improvement log, get better, lessons learned, self reflection, review performance
+
+── Author Skills (14) ──
+
+  beta-reader
+    Simulate beta reader feedback from different reader perspectives
+    Keywords: beta read, beta reader, reader feedback, test reader, would readers
+
+  book-bible
+    Maintain world consistency - characters, timeline, locations, rules, items
+    Keywords: book bible, character, character sheet, timeline, world building, world bible, consistency, continuity
+
+  continuity-check
+    Scan manuscript for inconsistencies in characters, timeline, settings, and names
+    Keywords: continuity, continuity check, consistency check, find inconsistencies, timeline check, plot holes, check continuity
+
+  dialogue
+    Craft authentic dialogue with distinct character voices and subtext
+    Keywords: dialogue, conversation, character voice, how would they say, make them talk
+
+  format
+    Export manuscripts to DOCX, EPUB, PDF, KDP-ready formatting
+    Keywords: format, export, epub, kindle, KDP, pdf, docx, manuscript format
+
+  ingest-tool
+    Read source code of any tool and generate an AuthorClaw skill from it
+    Keywords: ingest tool, create skill from, import tool, make a skill, convert to skill, read this code, analyze this tool
+
+  manuscript-hub
+    Track word count, chapters, progress, streaks, and project status
+    Keywords: word count, progress, manuscript status, how's my book, writing streak, new project, start a new
+
+  nonfiction-research
+    Academic source gathering, citation management, fact-checking for nonfiction
+    Keywords: nonfiction, citation, cite, bibliography, source, academic, fact check, reference
+
+  outline
+    Create structured outlines using popular frameworks (Save the Cat, 3-Act, Hero's Journey, custom)
+    Keywords: outline, structure, plot, beats, save the cat, hero's journey, three act, story structure
+
+  premise
+    Develop compelling story premises with market awareness and emotional hooks
+    Keywords: premise, story idea, book concept, what if, high concept, elevator pitch
+
+  research
+    Constrained internet research with source tracking for fiction and nonfiction projects
+    Keywords: research, look up, find out about, fact check, what is, source
+
+  revise
+    Multi-pass revision - developmental editing, line editing, copy editing
+    Keywords: revise, edit, improve, rewrite, feedback, critique, review, developmental edit, line edit, copy edit
+
+  style-clone
+    Analyze and match the author's unique writing voice
+    Keywords: learn my style, match my voice, style check, voice profile, analyze my writing, sound like me
+
+  write
+    Draft scenes, chapters, and passages matching the author's voice and style
+    Keywords: write, draft, write a scene, write chapter, continue writing, write the
+
+── Marketing Skills (2) ──
+
+  ad-copy
+    Write ad copy for Amazon AMS, BookBub, Facebook, and other book advertising platforms
+    Keywords: ad copy, amazon ad, bookbub, facebook ad, advertising
+
+  blurb-writer
+    Write compelling book blurbs and descriptions for Amazon, Goodreads, and back cover
+    Keywords: blurb, book description, back cover, amazon description
+

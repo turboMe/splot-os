@@ -1,0 +1,18 @@
+{
+  "blockId": "webhook-trigger",
+  "description": "HTTP webhook trigger that receives POST requests",
+  "nodes": [
+    {
+      "parameters": { "path": "{{webhookPath}}", "httpMethod": "POST", "responseMode": "onReceived", "options": {} },
+      "id": "webhook_trigger",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [250, 300]
+    }
+  ],
+  "params": {
+    "webhookPath": { "description": "URL path for the webhook", "default": "/my-webhook", "required": true }
+  },
+  "outputNode": "Webhook"
+}

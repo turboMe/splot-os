@@ -1,0 +1,25 @@
+{
+  "_comment": "Gold set for eval-flavor-pairing.ts. `good` = canonical Western COMPLEMENTARY pairs — by the shared-compound hypothesis (Ahn et al. 2011) these MUST show HIGH shared-compound overlap; aroma-CONTRAST classics (e.g. lamb+rosemary, coffee+chocolate) are deliberately excluded because they pair on perceptual contrast, not molecular overlap, so they don't belong in a complementary-overlap test set. `anti` = culinarily odd pairs (should show LOWER overlap than the good set). `crossCuisine` = LOW-overlap pairs scored under both a Western and an East-Asian cuisine to verify the axis flip (low overlap reads better under the contrasting Eastern axis than the complementary Western axis); only genuinely low-overlap East-Asian pairings qualify. All names in English to maximize FlavorDB resolution.",
+  "good": [
+    { "a": "tomato", "b": "basil", "cuisine": "italian" },
+    { "a": "mushroom", "b": "onion", "cuisine": "french" },
+    { "a": "strawberry", "b": "balsamic vinegar", "cuisine": "italian" },
+    { "a": "apple", "b": "cinnamon", "cuisine": "european" },
+    { "a": "pork", "b": "apple", "cuisine": "european" },
+    { "a": "beef", "b": "mushroom", "cuisine": "french" },
+    { "a": "cheese", "b": "wine", "cuisine": "french" },
+    { "a": "potato", "b": "butter", "cuisine": "european" }
+  ],
+  "anti": [
+    { "a": "beef", "b": "banana", "cuisine": "european" },
+    { "a": "strawberry", "b": "fish", "cuisine": "european" },
+    { "a": "chocolate", "b": "cod", "cuisine": "european" },
+    { "a": "cucumber", "b": "caramel", "cuisine": "european" },
+    { "a": "coffee", "b": "salmon", "cuisine": "european" }
+  ],
+  "crossCuisine": [
+    { "a": "soy sauce", "b": "beef", "western": "french", "eastern": "japanese" },
+    { "a": "miso", "b": "fish", "western": "french", "eastern": "japanese" },
+    { "a": "ginger", "b": "fish", "western": "french", "eastern": "japanese" }
+  ]
+}

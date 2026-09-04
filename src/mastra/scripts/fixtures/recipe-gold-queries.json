@@ -1,0 +1,179 @@
+{
+  "_comment": "Gold set for recipe-library retrieval eval. Each query lists `expected` ids; a query counts as a hit at rank-k if ANY expected id appears in the top-k. Includes EN queries to test bge-m3 cross-lingual recall against PL recipes. Edit `opts` to test filtered retrieval. Acceptance target: recall@10 >= 0.85.",
+  "queries": [
+    {
+      "query": "sos do szparagów",
+      "expected": ["sosy-cieple--sos-holenderski", "sosy-cieple--sos-holenderski-2"],
+      "opts": {}
+    },
+    {
+      "query": "klasyczny ciepły sos emulsyjny z żółtek i klarowanego masła",
+      "expected": ["sosy-cieple--sos-holenderski", "sosy-cieple--sos-holenderski-2"],
+      "opts": {}
+    },
+    {
+      "query": "hollandaise sauce",
+      "expected": ["sosy-cieple--sos-holenderski", "sosy-cieple--sos-holenderski-2"],
+      "opts": {}
+    },
+    {
+      "query": "biały sos beszamelowy na mleku i mące",
+      "expected": ["sosy-cieple--sos-beszamelowy-smietankowy"],
+      "opts": {}
+    },
+    {
+      "query": "sos winegret do sałaty",
+      "expected": ["dressingi-winegrety--sos-winegret"],
+      "opts": {}
+    },
+    {
+      "query": "vinaigrette dressing with lemon",
+      "expected": [
+        "dressingi-winegrety--sos-winegret",
+        "bazy-polprodukty--grilled-asparagus-ginger-lemon-vinaigrette"
+      ],
+      "opts": {}
+    },
+    {
+      "query": "sos tatarski do ryb",
+      "expected": ["sosy-zimne--sos-tatarski", "sosy-zimne--sos-tatarski-2"],
+      "opts": {}
+    },
+    {
+      "query": "sos chrzanowy ze śmietaną",
+      "expected": [
+        "sosy-zimne--sos-chrzanowy-ze-smietana-i-musztarda",
+        "sosy-zimne--sos-chrzanowy-na-rosole",
+        "sosy-zimne--sos-chrzanowy-na-zasmazce-ze-smietana"
+      ],
+      "opts": {}
+    },
+    {
+      "query": "sos koperkowy ze śmietaną",
+      "expected": [
+        "sosy-cieple--sos-koperkowy",
+        "sosy-cieple--sos-koperkowy-ze-smietana",
+        "sosy-cieple--sos-koperkowy-na-rosole"
+      ],
+      "opts": {}
+    },
+    {
+      "query": "sos grzybowy do mięsa",
+      "expected": ["sosy-cieple--sos-grzybowy"],
+      "opts": {}
+    },
+    {
+      "query": "italian tomato sauce for pasta",
+      "expected": ["bazy-polprodukty--italian-tomato-sauce"],
+      "opts": {}
+    },
+    {
+      "query": "carbonara sauce",
+      "expected": ["bazy-polprodukty--carbonara-sauce", "dania-glowne--carbonara-sauce"],
+      "opts": {}
+    },
+    {
+      "query": "sos pesto do makaronu",
+      "expected": [
+        "dania-glowne--makaron-trenette-z-sosem-pesto",
+        "dania-glowne--kluseczki-z-sosem-pesto"
+      ],
+      "opts": {}
+    },
+    {
+      "query": "rosół na kościach mięsnych",
+      "expected": [
+        "wywary-buliony--rosol-z-szynka-i-grzybami",
+        "wywary-buliony--rosol-z-pulpetami-miesnymi",
+        "wywary-buliony--rosol-z-kwiatem"
+      ],
+      "opts": {}
+    },
+    {
+      "query": "rosół jarski bezmięsny",
+      "expected": ["wywary-buliony--rosol-jarski-z-lanym-ciastem"],
+      "opts": {}
+    },
+    {
+      "query": "kremowa zupa pieczarkowa",
+      "expected": ["zupy--kremowa-zupa-pieczarkowa"],
+      "opts": {}
+    },
+    {
+      "query": "barszcz czerwony czysty na buraku",
+      "expected": ["zupy--barszcz-burakowy-czysty-na-rosole"],
+      "opts": {}
+    },
+    {
+      "query": "żurek staropolski na zakwasie",
+      "expected": ["zupy--zurek-slaski", "zupy--zurek-mazurski", "zupy--zurek-wigilijny"],
+      "opts": {}
+    },
+    {
+      "query": "befsztyk tatarski na zimno",
+      "expected": ["przystawki--befsztyk-tatarski"],
+      "opts": {}
+    },
+    {
+      "query": "suflet czekoladowy na deser",
+      "expected": ["desery--suflet-czekoladowy"],
+      "opts": {}
+    },
+    {
+      "query": "bita śmietana z czekoladą",
+      "expected": [
+        "desery--bita-smietana-z-czekolada",
+        "desery--bita-smietana-z-czekolada-i-pomaranczami"
+      ],
+      "opts": {}
+    },
+    {
+      "query": "lody owocowe z mango",
+      "expected": ["desery--lody-z-mango"],
+      "opts": {}
+    },
+    {
+      "query": "szarlotka z jabłek",
+      "expected": [
+        "wypieki-slodkie--szarlotka-niedzielna",
+        "desery--szarlotka-z-jablek-w-grzankach"
+      ],
+      "opts": {}
+    },
+    {
+      "query": "pierogi ruskie z ziemniakami i serem",
+      "expected": ["dania-glowne--pierogi-ruskie"],
+      "opts": {}
+    },
+    {
+      "query": "bigos myśliwski z grzybami",
+      "expected": ["dania-glowne--bigos-z-baranina-i-grzybami-30-min", "bazy-polprodukty--venison-bigos"],
+      "opts": {}
+    },
+    {
+      "query": "gulasz z dziczyzny",
+      "expected": ["dania-glowne--gulasz-z-zajaca", "dania-glowne--zajeczy-gulasz-z-przodka-i-podrobow-25-min"],
+      "opts": {}
+    },
+    {
+      "query": "pieczeń cielęca",
+      "expected": ["dania-glowne--pieczen-cieleca"],
+      "opts": {}
+    },
+    {
+      "query": "danie z dyni gotowanej",
+      "expected": ["dania-glowne--dynia-zolta-gotowana", "dania-glowne--dynia-z-pomidorami"],
+      "opts": {}
+    },
+    {
+      "query": "pumpkin cookies dessert",
+      "expected": ["bazy-polprodukty--iced-pumpkin-cookies", "bazy-polprodukty--pumpkin-bars", "bazy-polprodukty--frosted-pumpkin-walnut-cookies-recipe"],
+      "opts": {}
+    },
+    {
+      "query": "tomato bruschetta starter",
+      "expected": ["bazy-polprodukty--tomato-bruschetta"],
+      "opts": {}
+    }
+  ]
+}

@@ -1,0 +1,1262 @@
+{
+  "1": {
+    "inputs": {
+      "unet_name": "lustify-v10-krea-turbo-fp8.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load Diffusion Model"
+    }
+  },
+  "3": {
+    "inputs": {
+      "clip_name": "qwen3vl_4b_fp8_scaled.safetensors",
+      "type": "krea2",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Load CLIP"
+    }
+  },
+  "11": {
+    "inputs": {
+      "width": 1280,
+      "height": 1280,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "12": {
+    "inputs": {
+      "seed": 238557567095680
+    },
+    "class_type": "Seed (rgthree)",
+    "_meta": {
+      "title": "Seed (rgthree)"
+    },
+    "is_changed": [
+      238557567095680
+    ]
+  },
+  "14": {
+    "inputs": {
+      "images": [
+        "123:102",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "16": {
+    "inputs": {
+      "vae_name": "wan_2.1_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "30": {
+    "inputs": {
+      "PowerLoraLoaderHeaderWidget": {
+        "type": "PowerLoraLoaderHeaderWidget"
+      },
+      "lora_1": {
+        "on": false,
+        "lora": "ver0girl_krea2.safetensors",
+        "strength": 0.8
+      },
+      "lora_2": {
+        "on": true,
+        "lora": "pa1rykman_krea2.safetensors",
+        "strength": 0.95
+      },
+      "lora_3": {
+        "on": false,
+        "lora": "KNP_000003000.safetensors",
+        "strength": 0.35
+      },
+      "lora_4": {
+        "on": false,
+        "lora": "KREA2_D33P_V2.safetensors",
+        "strength": 1
+      },
+      "lora_5": {
+        "on": false,
+        "lora": "KREA2_G4NGB4NG_V1.safetensors",
+        "strength": 1
+      },
+      "lora_6": {
+        "on": false,
+        "lora": "MidJounreyNSFWKrea2Raw.safetensors",
+        "strength": 1
+      },
+      "lora_7": {
+        "on": false,
+        "lora": "MysticXXX_KREA2_v3.safetensors",
+        "strength": 1
+      },
+      "lora_8": {
+        "on": false,
+        "lora": "realism_engine_krea2_v3.1.safetensors",
+        "strength": 0.3
+      },
+      "lora_9": {
+        "on": false,
+        "lora": "snofs_krea_v1_3D.safetensors",
+        "strength": 1
+      },
+      "lora_10": {
+        "on": false,
+        "lora": "scg-anatomy-female-v2.safetensors",
+        "strength": 1
+      },
+      "lora_11": {
+        "on": false,
+        "lora": "dickie.safetensors",
+        "strength": 1
+      },
+      "lora_12": {
+        "on": false,
+        "lora": "Afterlight_v1.safetensors",
+        "strength": 0.2
+      },
+      "\u2795 Add Lora": "",
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "Power Lora Loader (rgthree)",
+    "_meta": {
+      "title": "Power Lora Loader (rgthree)"
+    }
+  },
+  "119": {
+    "inputs": {
+      "value": "pa1rykman, natural body proportions.\n\n1. WARDROBE / EXPRESSION / CAMERA\nDeep red satin robe \n\n2. POSE\nStanding beside a large window, body turned slightly away from the camera while the face turns directly back toward the lens. One hand casually resting near the robe belt, the other touching the window frame. Relaxed posture, effortless confidence.\n\n3. LIGHTING\nWarm early-morning sunlight entering from the side through sheer curtains, large soft directional window light, gentle shadow transition, subtle rim light along the robe, controlled highlights on the satin, soft luminous atmosphere.\n\n4. LOCATION\nElegant boutique hotel suite with cream linen, warm wood, sheer curtains and a large floor-to-ceiling window. Background softly blurred and uncluttered.\n\n5. EXTRA\nA slightly unmade bed in the background and a ceramic coffee cup on the bedside table, restrained luxury male boudoir editorial, intimate and sophisticated rather than posed.\n\n"
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "Prompt #1"
+    }
+  },
+  "121": {
+    "inputs": {
+      "value": false
+    },
+    "class_type": "PrimitiveBoolean",
+    "_meta": {
+      "title": "Enable Prompt Enhancer?"
+    }
+  },
+  "122": {
+    "inputs": {
+      "value": true
+    },
+    "class_type": "PrimitiveBoolean",
+    "_meta": {
+      "title": "Add LoRA trigger to enhanced prompt?"
+    }
+  },
+  "129": {
+    "inputs": {
+      "value": "pa1rykman"
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "LoRA trigger for enhanced prompt"
+    }
+  },
+  "158": {
+    "inputs": {
+      "images": [
+        "157:148",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "164": {
+    "inputs": {
+      "images": [
+        "167:331",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "169": {
+    "inputs": {
+      "images": [
+        "167:1012:330",
+        3
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Debug \u2014 twarze KOBIETA"
+    }
+  },
+  "211": {
+    "inputs": {
+      "value": 1
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "Prompt enhancement seed (if used)"
+    }
+  },
+  "212": {
+    "inputs": {
+      "filename": "",
+      "path": "",
+      "extension": "png",
+      "lossless_webp": true,
+      "quality_jpeg_or_webp": 100,
+      "optimize_png": false,
+      "embed_workflow": true,
+      "save_workflow_as_json": false,
+      "counter": 0,
+      "time_format": "%Y-%m-%d-%H%M%S",
+      "show_preview": false,
+      "images": [
+        "1002",
+        0
+      ],
+      "metadata": [
+        "213",
+        0
+      ]
+    },
+    "class_type": "Image Saver Simple",
+    "_meta": {
+      "title": "Image Saver Simple"
+    }
+  },
+  "213": {
+    "inputs": {
+      "modelname": "",
+      "positive": [
+        "123:115",
+        0
+      ],
+      "negative": "",
+      "width": [
+        "123:221",
+        0
+      ],
+      "height": [
+        "123:221",
+        1
+      ],
+      "seed_value": [
+        "12",
+        0
+      ],
+      "steps": 8,
+      "cfg": 1.0,
+      "sampler_name": "",
+      "scheduler_name": "normal",
+      "denoise": 1.0,
+      "clip_skip": 0,
+      "additional_hashes": "",
+      "download_civitai_data": true,
+      "easy_remix": true,
+      "custom": ""
+    },
+    "class_type": "Image Saver Metadata",
+    "_meta": {
+      "title": "Image Saver Metadata"
+    }
+  },
+  "214": {
+    "inputs": {
+      "upscale_method": "bicubic",
+      "width": 1920,
+      "height": 1080,
+      "crop": "center",
+      "image": [
+        "164",
+        0
+      ]
+    },
+    "class_type": "ImageScale",
+    "_meta": {
+      "title": "Upscale Image"
+    }
+  },
+  "215": {
+    "inputs": {
+      "image": "example.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Wczytaj Zdj\u0119cie Twarzy #1 (Kobieta)"
+    },
+    "is_changed": [
+      "a8e215ad32a0052fc4190e9c5863428d5ee35cd98b246243842ba8360511b7c4"
+    ]
+  },
+  "216": {
+    "inputs": {
+      "enabled": false,
+      "swap_model": "inswapper_128.onnx",
+      "facedetection": "retinaface_resnet50",
+      "face_restore_model": "none",
+      "face_restore_visibility": 1.0,
+      "codeformer_weight": 0.5,
+      "detect_gender_input": "female",
+      "detect_gender_source": "no",
+      "input_faces_index": "0,1,2",
+      "source_faces_index": "0",
+      "console_log_level": 1,
+      "input_image": [
+        "214",
+        0
+      ],
+      "source_image": [
+        "215",
+        0
+      ]
+    },
+    "class_type": "ReActorFaceSwap",
+    "_meta": {
+      "title": "Podmiana Twarzy #1 (ReActor)"
+    }
+  },
+  "1001": {
+    "inputs": {
+      "image": "example.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Wczytaj Zdj\u0119cie Twarzy #2 (M\u0119\u017cczyzna)"
+    },
+    "is_changed": [
+      "a8e215ad32a0052fc4190e9c5863428d5ee35cd98b246243842ba8360511b7c4"
+    ]
+  },
+  "1002": {
+    "inputs": {
+      "enabled": false,
+      "swap_model": "inswapper_128.onnx",
+      "facedetection": "retinaface_resnet50",
+      "face_restore_model": "none",
+      "face_restore_visibility": 1.0,
+      "codeformer_weight": 0.5,
+      "detect_gender_input": "male",
+      "detect_gender_source": "no",
+      "input_faces_index": "0,1,2",
+      "source_faces_index": "0",
+      "console_log_level": 1,
+      "input_image": [
+        "216",
+        0
+      ],
+      "source_image": [
+        "1001",
+        0
+      ]
+    },
+    "class_type": "ReActorFaceSwap",
+    "_meta": {
+      "title": "Podmiana Twarzy #2 (ReActor)"
+    }
+  },
+  "1003": {
+    "inputs": {
+      "value": ""
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "Prompt #2"
+    }
+  },
+  "1004": {
+    "inputs": {
+      "value": ""
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "Prompt #3"
+    }
+  },
+  "1005": {
+    "inputs": {
+      "value": ""
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "Prompt #4"
+    }
+  },
+  "1006": {
+    "inputs": {
+      "value": ""
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "Prompt #5"
+    }
+  },
+  "1007": {
+    "inputs": {
+      "value": ""
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "Prompt #6"
+    }
+  },
+  "1008": {
+    "inputs": {
+      "value": ""
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "Prompt #7"
+    }
+  },
+  "1009": {
+    "inputs": {
+      "value": ""
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "Prompt #8"
+    }
+  },
+  "1010": {
+    "inputs": {
+      "select": 1,
+      "sel_mode": false,
+      "input1": [
+        "119",
+        0
+      ],
+      "input2": [
+        "1003",
+        0
+      ],
+      "input3": [
+        "1004",
+        0
+      ],
+      "input4": [
+        "1005",
+        0
+      ],
+      "input5": [
+        "1006",
+        0
+      ],
+      "input6": [
+        "1007",
+        0
+      ],
+      "input7": [
+        "1008",
+        0
+      ],
+      "input8": [
+        "1009",
+        0
+      ]
+    },
+    "class_type": "ImpactSwitch",
+    "_meta": {
+      "title": "Wyb\u00f3r Promptu (1-8)"
+    }
+  },
+  "1011": {
+    "inputs": {
+      "images": [
+        "167:331",
+        3
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Debug \u2014 twarze M\u0118\u017bCZYZNA"
+    }
+  },
+  "123:8": {
+    "inputs": {
+      "text": [
+        "123:115",
+        0
+      ],
+      "clip": [
+        "30",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "123:29": {
+    "inputs": {
+      "conditioning": [
+        "123:8",
+        0
+      ]
+    },
+    "class_type": "ConditioningZeroOut",
+    "_meta": {
+      "title": "Conditioning Zero Out"
+    }
+  },
+  "123:189": {
+    "inputs": {
+      "shift": 4.0,
+      "model": [
+        "30",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingAuraFlow",
+    "_meta": {
+      "title": "ModelSamplingAuraFlow"
+    }
+  },
+  "123:113": {
+    "inputs": {
+      "string_a": [
+        "123:114",
+        0
+      ],
+      "string_b": [
+        "1010",
+        0
+      ],
+      "delimiter": ""
+    },
+    "class_type": "StringConcatenate",
+    "_meta": {
+      "title": "Concatenate Text"
+    }
+  },
+  "123:117": {
+    "inputs": {
+      "string_a": [
+        "123:116",
+        0
+      ],
+      "string_b": [
+        "129",
+        0
+      ],
+      "delimiter": ", "
+    },
+    "class_type": "StringConcatenate",
+    "_meta": {
+      "title": "Concatenate Text (LoRA Trigger Word)"
+    }
+  },
+  "123:118": {
+    "inputs": {
+      "switch": [
+        "122",
+        0
+      ],
+      "on_false": [
+        "123:116",
+        0
+      ],
+      "on_true": [
+        "123:117",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "If/Else Switch"
+    }
+  },
+  "123:114": {
+    "inputs": {
+      "value": "Role: Autonomous prompt expander for a vision-language model.\nTask: Convert brief input into a fluid 7-9 sentence paragraph mirroring exact training data formats.\n\nCRITICAL RULES:\n- Zero Conversation: Output ONLY the descriptive paragraph. No intros, no meta-text, no regurgitation of rules.\n- Absolute Autonomy: If input is short/vague, hallucinate ALL missing details. NEVER ask for details.\n- Strictly Optical: Describe ONLY visible pixels. ZERO invisible senses (smells, sounds, temperature) or narrative conclusions.\n- Mandatory Sequence: \n1) Subject & Action (use \"naked\"/\"nude\" if unclothed), \n2) Traits & Attire (assign age strictly as \"18-years-old\", \"25-years-old\" etc.), \n3) Setting & Background, \n4) Lighting & Dominant Colors, \n5) Camera Angle, \n6-9) Optical Micro-Details (textures, shadows).\n- Banned Vocabulary: scent, smell, fragrance, sound, hears, feels, striking, embodies, personifying, narrative, masterpiece, hyper-realistic, realistic, 4k, possesses.\n\nEXAMPLE INPUT:\nwoman on bed in a room. she is dressed\n\nEXAMPLE OUTPUT:\nA 25-years-old woman sits on the edge of a bed, leaning forward slightly with her hands resting on her knees. She wears a faded oversized band t-shirt and ripped black denim shorts, her dark hair pulled into a bun. The bedroom behind her is cluttered with clothes scattered across a wooden floor and posters peeling off the walls. The camera captures her in a medium-wide shot from a slightly high angle, emphasizing the clutter around her feet. A silver ring catches a glint of light on her right hand. The bedsheets are crumpled, showing tight folds and heavy creases where she sits.\n\nNow, process the following input. Output ONLY the final visual description paragraph.\n\nUSER'S INPUT:"
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "System Prompt"
+    }
+  },
+  "123:115": {
+    "inputs": {
+      "source": [
+        "123:118",
+        0
+      ]
+    },
+    "class_type": "PreviewAny",
+    "_meta": {
+      "title": "Preview as Text"
+    }
+  },
+  "123:102": {
+    "inputs": {
+      "samples": [
+        "123:6",
+        0
+      ],
+      "vae": [
+        "16",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "123:221": {
+    "inputs": {
+      "image": [
+        "123:102",
+        0
+      ]
+    },
+    "class_type": "GetImageSize",
+    "_meta": {
+      "title": "Get Image Size"
+    }
+  },
+  "123:6": {
+    "inputs": {
+      "seed": [
+        "12",
+        0
+      ],
+      "steps": 12,
+      "cfg": 1.0,
+      "sampler_name": "er_sde",
+      "scheduler": "beta",
+      "denoise": 1.0,
+      "model": [
+        "123:189",
+        0
+      ],
+      "positive": [
+        "123:8",
+        0
+      ],
+      "negative": [
+        "123:29",
+        0
+      ],
+      "latent_image": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "123:112": {
+    "inputs": {
+      "prompt": [
+        "123:113",
+        0
+      ],
+      "max_length": 512,
+      "sampling_mode": "on",
+      "sampling_mode.temperature": 0.7,
+      "sampling_mode.top_k": 64,
+      "sampling_mode.top_p": 0.95,
+      "sampling_mode.min_p": 0.05,
+      "sampling_mode.repetition_penalty": 1.05,
+      "sampling_mode.seed": [
+        "211",
+        0
+      ],
+      "sampling_mode.presence_penalty": 0.0,
+      "thinking": false,
+      "use_default_template": true,
+      "clip": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "TextGenerate",
+    "_meta": {
+      "title": "Generate Text"
+    }
+  },
+  "123:116": {
+    "inputs": {
+      "switch": [
+        "121",
+        0
+      ],
+      "on_false": [
+        "1010",
+        0
+      ],
+      "on_true": [
+        "123:112",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "If/Else Switch"
+    }
+  },
+  "157:144": {
+    "inputs": {
+      "image": [
+        "157:146",
+        0
+      ]
+    },
+    "class_type": "GetImageSize+",
+    "_meta": {
+      "title": "\ud83d\udd27 Get Image Size"
+    }
+  },
+  "157:145": {
+    "inputs": {
+      "upscale_model": [
+        "157:142",
+        0
+      ],
+      "image": [
+        "14",
+        0
+      ]
+    },
+    "class_type": "ImageUpscaleWithModel",
+    "_meta": {
+      "title": "Upscale Image (using Model)"
+    }
+  },
+  "157:146": {
+    "inputs": {
+      "upscale_method": "lanczos",
+      "scale_by": [
+        "157:153",
+        1
+      ],
+      "image": [
+        "157:145",
+        0
+      ]
+    },
+    "class_type": "ImageScaleBy",
+    "_meta": {
+      "title": "Upscale Image By"
+    }
+  },
+  "157:142": {
+    "inputs": {
+      "model_name": "4x_NMKD-Superscale-SP_178000_G.pth"
+    },
+    "class_type": "UpscaleModelLoader",
+    "_meta": {
+      "title": "Load Upscale Model"
+    }
+  },
+  "157:153": {
+    "inputs": {
+      "expression": "a/4",
+      "a": [
+        "157:154",
+        0
+      ]
+    },
+    "class_type": "MathExpression|pysssss",
+    "_meta": {
+      "title": "Math Expression \ud83d\udc0d"
+    },
+    "is_changed": [
+      "a/4"
+    ]
+  },
+  "157:150": {
+    "inputs": {
+      "seed": 27499,
+      "steps": 3,
+      "cfg": 1.0,
+      "sampler_name": "euler",
+      "scheduler": "sgm_uniform",
+      "denoise": 0.75,
+      "model": [
+        "157:155",
+        0
+      ],
+      "positive": [
+        "123:8",
+        0
+      ],
+      "negative": [
+        "123:29",
+        0
+      ],
+      "latent_image": [
+        "157:149",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "157:149": {
+    "inputs": {
+      "pixels": [
+        "157:226",
+        0
+      ],
+      "vae": [
+        "16",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "157:148": {
+    "inputs": {
+      "samples": [
+        "157:150",
+        0
+      ],
+      "vae": [
+        "16",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "157:154": {
+    "inputs": {
+      "value": 1.0
+    },
+    "class_type": "PrimitiveFloat",
+    "_meta": {
+      "title": "Upscale By"
+    }
+  },
+  "157:155": {
+    "inputs": {
+      "shift": 0.8,
+      "model": [
+        "30",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingAuraFlow",
+    "_meta": {
+      "title": "ModelSamplingAuraFlow"
+    }
+  },
+  "157:151": {
+    "inputs": {
+      "width": [
+        "157:144",
+        0
+      ],
+      "height": [
+        "157:144",
+        1
+      ],
+      "interpolation": "lanczos",
+      "method": "fill / crop",
+      "condition": "always",
+      "multiple_of": 8,
+      "image": [
+        "157:146",
+        0
+      ]
+    },
+    "class_type": "ImageResize+",
+    "_meta": {
+      "title": "\ud83d\udd27 Image Resize"
+    }
+  },
+  "157:226": {
+    "inputs": {
+      "blur_radius": 1,
+      "sigma": 1.0,
+      "image": [
+        "157:151",
+        0
+      ]
+    },
+    "class_type": "ImageBlur",
+    "_meta": {
+      "title": "Blur Image"
+    }
+  },
+  "167:312": {
+    "inputs": {
+      "shift": 0.65,
+      "model": [
+        "167:311",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingAuraFlow",
+    "_meta": {
+      "title": "ModelSamplingAuraFlow"
+    }
+  },
+  "167:322": {
+    "inputs": {
+      "shift": 0.65,
+      "model": [
+        "167:321",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingAuraFlow",
+    "_meta": {
+      "title": "ModelSamplingAuraFlow"
+    }
+  },
+  "167:323": {
+    "inputs": {
+      "text": "pa1rykman, close-up photo of a face of a man, detailed skin, stubble, sharp eyes",
+      "clip": [
+        "167:321",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Prompt M\u0118\u017bCZYZNA"
+    }
+  },
+  "167:300": {
+    "inputs": {
+      "model_name": "bbox/face_yolov8m.pt"
+    },
+    "class_type": "UltralyticsDetectorProvider",
+    "_meta": {
+      "title": "UltralyticsDetectorProvider"
+    }
+  },
+  "167:301": {
+    "inputs": {
+      "model_name": "sam_vit_b_01ec64.pth",
+      "device_mode": "AUTO"
+    },
+    "class_type": "SAMLoader",
+    "_meta": {
+      "title": "SAMLoader (Impact)"
+    }
+  },
+  "167:302": {
+    "inputs": {
+      "bbox_threshold": 0.5,
+      "bbox_dilation": 35,
+      "crop_factor": 1.7,
+      "drop_size": 10,
+      "sub_threshold": 0.5,
+      "sub_dilation": 0,
+      "sub_bbox_expansion": 0,
+      "sam_mask_hint_threshold": 0.7,
+      "post_dilation": 0,
+      "bbox_detector": [
+        "167:300",
+        0
+      ],
+      "image": [
+        "158",
+        0
+      ],
+      "sam_model_opt": [
+        "167:301",
+        0
+      ]
+    },
+    "class_type": "ImpactSimpleDetectorSEGS",
+    "_meta": {
+      "title": "Wykryj twarze (SEGS)"
+    }
+  },
+  "167:303": {
+    "inputs": {
+      "preset_repo_id": "rizvandwiki/gender-classification-2",
+      "manual_repo_id": "",
+      "device_mode": "AUTO"
+    },
+    "class_type": "ImpactHFTransformersClassifierProvider",
+    "_meta": {
+      "title": "Klasyfikator p\u0142ci"
+    }
+  },
+  "167:304": {
+    "inputs": {
+      "preset_expr": "#Female > #Male",
+      "manual_expr": "",
+      "classifier": [
+        "167:303",
+        0
+      ],
+      "segs": [
+        "167:302",
+        0
+      ],
+      "ref_image_opt": [
+        "158",
+        0
+      ]
+    },
+    "class_type": "ImpactSEGSClassify",
+    "_meta": {
+      "title": "Podzia\u0142 twarzy wg p\u0142ci"
+    }
+  },
+  "167:331": {
+    "inputs": {
+      "guide_size": 1024.0,
+      "guide_size_for": true,
+      "max_size": 1024.0,
+      "seed": 446700986820556,
+      "steps": 3,
+      "cfg": 1.0,
+      "sampler_name": "euler",
+      "scheduler": "sgm_uniform",
+      "denoise": 0.75,
+      "feather": 15,
+      "noise_mask": true,
+      "force_inpaint": true,
+      "wildcard": "",
+      "cycle": 1,
+      "inpaint_model": false,
+      "noise_mask_feather": 20,
+      "tiled_encode": false,
+      "tiled_decode": false,
+      "image": [
+        "167:1012:330",
+        0
+      ],
+      "segs": [
+        "167:304",
+        1
+      ],
+      "model": [
+        "167:322",
+        0
+      ],
+      "clip": [
+        "167:321",
+        1
+      ],
+      "vae": [
+        "16",
+        0
+      ],
+      "positive": [
+        "167:323",
+        0
+      ],
+      "negative": [
+        "167:324",
+        0
+      ]
+    },
+    "class_type": "DetailerForEachDebug",
+    "_meta": {
+      "title": "Detailer M\u0118\u017bCZYZNA"
+    }
+  },
+  "167:324": {
+    "inputs": {
+      "conditioning": [
+        "167:323",
+        0
+      ]
+    },
+    "class_type": "ConditioningZeroOut",
+    "_meta": {
+      "title": "Conditioning Zero Out"
+    }
+  },
+  "167:314": {
+    "inputs": {
+      "conditioning": [
+        "167:313",
+        0
+      ]
+    },
+    "class_type": "ConditioningZeroOut",
+    "_meta": {
+      "title": "Conditioning Zero Out"
+    }
+  },
+  "167:313": {
+    "inputs": {
+      "text": " close-up photo of a face of a  woman, detailed skin, sharp eyes",
+      "clip": [
+        "167:311",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Prompt KOBIETA"
+    }
+  },
+  "167:310": {
+    "inputs": {
+      "lora_name": "krea2/scg-anatomy-female-v2.safetensors",
+      "strength_model": 0.74,
+      "strength_clip": 1.0,
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "LoRA KOBIETA (tozsamosc)"
+    }
+  },
+  "167:311": {
+    "inputs": {
+      "lora_name": "krea2/Afterlight_v1.safetensors",
+      "strength_model": 0.25,
+      "strength_clip": 0.4,
+      "model": [
+        "167:310",
+        0
+      ],
+      "clip": [
+        "167:310",
+        1
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "LoRA KOBIETA (styl)"
+    }
+  },
+  "167:321": {
+    "inputs": {
+      "lora_name": "krea2/pa1rykman_krea2.safetensors",
+      "strength_model": 0.8,
+      "strength_clip": 0.7,
+      "model": [
+        "167:1014",
+        0
+      ],
+      "clip": [
+        "167:1014",
+        1
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "LoRA M\u0118\u017bCZYZNA (styl)"
+    }
+  },
+  "167:1012:330": {
+    "inputs": {
+      "guide_size": 1024.0,
+      "guide_size_for": true,
+      "max_size": 1024.0,
+      "seed": 446700986820556,
+      "steps": 3,
+      "cfg": 1.0,
+      "sampler_name": "euler",
+      "scheduler": "sgm_uniform",
+      "denoise": 0.75,
+      "feather": 15,
+      "noise_mask": true,
+      "force_inpaint": true,
+      "wildcard": "",
+      "cycle": 1,
+      "inpaint_model": false,
+      "noise_mask_feather": 20,
+      "tiled_encode": false,
+      "tiled_decode": false,
+      "image": [
+        "158",
+        0
+      ],
+      "segs": [
+        "167:304",
+        0
+      ],
+      "model": [
+        "167:312",
+        0
+      ],
+      "clip": [
+        "167:311",
+        1
+      ],
+      "vae": [
+        "16",
+        0
+      ],
+      "positive": [
+        "167:313",
+        0
+      ],
+      "negative": [
+        "167:314",
+        0
+      ]
+    },
+    "class_type": "DetailerForEachDebug",
+    "_meta": {
+      "title": "Detailer KOBIETA"
+    }
+  },
+  "167:1014": {
+    "inputs": {
+      "lora_name": "krea2/pa1rykman_krea2.safetensors",
+      "strength_model": 0.95,
+      "strength_clip": 0.93,
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "LoRA M\u0118\u017bCZYZNA (to\u017csamo\u015b\u0107)"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "blockId": "http-request",
+  "description": "Generic HTTP request to any URL",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "{{method}}",
+        "url": "{{url}}",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "http_request",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [0, 300]
+    }
+  ],
+  "params": {
+    "method": { "description": "HTTP method", "default": "POST", "required": true },
+    "url": { "description": "Target URL", "default": "", "required": true }
+  },
+  "outputNode": "HTTP Request"
+}

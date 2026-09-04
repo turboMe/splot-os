@@ -1,0 +1,22 @@
+{
+  "spike": "GAP-WORKER-ISO-01",
+  "at": "2026-07-23T18:14:21.046Z",
+  "env": {
+    "node": "v22.20.0",
+    "workloadMs": 1000,
+    "heartbeatMs": 25
+  },
+  "maxLagMs": {
+    "syncInProcess": 999,
+    "syncOutOfProcess": 1,
+    "asyncInProcess": 1
+  },
+  "criteria": {
+    "syncBlocks": true,
+    "isolationProtects": true,
+    "asyncDoesNotBlock": true
+  },
+  "verdict": "ISOLATE_SYNC_KEEP_ASYNC",
+  "decision": "Isolate CPU-bound/synchronous/non-cooperative attempts in a separate execution context (worker_thread or child process). Async-I/O model calls may stay in-process and remain cooperatively cancellable (GAP-MODEL-ABORT-01). Front/dispatcher never runs a synchronous heavy attempt.",
+  "note": "worker_thread demonstrates the event-loop protection cheaply; media/subprocess/browser attempts additionally need a killable OS process (child_process + TERM/grace/KILL) for GAP-MODEL-ABORT-style non-cooperative cancel."
+}

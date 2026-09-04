@@ -1,0 +1,37 @@
+{
+  "spike": "GAP-MODEL-ABORT-01",
+  "at": "2026-07-23T18:04:20.658Z",
+  "env": {
+    "model": "huihui_ai/qwen3.5-abliterated:9b",
+    "base": "http://localhost:11434",
+    "abortAfterMs": 1500,
+    "aiSdk": "6.x",
+    "openaiCompatible": "2.x",
+    "node": "v22.20.0"
+  },
+  "control": {
+    "chunks": 0,
+    "totalMs": 6422.287605
+  },
+  "stream": {
+    "chunksBeforeAbort": 0,
+    "chunksAfterAbort": 0,
+    "abortToStopMs": 2.8229229999997187,
+    "observedAbort": false,
+    "errorName": null,
+    "totalMs": 1502.4178169999996
+  },
+  "generate": {
+    "rejected": true,
+    "errorName": "AbortError",
+    "elapsedMs": 1505.3546920000008
+  },
+  "criteria": {
+    "controlMeaningful": false,
+    "streamStops": false,
+    "generateStops": true
+  },
+  "verdict": "INCONCLUSIVE",
+  "implication": "Abort does NOT reliably stop the model call in-process; GAP-WORKER-ISO-01 must mandate a killable separate process for model/subprocess attempts.",
+  "note": "Local Ollama: closing the HTTP connection stops server-side generation. Remote/cloud providers need a separate per-capability confirmation that provider compute/billing stops."
+}

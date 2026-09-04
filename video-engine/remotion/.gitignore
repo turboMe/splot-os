@@ -1,0 +1,27 @@
+# ── Remotion Auto-Generated Registries & Manifests ──────────
+src/registry.gen.tsx
+src/shots.manifest.json
+
+# ── Dynamic Generated Project Shots ─────────────────────────
+# Keep only brand proof and core example templates in git
+src/shots/video-*
+src/shots/short-*
+src/shots/ep-*
+src/shots/temp-*
+src/shots/vero-*
+
+# ── Renders, Builds & Bundler Caches ────────────────────────
+node_modules/
+.remotion/
+out/
+renders/
+dist/
+*.mp4
+*.wav
+*.aac
+*.png.cache
+
+# ── Local Project Media ──────────────────────────────────────
+public/projects/
+public/temp/
+public/renders/

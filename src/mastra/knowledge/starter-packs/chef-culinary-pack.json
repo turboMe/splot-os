@@ -1,0 +1,212 @@
+{
+  "category": "culinary",
+  "targetAgents": ["chefAgent"],
+  "description": "Kompletna baza wiedzy gastronomicznej, inżynierii menu, technik kulinarnych i parowania smaków dla chefAgenta.",
+  "notebooks": [
+    {
+      "title": "chef_menu_engineering",
+      "purpose": "Inżynieria menu, matryca rentowności (Stars, Puzzles, Plow Horses, Dogs), psychologia cenowa i optymalizacja food cost.",
+      "sources": [
+        {
+          "title": "Menu Engineering 101: How to Maximize Profit from Every Dish",
+          "type": "url",
+          "url": "https://www.foodics.com/menu-engineering-matrix-for-restaurants/"
+        },
+        {
+          "title": "Bistro vs Fine Dining - A Complete Guide to the Differences",
+          "type": "text",
+          "summary": "Różnice strukturalne, serwisowe i kosztowe między formatem bistro a restauracją fine dining."
+        },
+        {
+          "title": "Bistro Menus Explained: How Chefs Design the Perfect Balance",
+          "type": "text",
+          "summary": "Projektowanie zbalansowanej karty dań bistro z uwzględnieniem sezonowości i rotacji dań."
+        },
+        {
+          "title": "Menu engineering re-engineered: Accounting for menu item substitutes in pricing and menu placement decisions",
+          "type": "text",
+          "summary": "Naukowe badanie zależności między pozycjami substytucyjnymi w menu a elastycznością cenową."
+        },
+        {
+          "title": "Menu Engineering: How to create a profitable restaurant menu",
+          "type": "text",
+          "summary": "Zasady rozmieszczania dań w 'złotym trójkącie' karty dań dla maksymalizacji marży."
+        },
+        {
+          "title": "The application of menu engineering and design in Asian restaurants",
+          "type": "text",
+          "summary": "Specyfika inżynierii menu dla konceptów azjatyckich i formatów do dzielenia (sharing plates)."
+        },
+        {
+          "title": "Seasonal Food Guide & Menu Planning",
+          "type": "text",
+          "summary": "Kalendarz sezonowości surowców i planowanie rotacji wkładki menu."
+        }
+      ]
+    },
+    {
+      "title": "chef_classic",
+      "purpose": "Klasyczna szkoła kulinarna, 5 sosów matczynych Escoffiera, buliony, wywary i system brygady kuchennej.",
+      "sources": [
+        {
+          "title": "On Food and Cooking: The Science and Lore of the Kitchen by Harold McGee",
+          "type": "text",
+          "summary": "Fundament wiedzy o chemii i fizyce gotowania, strukturach białek, emulsjach i przemianach termicznych."
+        },
+        {
+          "title": "An Introduction to the 5 French Mother Sauces - Escoffier Online",
+          "type": "text",
+          "summary": "Definicje i techniki bazowe 5 sosów matczynych: Béchamel, Velouté, Espagnole, Sos Pomidorowy, Hollandaise."
+        },
+        {
+          "title": "Auguste Escoffier and the Invention of the Restaurant Kitchen Brigade System",
+          "type": "text",
+          "summary": "Hierarchia i organizacja pracy w kuchni: Chef de Cuisine, Sous Chef, Chef de Partie, Saucier, Garde Manger."
+        },
+        {
+          "title": "Fundamentals of Stocks and Broths - Clarification, Gelatin & Extraction",
+          "type": "text",
+          "summary": "Technologia wyciągania kolagenu, klarowania i głębi smakowej bulionów jasnych i ciemnych."
+        },
+        {
+          "title": "French Sauces Basics & Derivative Secondary Sauces",
+          "type": "text",
+          "summary": "Wyprowadzanie sosów pochodnych (Béarnaise, Mornay, Bordelaise, Robert, Suprême)."
+        }
+      ]
+    },
+    {
+      "title": "chef_flavor",
+      "purpose": "Chemia smaku, foodpairing, interakcje cząsteczkowe, smak umami oraz kokumi.",
+      "sources": [
+        {
+          "title": "Flavor network and the principles of food pairing | Scientific Reports",
+          "type": "url",
+          "url": "https://arxiv.org/pdf/1111.6074"
+        },
+        {
+          "title": "The Flavor Bible: The Essential Guide to Culinary Creativity",
+          "type": "text",
+          "summary": "Matryca kompatybilności składników, przypraw, ziół i profili sensorycznych."
+        },
+        {
+          "title": "GPRC6A as a novel kokumi receptor responsible for enhanced taste preferences | eLife",
+          "type": "text",
+          "summary": "Naukowe mechanizmy odczuwania kokumi (pełni i głębi smaku) w potrawach bogatych w peptydy."
+        },
+        {
+          "title": "The Science behind great ingredient pairings - Foodpairing Chemistry",
+          "type": "text",
+          "summary": "Łączenie składników na podstawie wspólnych związków lotnych (aroma compounds)."
+        }
+      ]
+    },
+    {
+      "title": "chef_modern",
+      "purpose": "Nowoczesna gastronomia, technologia sous-vide, fermentacja (Noma), kriogenika i techniki molekularne.",
+      "sources": [
+        {
+          "title": "The Noma Guide to Fermentation: Science and Practice",
+          "type": "text",
+          "summary": "Praktyka fermentacji kwasu mlekowego, koji, garum, kombuchy i octów w nowoczesnej gastronomii."
+        },
+        {
+          "title": "A Practical Guide to Sous Vide Cooking (Time and Temperature Protocols)",
+          "type": "text",
+          "summary": "Tabele temperatur, denaturacji białek, pasteryzacji i bezpieczeństwa biologicznego dla mięs, ryb i warzyw."
+        },
+        {
+          "title": "Modernist Foams, Spherification and Gelling Agents",
+          "type": "text",
+          "summary": "Zastosowanie agaru, alginianu sodu, lecytyny sojowej i hydrokoloidów w kreacji tekstur."
+        }
+      ]
+    },
+    {
+      "title": "chef_texture",
+      "purpose": "Równowaga tekstur, kompozycja talerza (Plating 101), kontrast sensoryczny i chrupkość.",
+      "sources": [
+        {
+          "title": "Plating 101: Contrast and Balance in Food Presentation | Johnson & Wales University",
+          "type": "text",
+          "summary": "Zasady architektury dania: wysokość, kolor, kontrast teksturalny (chrupkie vs kremowe) i ergonomia jedzenia."
+        },
+        {
+          "title": "5 Modernist Cuisine Techniques to Transform Textures",
+          "type": "text",
+          "summary": "Emulsje, pudry smakowe, chrupki warzywne i dekonstrukcja konsystencji."
+        }
+      ]
+    },
+    {
+      "title": "chef_master",
+      "purpose": "Główny indeks technik kulinarnych, wzorce tworzenia autorskich kart dań i standardy jakościowe.",
+      "sources": [
+        {
+          "title": "Master Culinary Framework & Recipe Architecture",
+          "type": "text",
+          "summary": "Standard zapisu receptur standaryzacyjnych (BOM), kalkulacja strat termicznych i yield percentage."
+        }
+      ]
+    },
+    {
+      "title": "chef_europe",
+      "purpose": "Gastronomia europejska: Włochy (pasta & regional pairing), Francja, Hiszpania, Grecja, Polska.",
+      "sources": [
+        {
+          "title": "Italian Pasta Guide: Shapes, Sauces & Regional Pairings",
+          "type": "text",
+          "summary": "Kanon doboru kształtu makaronu do gęstości i charakteru sosu w tradycji włoskiej."
+        },
+        {
+          "title": "Salt, Fat, Acid, Heat: Mastering the Elements of Good Cooking by Samin Nosrat",
+          "type": "text",
+          "summary": "Zarządzanie solą, tłuszczem, kwasowością i temperaturą w kuchniach europejskich."
+        }
+      ]
+    },
+    {
+      "title": "chef_asia",
+      "purpose": "Gastronomia azjatycka: Japonia (Washoku, Kaiseki), Chiny (8 wielkich kuchni), Tajlandia, Indie.",
+      "sources": [
+        {
+          "title": "Washoku & Kaiseki: The Transformation of Japanese Cuisine in Changing Seasons",
+          "type": "text",
+          "summary": "Filozofia 5 smaków, 5 kolorów i 5 technik w japońskiej tradycji kulinarnej UNESCO."
+        },
+        {
+          "title": "8 Chinese Cuisines & How They Differ (Sichuan, Cantonese, Shandong...)",
+          "type": "text",
+          "summary": "Regionalne techniki woka, fermentowane pasty (doubanjiang) i balans ostrości i kwasu."
+        },
+        {
+          "title": "How to Build Real Thai Flavor: Sweet, Sour, Salty, Spicy Balance",
+          "type": "text",
+          "summary": "Dynamika past curry, sosu rybnego, tamaryndowca, limonki i liści kaffiru."
+        }
+      ]
+    },
+    {
+      "title": "chef_americas_mena",
+      "purpose": "Gastronomia Bliskiego Wschodu, Afryki Północnej (MENA) oraz obu Ameryk.",
+      "sources": [
+        {
+          "title": "Ras el Hanout, Baharat & Middle Eastern Gastronomic Profiles",
+          "type": "text",
+          "summary": "Złożone mieszanki korzenne, techniki pieczenia w tagine i stosowanie wody z kwiatu pomarańczy."
+        }
+      ]
+    },
+    {
+      "title": "chef_psychology",
+      "purpose": "Psychologia konsumenta w gastronomii, sensoryka i decyzje zakupowe gości.",
+      "sources": [
+        {
+          "title": "Sensory Perception, Full Course Sequences and Consumer Choice in Restaurants",
+          "type": "text",
+          "summary": "Kolejność serwowania dań, nasycenie zmysłowe i psychologiczne punkty kotwiczenia cen w menu."
+        }
+      ]
+    }
+  ]
+}

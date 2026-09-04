@@ -1,0 +1,6421 @@
+{
+  "generatedAt": "2026-07-20T15:42:41.547Z",
+  "gitCommit": "a817307",
+  "notes": [
+    "Etap 0 baseline (IDEALSYSTEMMASTERPLAN.md). Source: Mongo agent_events + mastra_scorers.",
+    "agent_events has a 30-day TTL — the 30d window is the maximum usable horizon.",
+    "budget-tracker is in-memory (resets on restart) and is not used here."
+  ],
+  "windows": {
+    "7d": {
+      "window": {
+        "from": "2026-07-13T15:42:41.547Z",
+        "to": "2026-07-20T15:42:41.547Z"
+      },
+      "overview": {
+        "window": {
+          "from": "2026-07-13T15:42:41.547Z",
+          "to": "2026-07-20T15:42:41.547Z"
+        },
+        "totalTasks": 0,
+        "successRate": 0,
+        "totalErrors": 0,
+        "totalToolCalls": 0,
+        "toolErrorRate": 0,
+        "totalTokens": 0,
+        "totalCostUsd": 0,
+        "uniqueAgents": 5,
+        "uniqueModels": 0,
+        "avgLatencyMs": 491
+      },
+      "costPerTask": 0,
+      "metaTurns": {
+        "turns": 0,
+        "completed": 0,
+        "failed": 0,
+        "promptTokensPerTurn": {
+          "count": 0,
+          "avg": 0,
+          "p50": 0,
+          "p95": 0
+        },
+        "completionTokensPerTurn": {
+          "count": 0,
+          "avg": 0,
+          "p50": 0,
+          "p95": 0
+        },
+        "durationMsPerTurn": {
+          "count": 0,
+          "avg": 0,
+          "p50": 0,
+          "p95": 0
+        },
+        "costUsd": 0
+      },
+      "delegations": {
+        "total": 0,
+        "successRate": 0,
+        "durationMs": {
+          "count": 0,
+          "avg": 0,
+          "p50": 0,
+          "p95": 0
+        },
+        "perTarget": []
+      },
+      "agents": [
+        {
+          "agentId": "worker:cache",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 2
+        },
+        {
+          "agentId": "worker:health",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 38
+        },
+        {
+          "agentId": "worker:memory",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 14
+        },
+        {
+          "agentId": "worker:telemetry",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 11
+        },
+        {
+          "agentId": "worker:models",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 1958
+        }
+      ],
+      "models": [],
+      "latency": [],
+      "cost": {
+        "totalUsd": 0,
+        "byAgent": [],
+        "byModel": [],
+        "byDay": []
+      },
+      "scores": []
+    },
+    "30d": {
+      "window": {
+        "from": "2026-06-20T15:42:41.590Z",
+        "to": "2026-07-20T15:42:41.590Z"
+      },
+      "overview": {
+        "window": {
+          "from": "2026-06-20T15:42:41.590Z",
+          "to": "2026-07-20T15:42:41.590Z"
+        },
+        "totalTasks": 893,
+        "successRate": 0.9115341545352743,
+        "totalErrors": 185,
+        "totalToolCalls": 2215,
+        "toolErrorRate": 0.04785553047404063,
+        "totalTokens": 68748232,
+        "totalCostUsd": 30.06061,
+        "uniqueAgents": 203,
+        "uniqueModels": 17,
+        "avgLatencyMs": 8195
+      },
+      "costPerTask": 0.033662,
+      "metaTurns": {
+        "turns": 130,
+        "completed": 129,
+        "failed": 1,
+        "promptTokensPerTurn": {
+          "count": 125,
+          "avg": 85609,
+          "p50": 50574,
+          "p95": 219707
+        },
+        "completionTokensPerTurn": {
+          "count": 125,
+          "avg": 1595,
+          "p50": 804,
+          "p95": 4781
+        },
+        "durationMsPerTurn": {
+          "count": 130,
+          "avg": 98288,
+          "p50": 16484,
+          "p95": 484497
+        },
+        "costUsd": 5.038175
+      },
+      "delegations": {
+        "total": 118,
+        "successRate": 0.763,
+        "durationMs": {
+          "count": 92,
+          "avg": 153662,
+          "p50": 95354,
+          "p95": 592332
+        },
+        "perTarget": [
+          {
+            "agentId": "researcherAgent",
+            "total": 23,
+            "successRate": 0.783,
+            "durationMs": {
+              "count": 18,
+              "avg": 163700,
+              "p50": 170463,
+              "p95": 259128
+            }
+          },
+          {
+            "agentId": "n8nMcpEngineer",
+            "total": 20,
+            "successRate": 0.95,
+            "durationMs": {
+              "count": 20,
+              "avg": 97114,
+              "p50": 89642,
+              "p95": 169135
+            }
+          },
+          {
+            "agentId": "filmmakerAgent",
+            "total": 18,
+            "successRate": 0.944,
+            "durationMs": {
+              "count": 17,
+              "avg": 80553,
+              "p50": 66270,
+              "p95": 281727
+            }
+          },
+          {
+            "agentId": "musicianAgent",
+            "total": 15,
+            "successRate": 1,
+            "durationMs": {
+              "count": 15,
+              "avg": 143511,
+              "p50": 104073,
+              "p95": 401963
+            }
+          },
+          {
+            "agentId": "automationArchitect",
+            "total": 13,
+            "successRate": 0.692,
+            "durationMs": {
+              "count": 10,
+              "avg": 524791,
+              "p50": 573679,
+              "p95": 991833
+            }
+          },
+          {
+            "agentId": "writerAgent",
+            "total": 8,
+            "successRate": 0.25,
+            "durationMs": {
+              "count": 2,
+              "avg": 130244,
+              "p50": 23399,
+              "p95": 237089
+            }
+          },
+          {
+            "agentId": "codingAgent",
+            "total": 8,
+            "successRate": 0.5,
+            "durationMs": {
+              "count": 4,
+              "avg": 1766,
+              "p50": 552,
+              "p95": 3578
+            }
+          },
+          {
+            "agentId": "huntAgent",
+            "total": 5,
+            "successRate": 0,
+            "durationMs": {
+              "count": 0,
+              "avg": 0,
+              "p50": 0,
+              "p95": 0
+            }
+          },
+          {
+            "agentId": "marketingAgent",
+            "total": 3,
+            "successRate": 1,
+            "durationMs": {
+              "count": 3,
+              "avg": 17633,
+              "p50": 18335,
+              "p95": 19073
+            }
+          },
+          {
+            "agentId": "analyticsAgent",
+            "total": 3,
+            "successRate": 0.333,
+            "durationMs": {
+              "count": 1,
+              "avg": 57506,
+              "p50": 57506,
+              "p95": 57506
+            }
+          },
+          {
+            "agentId": "chefAgent",
+            "total": 1,
+            "successRate": 1,
+            "durationMs": {
+              "count": 1,
+              "avg": 32242,
+              "p50": 32242,
+              "p95": 32242
+            }
+          },
+          {
+            "agentId": "contentAgent",
+            "total": 1,
+            "successRate": 1,
+            "durationMs": {
+              "count": 1,
+              "avg": 67824,
+              "p50": 67824,
+              "p95": 67824
+            }
+          }
+        ]
+      },
+      "agents": [
+        {
+          "agentId": "observational-memory-observer",
+          "totalTasks": 311,
+          "completed": 311,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 389,
+          "toolErrors": 30,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 9191606,
+          "costUsd": 2.960965,
+          "avgLatencyMs": 8226
+        },
+        {
+          "agentId": "meta-agent",
+          "totalTasks": 130,
+          "completed": 129,
+          "failed": 1,
+          "successRate": 0.9923076923076923,
+          "toolCalls": 326,
+          "toolErrors": 12,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 10900471,
+          "costUsd": 5.038175,
+          "avgLatencyMs": 48361
+        },
+        {
+          "agentId": "automationArchitect",
+          "totalTasks": 112,
+          "completed": 47,
+          "failed": 65,
+          "successRate": 0.41964285714285715,
+          "toolCalls": 140,
+          "toolErrors": 8,
+          "retries": 0,
+          "delegations": 13,
+          "tokensUsed": 15436322,
+          "costUsd": 6.86638,
+          "avgLatencyMs": 54383
+        },
+        {
+          "agentId": "researcherAgent",
+          "totalTasks": 25,
+          "completed": 24,
+          "failed": 1,
+          "successRate": 0.96,
+          "toolCalls": 65,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 23,
+          "tokensUsed": 8315382,
+          "costUsd": 3.681653,
+          "avgLatencyMs": 64290
+        },
+        {
+          "agentId": "n8nMcpEngineer",
+          "totalTasks": 21,
+          "completed": 21,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 2,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 20,
+          "tokensUsed": 3585345,
+          "costUsd": 1.613484,
+          "avgLatencyMs": 81648
+        },
+        {
+          "agentId": "filmmakerAgent",
+          "totalTasks": 19,
+          "completed": 19,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 177,
+          "toolErrors": 26,
+          "retries": 0,
+          "delegations": 18,
+          "tokensUsed": 4249661,
+          "costUsd": 1.885805,
+          "avgLatencyMs": 11096
+        },
+        {
+          "agentId": "musicianAgent",
+          "totalTasks": 15,
+          "completed": 15,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 84,
+          "toolErrors": 6,
+          "retries": 0,
+          "delegations": 15,
+          "tokensUsed": 2654733,
+          "costUsd": 1.190213,
+          "avgLatencyMs": 32959
+        },
+        {
+          "agentId": "marketingAgent",
+          "totalTasks": 14,
+          "completed": 14,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 24,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 3,
+          "tokensUsed": 353922,
+          "costUsd": 0.154003,
+          "avgLatencyMs": 10538
+        },
+        {
+          "agentId": "writerAgent",
+          "totalTasks": 10,
+          "completed": 10,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 54,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 8,
+          "tokensUsed": 5567283,
+          "costUsd": 2.498506,
+          "avgLatencyMs": 51445
+        },
+        {
+          "agentId": "analyticsAgent",
+          "totalTasks": 9,
+          "completed": 9,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 9,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 3,
+          "tokensUsed": 112719,
+          "costUsd": 0.020176,
+          "avgLatencyMs": 12604
+        },
+        {
+          "agentId": "judge",
+          "totalTasks": 9,
+          "completed": 9,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 8004,
+          "costUsd": 0.057614,
+          "avgLatencyMs": 5760
+        },
+        {
+          "agentId": "weather-agent",
+          "totalTasks": 9,
+          "completed": 9,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 1,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 9203
+        },
+        {
+          "agentId": "salesAgent",
+          "totalTasks": 13,
+          "completed": 9,
+          "failed": 4,
+          "successRate": 0.6923076923076923,
+          "toolCalls": 20,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 75030,
+          "costUsd": 0.375069,
+          "avgLatencyMs": 4165
+        },
+        {
+          "agentId": "huntAgent",
+          "totalTasks": 9,
+          "completed": 8,
+          "failed": 1,
+          "successRate": 0.8888888888888888,
+          "toolCalls": 65,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 5,
+          "tokensUsed": 6346320,
+          "costUsd": 2.826635,
+          "avgLatencyMs": 92025
+        },
+        {
+          "agentId": "codingAgent",
+          "totalTasks": 6,
+          "completed": 6,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 8,
+          "toolErrors": 2,
+          "retries": 0,
+          "delegations": 8,
+          "tokensUsed": 373690,
+          "costUsd": 0.165357,
+          "avgLatencyMs": 4164
+        },
+        {
+          "agentId": "designAgent",
+          "totalTasks": 4,
+          "completed": 4,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 132250,
+          "costUsd": 0.058213,
+          "avgLatencyMs": 7549
+        },
+        {
+          "agentId": "crmAgent",
+          "totalTasks": 3,
+          "completed": 3,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 1,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 12166
+        },
+        {
+          "agentId": "chefAgent",
+          "totalTasks": 4,
+          "completed": 3,
+          "failed": 1,
+          "successRate": 0.75,
+          "toolCalls": 6,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 1,
+          "tokensUsed": 145654,
+          "costUsd": 0.064388,
+          "avgLatencyMs": 6229
+        },
+        {
+          "agentId": "producer-hunt-discovery-agent",
+          "totalTasks": 2,
+          "completed": 2,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 1541
+        },
+        {
+          "agentId": "knowledgeAgent",
+          "totalTasks": 2,
+          "completed": 2,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 360365,
+          "costUsd": 0.161823,
+          "avgLatencyMs": 73892
+        },
+        {
+          "agentId": "codeReviewAgent",
+          "totalTasks": 2,
+          "completed": 2,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 13265,
+          "costUsd": 0.005971,
+          "avgLatencyMs": 919
+        },
+        {
+          "agentId": "plan-task-1782251413478",
+          "totalTasks": 2,
+          "completed": 2,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 7213,
+          "costUsd": 0.00479,
+          "avgLatencyMs": 19551
+        },
+        {
+          "agentId": "plan-task-1782019582167",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 3345,
+          "costUsd": 0.00267,
+          "avgLatencyMs": 28013
+        },
+        {
+          "agentId": "plan-task-1782052381392",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2209,
+          "costUsd": 0.001521,
+          "avgLatencyMs": 14558
+        },
+        {
+          "agentId": "plan-task-1782438017540",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1232,
+          "costUsd": 0,
+          "avgLatencyMs": 16526
+        },
+        {
+          "agentId": "plan-task-1782246312421",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2814,
+          "costUsd": 0.002138,
+          "avgLatencyMs": 17011
+        },
+        {
+          "agentId": "plan-task-1782083409145",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 4007,
+          "costUsd": 0.003018,
+          "avgLatencyMs": 27062
+        },
+        {
+          "agentId": "plan-task-1782176746718",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 5007,
+          "costUsd": 0.003043,
+          "avgLatencyMs": 25655
+        },
+        {
+          "agentId": "plan-task-1782438326891",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1245,
+          "costUsd": 0,
+          "avgLatencyMs": 22932
+        },
+        {
+          "agentId": "plan-task-1782203783380",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2034,
+          "costUsd": 0.001389,
+          "avgLatencyMs": 21991
+        },
+        {
+          "agentId": "plan-task-1782297157578",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 4034,
+          "costUsd": 0.002848,
+          "avgLatencyMs": 33142
+        },
+        {
+          "agentId": "plan-task-1782667078390",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1494,
+          "costUsd": 0,
+          "avgLatencyMs": 35590
+        },
+        {
+          "agentId": "plan-task-1782204308800",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1973,
+          "costUsd": 0.001249,
+          "avgLatencyMs": 19187
+        },
+        {
+          "agentId": "plan-task-1782250457574",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 4823,
+          "costUsd": 0.003507,
+          "avgLatencyMs": 31639
+        },
+        {
+          "agentId": "plan-task-1782084419860",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1806,
+          "costUsd": 0.001332,
+          "avgLatencyMs": 12200
+        },
+        {
+          "agentId": "plan-task-1782049619760",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2667,
+          "costUsd": 0.001981,
+          "avgLatencyMs": 24616
+        },
+        {
+          "agentId": "plan-task-1782437757771",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1166,
+          "costUsd": 0,
+          "avgLatencyMs": 19763
+        },
+        {
+          "agentId": "plan-task-1782086869341",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2564,
+          "costUsd": 0.001928,
+          "avgLatencyMs": 16916
+        },
+        {
+          "agentId": "plan-task-1782666726422",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1597,
+          "costUsd": 0,
+          "avgLatencyMs": 21376
+        },
+        {
+          "agentId": "plan-task-1782667078387",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1373,
+          "costUsd": 0,
+          "avgLatencyMs": 18268
+        },
+        {
+          "agentId": "plan-task-1782666535473",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1477,
+          "costUsd": 0,
+          "avgLatencyMs": 47644
+        },
+        {
+          "agentId": "plan-task-1782082942534",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 3218,
+          "costUsd": 0.00252,
+          "avgLatencyMs": 23340
+        },
+        {
+          "agentId": "plan-task-1782438075403",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1257,
+          "costUsd": 0,
+          "avgLatencyMs": 16402
+        },
+        {
+          "agentId": "plan-task-1782421024800",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2077,
+          "costUsd": 0,
+          "avgLatencyMs": 26655
+        },
+        {
+          "agentId": "plan-task-1782667078391",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1769,
+          "costUsd": 0,
+          "avgLatencyMs": 27831
+        },
+        {
+          "agentId": "plan-task-1782667089363",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1287,
+          "costUsd": 0,
+          "avgLatencyMs": 40626
+        },
+        {
+          "agentId": "plan-task-1782204461361",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2371,
+          "costUsd": 0.001842,
+          "avgLatencyMs": 28782
+        },
+        {
+          "agentId": "plan-task-1782416363508",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1628,
+          "costUsd": 0,
+          "avgLatencyMs": 32465
+        },
+        {
+          "agentId": "plan-task-1782075631654",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2099,
+          "costUsd": 0.001636,
+          "avgLatencyMs": 15062
+        },
+        {
+          "agentId": "plan-task-1782083018118",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2993,
+          "costUsd": 0.002326,
+          "avgLatencyMs": 19675
+        },
+        {
+          "agentId": "plan-task-1782083085438",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2657,
+          "costUsd": 0.002016,
+          "avgLatencyMs": 19675
+        },
+        {
+          "agentId": "plan-task-1782245887927",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 4636,
+          "costUsd": 0.003408,
+          "avgLatencyMs": 24154
+        },
+        {
+          "agentId": "plan-task-1783554463082",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1189,
+          "costUsd": 0,
+          "avgLatencyMs": 16076
+        },
+        {
+          "agentId": "plan-task-1783554669515",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1080,
+          "costUsd": 0,
+          "avgLatencyMs": 13239
+        },
+        {
+          "agentId": "plan-task-1782146689873",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1530,
+          "costUsd": 0.001171,
+          "avgLatencyMs": 14168
+        },
+        {
+          "agentId": "plan-task-1782319448023",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 5745,
+          "costUsd": 0.004203,
+          "avgLatencyMs": 54377
+        },
+        {
+          "agentId": "plan-task-1782075220138",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2386,
+          "costUsd": 0.001567,
+          "avgLatencyMs": 11958
+        },
+        {
+          "agentId": "plan-task-1782666891312",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1418,
+          "costUsd": 0,
+          "avgLatencyMs": 32140
+        },
+        {
+          "agentId": "plan-task-1782356588080",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1867,
+          "costUsd": 0,
+          "avgLatencyMs": 22637
+        },
+        {
+          "agentId": "plan-task-1782319820984",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 6268,
+          "costUsd": 0.003788,
+          "avgLatencyMs": 33287
+        },
+        {
+          "agentId": "plan-task-1782083576613",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 3407,
+          "costUsd": 0.002558,
+          "avgLatencyMs": 23302
+        },
+        {
+          "agentId": "plan-task-1782202638075",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1595,
+          "costUsd": 0.001169,
+          "avgLatencyMs": 21427
+        },
+        {
+          "agentId": "plan-task-1782438589829",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 932,
+          "costUsd": 0,
+          "avgLatencyMs": 14829
+        },
+        {
+          "agentId": "plan-task-1782438610722",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 925,
+          "costUsd": 0,
+          "avgLatencyMs": 15119
+        },
+        {
+          "agentId": "plan-task-1782666563624",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2053,
+          "costUsd": 0,
+          "avgLatencyMs": 29167
+        },
+        {
+          "agentId": "plan-task-1782297383481",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 3268,
+          "costUsd": 0.002397,
+          "avgLatencyMs": 32649
+        },
+        {
+          "agentId": "plan-task-1782666228060",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2066,
+          "costUsd": 0,
+          "avgLatencyMs": 30250
+        },
+        {
+          "agentId": "plan-task-1782083779193",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 3317,
+          "costUsd": 0.002551,
+          "avgLatencyMs": 22238
+        },
+        {
+          "agentId": "plan-task-1782084311135",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2027,
+          "costUsd": 0.001476,
+          "avgLatencyMs": 13452
+        },
+        {
+          "agentId": "plan-task-1782177389721",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1702,
+          "costUsd": 0.00113,
+          "avgLatencyMs": 12656
+        },
+        {
+          "agentId": "plan-task-1782439049511",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 910,
+          "costUsd": 0,
+          "avgLatencyMs": 12528
+        },
+        {
+          "agentId": "plan-task-1782666535481",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1135,
+          "costUsd": 0,
+          "avgLatencyMs": 28428
+        },
+        {
+          "agentId": "plan-task-1782666789597",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1271,
+          "costUsd": 0,
+          "avgLatencyMs": 14795
+        },
+        {
+          "agentId": "plan-task-1782019463650",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2591,
+          "costUsd": 0.00201,
+          "avgLatencyMs": 21384
+        },
+        {
+          "agentId": "plan-task-1782437426652",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1608,
+          "costUsd": 0,
+          "avgLatencyMs": 17420
+        },
+        {
+          "agentId": "plan-task-1782203880949",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2553,
+          "costUsd": 0.001833,
+          "avgLatencyMs": 37262
+        },
+        {
+          "agentId": "plan-task-1782177050921",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2552,
+          "costUsd": 0.001963,
+          "avgLatencyMs": 19905
+        },
+        {
+          "agentId": "plan-task-1782355929090",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1247,
+          "costUsd": 0,
+          "avgLatencyMs": 13007
+        },
+        {
+          "agentId": "plan-task-1782251465332",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2623,
+          "costUsd": 0.001923,
+          "avgLatencyMs": 15230
+        },
+        {
+          "agentId": "plan-task-1782084184389",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 3248,
+          "costUsd": 0.002461,
+          "avgLatencyMs": 20165
+        },
+        {
+          "agentId": "plan-task-1782086441269",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 3912,
+          "costUsd": 0.002952,
+          "avgLatencyMs": 31973
+        },
+        {
+          "agentId": "plan-task-1782176688057",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 5305,
+          "costUsd": 0.003483,
+          "avgLatencyMs": 30151
+        },
+        {
+          "agentId": "plan-task-1782204027356",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2364,
+          "costUsd": 0.001754,
+          "avgLatencyMs": 33456
+        },
+        {
+          "agentId": "plan-task-1782666727861",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1395,
+          "costUsd": 0,
+          "avgLatencyMs": 15287
+        },
+        {
+          "agentId": "run-worker-writer_critic-1782438591002",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 3,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 80892,
+          "costUsd": 0.042764,
+          "avgLatencyMs": 52804
+        },
+        {
+          "agentId": "plan-task-1782353779322",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1845,
+          "costUsd": 0,
+          "avgLatencyMs": 60827
+        },
+        {
+          "agentId": "plan-task-1782082302067",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 3620,
+          "costUsd": 0.002622,
+          "avgLatencyMs": 19858
+        },
+        {
+          "agentId": "plan-task-1782666949014",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1379,
+          "costUsd": 0,
+          "avgLatencyMs": 12122
+        },
+        {
+          "agentId": "plan-task-1782437168597",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1863,
+          "costUsd": 0,
+          "avgLatencyMs": 18048
+        },
+        {
+          "agentId": "plan-task-1782203068743",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2362,
+          "costUsd": 0.001518,
+          "avgLatencyMs": 22664
+        },
+        {
+          "agentId": "plan-task-1782438346561",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1638,
+          "costUsd": 0,
+          "avgLatencyMs": 15976
+        },
+        {
+          "agentId": "plan-task-1782666519277",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1218,
+          "costUsd": 0,
+          "avgLatencyMs": 11488
+        },
+        {
+          "agentId": "plan-task-1782666794519",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1326,
+          "costUsd": 0,
+          "avgLatencyMs": 16832
+        },
+        {
+          "agentId": "plan-task-1783554149498",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 893,
+          "costUsd": 0,
+          "avgLatencyMs": 11823
+        },
+        {
+          "agentId": "plan-task-1782083216672",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 3309,
+          "costUsd": 0.002507,
+          "avgLatencyMs": 23048
+        },
+        {
+          "agentId": "plan-task-1782438865851",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 830,
+          "costUsd": 0,
+          "avgLatencyMs": 14714
+        },
+        {
+          "agentId": "plan-task-1782438042706",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1040,
+          "costUsd": 0,
+          "avgLatencyMs": 16806
+        },
+        {
+          "agentId": "plan-task-1782299337363",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2621,
+          "costUsd": 0.0019,
+          "avgLatencyMs": 21491
+        },
+        {
+          "agentId": "plan-task-1782083879667",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2302,
+          "costUsd": 0.001728,
+          "avgLatencyMs": 13498
+        },
+        {
+          "agentId": "plan-task-1782666643446",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1483,
+          "costUsd": 0,
+          "avgLatencyMs": 18230
+        },
+        {
+          "agentId": "plan-task-1782051756469",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1920,
+          "costUsd": 0.001306,
+          "avgLatencyMs": 11793
+        },
+        {
+          "agentId": "plan-task-1782666891309",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1204,
+          "costUsd": 0,
+          "avgLatencyMs": 16226
+        },
+        {
+          "agentId": "plan-task-1782666841608",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 879,
+          "costUsd": 0,
+          "avgLatencyMs": 12815
+        },
+        {
+          "agentId": "plan-task-1782052080706",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1884,
+          "costUsd": 0.001336,
+          "avgLatencyMs": 14332
+        },
+        {
+          "agentId": "plan-task-1782666770770",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1265,
+          "costUsd": 0,
+          "avgLatencyMs": 12155
+        },
+        {
+          "agentId": "plan-task-1782051920151",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1662,
+          "costUsd": 0.001117,
+          "avgLatencyMs": 11163
+        },
+        {
+          "agentId": "plan-task-1782203329044",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2178,
+          "costUsd": 0.001556,
+          "avgLatencyMs": 28422
+        },
+        {
+          "agentId": "run-worker-writer_chronicler-1782438070849",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 2,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 23743,
+          "costUsd": 0.013839,
+          "avgLatencyMs": 34447
+        },
+        {
+          "agentId": "plan-task-1782017756491",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 893,
+          "costUsd": 0.000592,
+          "avgLatencyMs": 6172
+        },
+        {
+          "agentId": "plan-task-1782666535477",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1337,
+          "costUsd": 0,
+          "avgLatencyMs": 19036
+        },
+        {
+          "agentId": "plan-task-1782355239615",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1960,
+          "costUsd": 0,
+          "avgLatencyMs": 24357
+        },
+        {
+          "agentId": "plan-task-1782146367886",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2973,
+          "costUsd": 0.002156,
+          "avgLatencyMs": 23385
+        },
+        {
+          "agentId": "plan-task-1782413403869",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1928,
+          "costUsd": 0,
+          "avgLatencyMs": 19971
+        },
+        {
+          "agentId": "plan-task-1782438602542",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1791,
+          "costUsd": 0,
+          "avgLatencyMs": 20654
+        },
+        {
+          "agentId": "plan-task-1782667244098",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1479,
+          "costUsd": 0,
+          "avgLatencyMs": 19239
+        },
+        {
+          "agentId": "plan-task-1782203533607",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2305,
+          "costUsd": 0.001685,
+          "avgLatencyMs": 29470
+        },
+        {
+          "agentId": "plan-task-1782666293116",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1589,
+          "costUsd": 0,
+          "avgLatencyMs": 19336
+        },
+        {
+          "agentId": "plan-task-1782203175867",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 3977,
+          "costUsd": 0.002885,
+          "avgLatencyMs": 45043
+        },
+        {
+          "agentId": "run-worker-fast-1782438523658",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 4096,
+          "costUsd": 0,
+          "avgLatencyMs": 10887
+        },
+        {
+          "agentId": "plan-task-1782354948221",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2085,
+          "costUsd": 0,
+          "avgLatencyMs": 27253
+        },
+        {
+          "agentId": "plan-task-1782019235470",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2641,
+          "costUsd": 0.002068,
+          "avgLatencyMs": 23359
+        },
+        {
+          "agentId": "plan-task-1782082787940",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1314,
+          "costUsd": 0.000906,
+          "avgLatencyMs": 7955
+        },
+        {
+          "agentId": "plan-task-1782083837003",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2288,
+          "costUsd": 0.001698,
+          "avgLatencyMs": 13251
+        },
+        {
+          "agentId": "plan-task-1782241556970",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 5024,
+          "costUsd": 0.003344,
+          "avgLatencyMs": 23543
+        },
+        {
+          "agentId": "run-worker-fast-1782667133492",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 3850,
+          "costUsd": 0,
+          "avgLatencyMs": 45358
+        },
+        {
+          "agentId": "run-worker-fast-1782667207589",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 4096,
+          "costUsd": 0,
+          "avgLatencyMs": 11239
+        },
+        {
+          "agentId": "run-worker-powerful-1782241941755",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 8,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 35748,
+          "costUsd": 0.016039,
+          "avgLatencyMs": 1628
+        },
+        {
+          "agentId": "plan-task-1782666498326",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1793,
+          "costUsd": 0,
+          "avgLatencyMs": 20361
+        },
+        {
+          "agentId": "plan-task-1782667089358",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1574,
+          "costUsd": 0,
+          "avgLatencyMs": 77946
+        },
+        {
+          "agentId": "plan-task-1782436866858",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2231,
+          "costUsd": 0,
+          "avgLatencyMs": 29430
+        },
+        {
+          "agentId": "plan-task-1782666535479",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1241,
+          "costUsd": 0,
+          "avgLatencyMs": 35148
+        },
+        {
+          "agentId": "plan-task-1782075356942",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1905,
+          "costUsd": 0.001481,
+          "avgLatencyMs": 13822
+        },
+        {
+          "agentId": "plan-task-1782666891313",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1654,
+          "costUsd": 0,
+          "avgLatencyMs": 26999
+        },
+        {
+          "agentId": "run-worker-fast-1782667193791",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 4096,
+          "costUsd": 0,
+          "avgLatencyMs": 9687
+        },
+        {
+          "agentId": "plan-task-1782245816411",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 7673,
+          "costUsd": 0.006043,
+          "avgLatencyMs": 49645
+        },
+        {
+          "agentId": "plan-task-1782177184904",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2237,
+          "costUsd": 0.00165,
+          "avgLatencyMs": 20217
+        },
+        {
+          "agentId": "run-worker-writer_muse-1782438896695",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 4,
+          "toolErrors": 2,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 38516,
+          "costUsd": 0.018891,
+          "avgLatencyMs": 13603
+        },
+        {
+          "agentId": "run-worker-writer_critic-1782438629659",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 2,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 50661,
+          "costUsd": 0.026686,
+          "avgLatencyMs": 47081
+        },
+        {
+          "agentId": "plan-task-1782146589907",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1701,
+          "costUsd": 0.001304,
+          "avgLatencyMs": 16743
+        },
+        {
+          "agentId": "run-worker-powerful-1782439004671",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 8192,
+          "costUsd": 0,
+          "avgLatencyMs": 33843
+        },
+        {
+          "agentId": "plan-task-1782666468815",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1488,
+          "costUsd": 0,
+          "avgLatencyMs": 19042
+        },
+        {
+          "agentId": "plan-task-1782666468813",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1393,
+          "costUsd": 0,
+          "avgLatencyMs": 17594
+        },
+        {
+          "agentId": "plan-task-1782083668614",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 3242,
+          "costUsd": 0.002513,
+          "avgLatencyMs": 20434
+        },
+        {
+          "agentId": "plan-task-1782356430333",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1734,
+          "costUsd": 0,
+          "avgLatencyMs": 23937
+        },
+        {
+          "agentId": "plan-task-1782203649412",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1809,
+          "costUsd": 0.001257,
+          "avgLatencyMs": 22195
+        },
+        {
+          "agentId": "plan-task-1782241880983",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 6091,
+          "costUsd": 0.004265,
+          "avgLatencyMs": 31949
+        },
+        {
+          "agentId": "plan-task-1783554323989",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1176,
+          "costUsd": 0,
+          "avgLatencyMs": 16814
+        },
+        {
+          "agentId": "plan-task-1782666991392",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1353,
+          "costUsd": 0,
+          "avgLatencyMs": 12699
+        },
+        {
+          "agentId": "run-worker-cloud-1782667228156",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 10,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 42862,
+          "costUsd": 0.01912,
+          "avgLatencyMs": 2150
+        },
+        {
+          "agentId": "plan-task-1782666535475",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1199,
+          "costUsd": 0,
+          "avgLatencyMs": 14117
+        },
+        {
+          "agentId": "plan-task-1782249031246",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 4923,
+          "costUsd": 0.003515,
+          "avgLatencyMs": 26814
+        },
+        {
+          "agentId": "plan-task-1782082882240",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1451,
+          "costUsd": 0.000987,
+          "avgLatencyMs": 7320
+        },
+        {
+          "agentId": "contentAgent",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 6,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 1,
+          "tokensUsed": 165643,
+          "costUsd": 0.073817,
+          "avgLatencyMs": 15132
+        },
+        {
+          "agentId": "plan-task-1782666841611",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 916,
+          "costUsd": 0,
+          "avgLatencyMs": 14195
+        },
+        {
+          "agentId": "plan-task-1782075610769",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1341,
+          "costUsd": 0.000983,
+          "avgLatencyMs": 14235
+        },
+        {
+          "agentId": "plan-task-1782299240017",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 3359,
+          "costUsd": 0.002354,
+          "avgLatencyMs": 26209
+        },
+        {
+          "agentId": "plan-task-1782666901682",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1816,
+          "costUsd": 0,
+          "avgLatencyMs": 37821
+        },
+        {
+          "agentId": "plan-task-1782050298945",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2672,
+          "costUsd": 0.001891,
+          "avgLatencyMs": 20749
+        },
+        {
+          "agentId": "plan-task-1782666414903",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1415,
+          "costUsd": 0,
+          "avgLatencyMs": 17605
+        },
+        {
+          "agentId": "plan-task-1782667089365",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1351,
+          "costUsd": 0,
+          "avgLatencyMs": 34646
+        },
+        {
+          "agentId": "security-review-agent",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 5982,
+          "costUsd": 0.00273,
+          "avgLatencyMs": 3928
+        },
+        {
+          "agentId": "plan-task-1782246003559",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 4436,
+          "costUsd": 0.003226,
+          "avgLatencyMs": 28151
+        },
+        {
+          "agentId": "plan-task-1782666691652",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1625,
+          "costUsd": 0,
+          "avgLatencyMs": 17336
+        },
+        {
+          "agentId": "plan-task-1783540190669",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 690,
+          "costUsd": 0,
+          "avgLatencyMs": 14886
+        },
+        {
+          "agentId": "run-worker-music-1782202290233",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 1,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 24211,
+          "costUsd": 0.013691,
+          "avgLatencyMs": 67108
+        },
+        {
+          "agentId": "plan-task-1782051243793",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 4035,
+          "costUsd": 0.003116,
+          "avgLatencyMs": 38061
+        },
+        {
+          "agentId": "plan-task-1782355856651",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1395,
+          "costUsd": 0,
+          "avgLatencyMs": 13635
+        },
+        {
+          "agentId": "plan-task-1782083135231",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2282,
+          "costUsd": 0.001622,
+          "avgLatencyMs": 15893
+        },
+        {
+          "agentId": "plan-task-1782082671294",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2158,
+          "costUsd": 0.001619,
+          "avgLatencyMs": 12524
+        },
+        {
+          "agentId": "plan-task-1782356551277",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1767,
+          "costUsd": 0,
+          "avgLatencyMs": 16604
+        },
+        {
+          "agentId": "plan-task-1782667089361",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1591,
+          "costUsd": 0,
+          "avgLatencyMs": 63392
+        },
+        {
+          "agentId": "plan-task-1782202144661",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 4417,
+          "costUsd": 0.002851,
+          "avgLatencyMs": 42056
+        },
+        {
+          "agentId": "plan-task-1782050767676",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2830,
+          "costUsd": 0.002068,
+          "avgLatencyMs": 23517
+        },
+        {
+          "agentId": "plan-task-1782666672513",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1373,
+          "costUsd": 0,
+          "avgLatencyMs": 12367
+        },
+        {
+          "agentId": "plan-task-1782667089367",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1587,
+          "costUsd": 0,
+          "avgLatencyMs": 57841
+        },
+        {
+          "agentId": "analytics-agent",
+          "totalTasks": 3,
+          "completed": 1,
+          "failed": 2,
+          "successRate": 0.3333333333333333,
+          "toolCalls": 10,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 110893,
+          "costUsd": 0.04938,
+          "avgLatencyMs": 2765
+        },
+        {
+          "agentId": "plan-task-1782437136297",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 2204,
+          "costUsd": 0,
+          "avgLatencyMs": 16347
+        },
+        {
+          "agentId": "plan-task-1782418670320",
+          "totalTasks": 1,
+          "completed": 1,
+          "failed": 0,
+          "successRate": 1,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 1735,
+          "costUsd": 0,
+          "avgLatencyMs": 27229
+        },
+        {
+          "agentId": "error-collector",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 0
+        },
+        {
+          "agentId": "worker:run-fast-1782667207589",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 11239
+        },
+        {
+          "agentId": "worker:run-writer_chronicler-1782438070849",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 103337
+        },
+        {
+          "agentId": "film",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 2
+        },
+        {
+          "agentId": "worker:run-fast-1782667193791",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 9687
+        },
+        {
+          "agentId": "plan-task-1782018938426",
+          "totalTasks": 1,
+          "completed": 0,
+          "failed": 1,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 392
+        },
+        {
+          "agentId": "worker:models",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 1056
+        },
+        {
+          "agentId": "plan-task-1782018918794",
+          "totalTasks": 1,
+          "completed": 0,
+          "failed": 1,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 807
+        },
+        {
+          "agentId": "worker:run-cloud-1782667228156",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 17646
+        },
+        {
+          "agentId": "worker:memory",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 65
+        },
+        {
+          "agentId": "worker:run-powerful-1782241941754",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 14599
+        },
+        {
+          "agentId": "worker:run-writer_critic-1782438629659",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 141216
+        },
+        {
+          "agentId": "worker:telemetry",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 16
+        },
+        {
+          "agentId": "worker:cache",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 5
+        },
+        {
+          "agentId": "worker:health",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 34
+        },
+        {
+          "agentId": "worker:run-fast-1782438523658",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 10887
+        },
+        {
+          "agentId": "worker:run-fast-1782667133492",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 45359
+        },
+        {
+          "agentId": "unknown",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 800,
+          "toolErrors": 18,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 13251
+        },
+        {
+          "agentId": "plan-task-1782018919997",
+          "totalTasks": 1,
+          "completed": 0,
+          "failed": 1,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 375
+        },
+        {
+          "agentId": "worker:run-writer_muse-1782438896695",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 95178
+        },
+        {
+          "agentId": "worker:run-music-1782202290233",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 134214
+        },
+        {
+          "agentId": "worker:run-writer_critic-1782438591002",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 211155
+        },
+        {
+          "agentId": "goal-tracker",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 0
+        },
+        {
+          "agentId": "worker:run-powerful-1782439004671",
+          "totalTasks": 0,
+          "completed": 0,
+          "failed": 0,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 33843
+        },
+        {
+          "agentId": "plan-task-1782018937489",
+          "totalTasks": 1,
+          "completed": 0,
+          "failed": 1,
+          "successRate": 0,
+          "toolCalls": 0,
+          "toolErrors": 0,
+          "retries": 0,
+          "delegations": 0,
+          "tokensUsed": 0,
+          "costUsd": 0,
+          "avgLatencyMs": 465
+        }
+      ],
+      "models": [
+        {
+          "model": "deepseek-v4-pro",
+          "provider": "deepseek",
+          "invocations": 525,
+          "promptTokens": 62182560,
+          "completionTokens": 2010711,
+          "totalTokens": 64193271,
+          "costUsd": 28.798732,
+          "agents": [
+            "plan-task-1782177184904",
+            "plan-task-1782146689873",
+            "plan-task-1782319448023",
+            "plan-task-1782075220138",
+            "run-worker-writer_critic-1782438629659",
+            "plan-task-1782146589907",
+            "filmmakerAgent",
+            "plan-task-1782319820984",
+            "plan-task-1782083576613",
+            "plan-task-1782083668614",
+            "plan-task-1782202638075",
+            "plan-task-1782297383481",
+            "plan-task-1782083779193",
+            "plan-task-1782084311135",
+            "plan-task-1782203649412",
+            "plan-task-1782177389721",
+            "plan-task-1782241880983",
+            "plan-task-1782017756491",
+            "plan-task-1782083409145",
+            "plan-task-1782146367886",
+            "plan-task-1782246312421",
+            "plan-task-1782176746718",
+            "plan-task-1782203533607",
+            "plan-task-1782203783380",
+            "plan-task-1782203175867",
+            "plan-task-1782204308800",
+            "plan-task-1782084419860",
+            "plan-task-1782250457574",
+            "plan-task-1782297157578",
+            "meta-agent",
+            "plan-task-1782019235470",
+            "plan-task-1782082787940",
+            "plan-task-1782083837003",
+            "plan-task-1782086869341",
+            "plan-task-1782049619760",
+            "plan-task-1782082942534",
+            "plan-task-1782241556970",
+            "run-worker-powerful-1782241941755",
+            "researcherAgent",
+            "run-worker-writer_muse-1782438896695",
+            "plan-task-1782204461361",
+            "plan-task-1782075631654",
+            "plan-task-1782075356942",
+            "plan-task-1782083018118",
+            "plan-task-1782083085438",
+            "plan-task-1782245816411",
+            "plan-task-1782083216672",
+            "plan-task-1782245887927",
+            "plan-task-1782246003559",
+            "chefAgent",
+            "run-worker-music-1782202290233",
+            "plan-task-1782051243793",
+            "automationArchitect",
+            "plan-task-1782299337363",
+            "plan-task-1782083135231",
+            "n8nMcpEngineer",
+            "plan-task-1782082671294",
+            "plan-task-1782083879667",
+            "plan-task-1782051756469",
+            "plan-task-1782050767676",
+            "plan-task-1782202144661",
+            "marketingAgent",
+            "designAgent",
+            "analytics-agent",
+            "writerAgent",
+            "codingAgent",
+            "observational-memory-observer",
+            "plan-task-1782051920151",
+            "plan-task-1782019582167",
+            "plan-task-1782052381392",
+            "plan-task-1782052080706",
+            "plan-task-1782019463650",
+            "plan-task-1782203329044",
+            "plan-task-1782203880949",
+            "plan-task-1782251413478",
+            "plan-task-1782177050921",
+            "plan-task-1782251465332",
+            "codeReviewAgent",
+            "musicianAgent",
+            "huntAgent",
+            "plan-task-1782249031246",
+            "plan-task-1782084184389",
+            "salesAgent",
+            "run-worker-writer_chronicler-1782438070849",
+            "plan-task-1782086441269",
+            "plan-task-1782176688057",
+            "plan-task-1782082882240",
+            "knowledgeAgent",
+            "plan-task-1782204027356",
+            "analyticsAgent",
+            "plan-task-1782075610769",
+            "plan-task-1782299240017",
+            "run-worker-writer_critic-1782438591002",
+            "plan-task-1782082302067",
+            "run-worker-cloud-1782667228156",
+            "contentAgent",
+            "plan-task-1782050298945",
+            "plan-task-1782203068743",
+            "security-review-agent"
+          ]
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "provider": "deepseek",
+          "invocations": 164,
+          "promptTokens": 3838739,
+          "completionTokens": 193174,
+          "totalTokens": 4031913,
+          "costUsd": 0.591512,
+          "agents": [
+            "observational-memory-observer"
+          ]
+        },
+        {
+          "model": "maxwellb/gemma4-12b-it-oym",
+          "provider": "ollama",
+          "invocations": 107,
+          "promptTokens": 241554,
+          "completionTokens": 48893,
+          "totalTokens": 290447,
+          "costUsd": 0,
+          "agents": [
+            "plan-task-1782666519277",
+            "plan-task-1782666414903",
+            "plan-task-1782437168597",
+            "plan-task-1782438346561",
+            "plan-task-1782666901682",
+            "plan-task-1783554149498",
+            "plan-task-1782666794519",
+            "plan-task-1782667089365",
+            "plan-task-1782666727861",
+            "plan-task-1782666841611",
+            "plan-task-1782666949014",
+            "plan-task-1782353779322",
+            "salesAgent",
+            "plan-task-1782666535475",
+            "analyticsAgent",
+            "plan-task-1782666991392",
+            "plan-task-1782018919997",
+            "plan-task-1782437426652",
+            "plan-task-1782355929090",
+            "plan-task-1782437136297",
+            "plan-task-1782666770770",
+            "analytics-agent",
+            "plan-task-1782438017540",
+            "plan-task-1782018937489",
+            "plan-task-1782418670320",
+            "marketingAgent",
+            "plan-task-1782667089361",
+            "plan-task-1782666643446",
+            "plan-task-1782666841608",
+            "plan-task-1782666672513",
+            "plan-task-1782666891309",
+            "plan-task-1782355856651",
+            "plan-task-1782356551277",
+            "automationArchitect",
+            "plan-task-1782667089367",
+            "plan-task-1782666691652",
+            "plan-task-1783540190669",
+            "plan-task-1782438865851",
+            "plan-task-1782438042706",
+            "plan-task-1782416363508",
+            "weather-agent",
+            "plan-task-1782436866858",
+            "plan-task-1782666535479",
+            "plan-task-1782667089358",
+            "plan-task-1782666891313",
+            "producer-hunt-discovery-agent",
+            "plan-task-1782666535473",
+            "plan-task-1782667078387",
+            "plan-task-1782667089363",
+            "plan-task-1782421024800",
+            "crmAgent",
+            "plan-task-1782666498326",
+            "plan-task-1782438075403",
+            "plan-task-1782666726422",
+            "plan-task-1782666293116",
+            "plan-task-1782667078391",
+            "plan-task-1782354948221",
+            "plan-task-1782437757771",
+            "plan-task-1782666535477",
+            "plan-task-1782438326891",
+            "plan-task-1782667078390",
+            "plan-task-1782667244098",
+            "plan-task-1783554463082",
+            "plan-task-1782413403869",
+            "plan-task-1782438602542",
+            "plan-task-1782355239615",
+            "plan-task-1783554669515",
+            "plan-task-1782439049511",
+            "plan-task-1782666228060",
+            "plan-task-1782018918794",
+            "plan-task-1782666789597",
+            "plan-task-1782666535481",
+            "plan-task-1783554323989",
+            "plan-task-1782438610722",
+            "plan-task-1782666563624",
+            "plan-task-1782438589829",
+            "plan-task-1782018938426",
+            "plan-task-1782356430333",
+            "plan-task-1782666468813",
+            "plan-task-1782666468815",
+            "plan-task-1782356588080",
+            "run-worker-powerful-1782439004671",
+            "plan-task-1782666891312"
+          ]
+        },
+        {
+          "model": "custom-deepseek/deepseek/deepseek-v4-pro",
+          "provider": "deepseek",
+          "invocations": 10,
+          "promptTokens": 0,
+          "completionTokens": 0,
+          "totalTokens": 0,
+          "costUsd": 0,
+          "agents": [
+            "worker:run-writer_chronicler-1782438070849",
+            "worker:run-writer_critic-1782438629659",
+            "worker:run-writer_critic-1782438591002",
+            "worker:run-cloud-1782667228156",
+            "worker:run-writer_muse-1782438896695"
+          ]
+        },
+        {
+          "model": "gemini-2.5-pro",
+          "provider": "google",
+          "invocations": 9,
+          "promptTokens": 2563,
+          "completionTokens": 5441,
+          "totalTokens": 8004,
+          "costUsd": 0.057614,
+          "agents": [
+            "judge"
+          ]
+        },
+        {
+          "model": "gemma4:12b",
+          "provider": "ollama",
+          "invocations": 8,
+          "promptTokens": 0,
+          "completionTokens": 0,
+          "totalTokens": 0,
+          "costUsd": 0,
+          "agents": [
+            "salesAgent",
+            "meta-agent",
+            "analyticsAgent"
+          ]
+        },
+        {
+          "model": "ollama/local/gemma4:e4b",
+          "provider": "ollama",
+          "invocations": 8,
+          "promptTokens": 0,
+          "completionTokens": 0,
+          "totalTokens": 0,
+          "costUsd": 0,
+          "agents": [
+            "worker:run-fast-1782667193791",
+            "worker:run-fast-1782667133492",
+            "worker:run-fast-1782667207589",
+            "worker:run-fast-1782438523658"
+          ]
+        },
+        {
+          "model": "claude-opus-4.8",
+          "provider": "anthropic",
+          "invocations": 5,
+          "promptTokens": 58533,
+          "completionTokens": 3038,
+          "totalTokens": 61571,
+          "costUsd": 0.368615,
+          "agents": [
+            "salesAgent"
+          ]
+        },
+        {
+          "model": "deepseek/deepseek-v4-pro",
+          "provider": "deepseek",
+          "invocations": 4,
+          "promptTokens": 0,
+          "completionTokens": 0,
+          "totalTokens": 0,
+          "costUsd": 0,
+          "agents": [
+            "researcherAgent",
+            "chefAgent",
+            "automationArchitect",
+            "huntAgent"
+          ]
+        },
+        {
+          "model": "gemma4:e4b",
+          "provider": "ollama",
+          "invocations": 4,
+          "promptTokens": 13476,
+          "completionTokens": 2662,
+          "totalTokens": 16138,
+          "costUsd": 0,
+          "agents": [
+            "run-worker-fast-1782667193791",
+            "run-worker-fast-1782667133492",
+            "run-worker-fast-1782438523658",
+            "run-worker-fast-1782667207589"
+          ]
+        },
+        {
+          "model": "deepseek/deepseek/deepseek-v4-pro",
+          "provider": "deepseek",
+          "invocations": 4,
+          "promptTokens": 0,
+          "completionTokens": 0,
+          "totalTokens": 0,
+          "costUsd": 0,
+          "agents": [
+            "worker:run-powerful-1782241941754",
+            "worker:run-music-1782202290233"
+          ]
+        },
+        {
+          "model": "gemma4-12b-it-oym:latest",
+          "provider": "unknown",
+          "invocations": 3,
+          "promptTokens": 0,
+          "completionTokens": 0,
+          "totalTokens": 0,
+          "costUsd": 0,
+          "agents": [
+            "meta-agent",
+            "analyticsAgent"
+          ]
+        },
+        {
+          "model": "laguna-m.1:free",
+          "provider": "openrouter",
+          "invocations": 2,
+          "promptTokens": 67510,
+          "completionTokens": 1151,
+          "totalTokens": 68661,
+          "costUsd": 0,
+          "agents": [
+            "analyticsAgent"
+          ]
+        },
+        {
+          "model": "ollama/local/maxwellb/gemma4-12b-it-oym",
+          "provider": "ollama",
+          "invocations": 2,
+          "promptTokens": 0,
+          "completionTokens": 0,
+          "totalTokens": 0,
+          "costUsd": 0,
+          "agents": [
+            "worker:run-powerful-1782439004671"
+          ]
+        },
+        {
+          "model": "claude-sonnet-4.6",
+          "provider": "anthropic",
+          "invocations": 1,
+          "promptTokens": 77439,
+          "completionTokens": 788,
+          "totalTokens": 78227,
+          "costUsd": 0.244137,
+          "agents": [
+            "meta-agent"
+          ]
+        },
+        {
+          "model": "qwen3.6:27b",
+          "provider": "unknown",
+          "invocations": 1,
+          "promptTokens": 0,
+          "completionTokens": 0,
+          "totalTokens": 0,
+          "costUsd": 0,
+          "agents": [
+            "salesAgent"
+          ]
+        },
+        {
+          "model": "qwen-3.7-max",
+          "provider": "unknown",
+          "invocations": 1,
+          "promptTokens": 0,
+          "completionTokens": 0,
+          "totalTokens": 0,
+          "costUsd": 0,
+          "agents": [
+            "automationArchitect"
+          ]
+        }
+      ],
+      "latency": [
+        {
+          "agentId": "observational-memory-observer",
+          "count": 311,
+          "p50": 14935,
+          "p95": 40548,
+          "p99": 53666,
+          "min": 4470,
+          "max": 66243,
+          "avg": 18015
+        },
+        {
+          "agentId": "meta-agent",
+          "count": 129,
+          "p50": 16484,
+          "p95": 484497,
+          "p99": 865823,
+          "min": 2110,
+          "max": 1080703,
+          "avg": 98817
+        },
+        {
+          "agentId": "automationArchitect",
+          "count": 47,
+          "p50": 29208,
+          "p95": 815039,
+          "p99": 892373,
+          "min": 3472,
+          "max": 892373,
+          "avg": 165977
+        },
+        {
+          "agentId": "researcherAgent",
+          "count": 24,
+          "p50": 152161,
+          "p95": 260835,
+          "p99": 277658,
+          "min": 6455,
+          "max": 277658,
+          "avg": 153335
+        },
+        {
+          "agentId": "n8nMcpEngineer",
+          "count": 21,
+          "p50": 67761,
+          "p95": 148377,
+          "p99": 152041,
+          "min": 25419,
+          "max": 152041,
+          "avg": 74694
+        },
+        {
+          "agentId": "filmmakerAgent",
+          "count": 19,
+          "p50": 53103,
+          "p95": 264801,
+          "p99": 264801,
+          "min": 16087,
+          "max": 264801,
+          "avg": 60277
+        },
+        {
+          "agentId": "musicianAgent",
+          "count": 15,
+          "p50": 75283,
+          "p95": 359886,
+          "p99": 359886,
+          "min": 50974,
+          "max": 359886,
+          "avg": 114992
+        },
+        {
+          "agentId": "marketingAgent",
+          "count": 14,
+          "p50": 2781,
+          "p95": 159848,
+          "p99": 159848,
+          "min": 2247,
+          "max": 159848,
+          "avg": 18654
+        },
+        {
+          "agentId": "writerAgent",
+          "count": 10,
+          "p50": 336719,
+          "p95": 584582,
+          "p99": 584582,
+          "min": 6584,
+          "max": 584582,
+          "avg": 302939
+        },
+        {
+          "agentId": "analyticsAgent",
+          "count": 9,
+          "p50": 6493,
+          "p95": 103516,
+          "p99": 103516,
+          "min": 2658,
+          "max": 103516,
+          "avg": 20200
+        },
+        {
+          "agentId": "judge",
+          "count": 9,
+          "p50": 5660,
+          "p95": 7515,
+          "p99": 7515,
+          "min": 4161,
+          "max": 7515,
+          "avg": 5760
+        },
+        {
+          "agentId": "weather-agent",
+          "count": 9,
+          "p50": 9815,
+          "p95": 19071,
+          "p99": 19071,
+          "min": 3317,
+          "max": 19071,
+          "avg": 10116
+        },
+        {
+          "agentId": "salesAgent",
+          "count": 9,
+          "p50": 6004,
+          "p95": 16752,
+          "p99": 16752,
+          "min": 329,
+          "max": 16752,
+          "avg": 6763
+        },
+        {
+          "agentId": "huntAgent",
+          "count": 8,
+          "p50": 443011,
+          "p95": 1002457,
+          "p99": 1002457,
+          "min": 7522,
+          "max": 1002457,
+          "avg": 502135
+        },
+        {
+          "agentId": "codingAgent",
+          "count": 6,
+          "p50": 8592,
+          "p95": 35912,
+          "p99": 35912,
+          "min": 4395,
+          "max": 35912,
+          "avg": 17806
+        },
+        {
+          "agentId": "designAgent",
+          "count": 4,
+          "p50": 6543,
+          "p95": 8902,
+          "p99": 8902,
+          "min": 6472,
+          "max": 8902,
+          "avg": 7549
+        },
+        {
+          "agentId": "crmAgent",
+          "count": 3,
+          "p50": 9077,
+          "p95": 33485,
+          "p99": 33485,
+          "min": 6088,
+          "max": 33485,
+          "avg": 16217
+        },
+        {
+          "agentId": "chefAgent",
+          "count": 3,
+          "p50": 8126,
+          "p95": 20408,
+          "p99": 20408,
+          "min": 6699,
+          "max": 20408,
+          "avg": 11744
+        },
+        {
+          "agentId": "producer-hunt-discovery-agent",
+          "count": 2,
+          "p50": 405,
+          "p95": 2676,
+          "p99": 2676,
+          "min": 405,
+          "max": 2676,
+          "avg": 1540
+        },
+        {
+          "agentId": "knowledgeAgent",
+          "count": 2,
+          "p50": 23421,
+          "p95": 124363,
+          "p99": 124363,
+          "min": 23421,
+          "max": 124363,
+          "avg": 73892
+        },
+        {
+          "agentId": "codeReviewAgent",
+          "count": 2,
+          "p50": 3076,
+          "p95": 3920,
+          "p99": 3920,
+          "min": 3076,
+          "max": 3920,
+          "avg": 3498
+        },
+        {
+          "agentId": "plan-task-1782251413478",
+          "count": 2,
+          "p50": 19206,
+          "p95": 19895,
+          "p99": 19895,
+          "min": 19206,
+          "max": 19895,
+          "avg": 19550
+        },
+        {
+          "agentId": "plan-task-1782052381392",
+          "count": 1,
+          "p50": 14558,
+          "p95": 14558,
+          "p99": 14558,
+          "min": 14558,
+          "max": 14558,
+          "avg": 14558
+        },
+        {
+          "agentId": "plan-task-1782438326891",
+          "count": 1,
+          "p50": 22932,
+          "p95": 22932,
+          "p99": 22932,
+          "min": 22932,
+          "max": 22932,
+          "avg": 22932
+        },
+        {
+          "agentId": "plan-task-1782667078390",
+          "count": 1,
+          "p50": 35590,
+          "p95": 35590,
+          "p99": 35590,
+          "min": 35590,
+          "max": 35590,
+          "avg": 35590
+        },
+        {
+          "agentId": "plan-task-1782246312421",
+          "count": 1,
+          "p50": 17011,
+          "p95": 17011,
+          "p99": 17011,
+          "min": 17011,
+          "max": 17011,
+          "avg": 17011
+        },
+        {
+          "agentId": "plan-task-1782083409145",
+          "count": 1,
+          "p50": 27062,
+          "p95": 27062,
+          "p99": 27062,
+          "min": 27062,
+          "max": 27062,
+          "avg": 27062
+        },
+        {
+          "agentId": "plan-task-1783554669515",
+          "count": 1,
+          "p50": 13239,
+          "p95": 13239,
+          "p99": 13239,
+          "min": 13239,
+          "max": 13239,
+          "avg": 13239
+        },
+        {
+          "agentId": "plan-task-1783554463082",
+          "count": 1,
+          "p50": 16076,
+          "p95": 16076,
+          "p99": 16076,
+          "min": 16076,
+          "max": 16076,
+          "avg": 16076
+        },
+        {
+          "agentId": "plan-task-1782203783380",
+          "count": 1,
+          "p50": 21991,
+          "p95": 21991,
+          "p99": 21991,
+          "min": 21991,
+          "max": 21991,
+          "avg": 21991
+        },
+        {
+          "agentId": "plan-task-1782297157578",
+          "count": 1,
+          "p50": 33142,
+          "p95": 33142,
+          "p99": 33142,
+          "min": 33142,
+          "max": 33142,
+          "avg": 33142
+        },
+        {
+          "agentId": "plan-task-1782176746718",
+          "count": 1,
+          "p50": 25655,
+          "p95": 25655,
+          "p99": 25655,
+          "min": 25655,
+          "max": 25655,
+          "avg": 25655
+        },
+        {
+          "agentId": "plan-task-1782666726422",
+          "count": 1,
+          "p50": 21376,
+          "p95": 21376,
+          "p99": 21376,
+          "min": 21376,
+          "max": 21376,
+          "avg": 21376
+        },
+        {
+          "agentId": "plan-task-1782250457574",
+          "count": 1,
+          "p50": 31639,
+          "p95": 31639,
+          "p99": 31639,
+          "min": 31639,
+          "max": 31639,
+          "avg": 31639
+        },
+        {
+          "agentId": "plan-task-1782437757771",
+          "count": 1,
+          "p50": 19763,
+          "p95": 19763,
+          "p99": 19763,
+          "min": 19763,
+          "max": 19763,
+          "avg": 19763
+        },
+        {
+          "agentId": "plan-task-1782204308800",
+          "count": 1,
+          "p50": 19187,
+          "p95": 19187,
+          "p99": 19187,
+          "min": 19187,
+          "max": 19187,
+          "avg": 19187
+        },
+        {
+          "agentId": "plan-task-1782084419860",
+          "count": 1,
+          "p50": 12200,
+          "p95": 12200,
+          "p99": 12200,
+          "min": 12200,
+          "max": 12200,
+          "avg": 12200
+        },
+        {
+          "agentId": "plan-task-1782086869341",
+          "count": 1,
+          "p50": 16916,
+          "p95": 16916,
+          "p99": 16916,
+          "min": 16916,
+          "max": 16916,
+          "avg": 16916
+        },
+        {
+          "agentId": "plan-task-1782667078387",
+          "count": 1,
+          "p50": 18268,
+          "p95": 18268,
+          "p99": 18268,
+          "min": 18268,
+          "max": 18268,
+          "avg": 18268
+        },
+        {
+          "agentId": "plan-task-1782049619760",
+          "count": 1,
+          "p50": 24616,
+          "p95": 24616,
+          "p99": 24616,
+          "min": 24616,
+          "max": 24616,
+          "avg": 24616
+        },
+        {
+          "agentId": "plan-task-1782666535473",
+          "count": 1,
+          "p50": 47644,
+          "p95": 47644,
+          "p99": 47644,
+          "min": 47644,
+          "max": 47644,
+          "avg": 47644
+        },
+        {
+          "agentId": "plan-task-1782667089363",
+          "count": 1,
+          "p50": 40626,
+          "p95": 40626,
+          "p99": 40626,
+          "min": 40626,
+          "max": 40626,
+          "avg": 40626
+        },
+        {
+          "agentId": "plan-task-1782667078391",
+          "count": 1,
+          "p50": 27831,
+          "p95": 27831,
+          "p99": 27831,
+          "min": 27831,
+          "max": 27831,
+          "avg": 27831
+        },
+        {
+          "agentId": "plan-task-1782438075403",
+          "count": 1,
+          "p50": 16402,
+          "p95": 16402,
+          "p99": 16402,
+          "min": 16402,
+          "max": 16402,
+          "avg": 16402
+        },
+        {
+          "agentId": "plan-task-1782421024800",
+          "count": 1,
+          "p50": 26655,
+          "p95": 26655,
+          "p99": 26655,
+          "min": 26655,
+          "max": 26655,
+          "avg": 26655
+        },
+        {
+          "agentId": "plan-task-1782416363508",
+          "count": 1,
+          "p50": 32465,
+          "p95": 32465,
+          "p99": 32465,
+          "min": 32465,
+          "max": 32465,
+          "avg": 32465
+        },
+        {
+          "agentId": "plan-task-1782204461361",
+          "count": 1,
+          "p50": 28782,
+          "p95": 28782,
+          "p99": 28782,
+          "min": 28782,
+          "max": 28782,
+          "avg": 28782
+        },
+        {
+          "agentId": "plan-task-1782082942534",
+          "count": 1,
+          "p50": 23340,
+          "p95": 23340,
+          "p99": 23340,
+          "min": 23340,
+          "max": 23340,
+          "avg": 23340
+        },
+        {
+          "agentId": "plan-task-1782245887927",
+          "count": 1,
+          "p50": 24154,
+          "p95": 24154,
+          "p99": 24154,
+          "min": 24154,
+          "max": 24154,
+          "avg": 24154
+        },
+        {
+          "agentId": "plan-task-1782083085438",
+          "count": 1,
+          "p50": 19675,
+          "p95": 19675,
+          "p99": 19675,
+          "min": 19675,
+          "max": 19675,
+          "avg": 19675
+        },
+        {
+          "agentId": "plan-task-1782083018118",
+          "count": 1,
+          "p50": 19675,
+          "p95": 19675,
+          "p99": 19675,
+          "min": 19675,
+          "max": 19675,
+          "avg": 19675
+        },
+        {
+          "agentId": "plan-task-1782075631654",
+          "count": 1,
+          "p50": 15062,
+          "p95": 15062,
+          "p99": 15062,
+          "min": 15062,
+          "max": 15062,
+          "avg": 15062
+        },
+        {
+          "agentId": "plan-task-1782319448023",
+          "count": 1,
+          "p50": 54377,
+          "p95": 54377,
+          "p99": 54377,
+          "min": 54377,
+          "max": 54377,
+          "avg": 54377
+        },
+        {
+          "agentId": "plan-task-1782146689873",
+          "count": 1,
+          "p50": 14168,
+          "p95": 14168,
+          "p99": 14168,
+          "min": 14168,
+          "max": 14168,
+          "avg": 14168
+        },
+        {
+          "agentId": "plan-task-1782666891312",
+          "count": 1,
+          "p50": 32140,
+          "p95": 32140,
+          "p99": 32140,
+          "min": 32140,
+          "max": 32140,
+          "avg": 32140
+        },
+        {
+          "agentId": "plan-task-1782075220138",
+          "count": 1,
+          "p50": 11958,
+          "p95": 11958,
+          "p99": 11958,
+          "min": 11958,
+          "max": 11958,
+          "avg": 11958
+        },
+        {
+          "agentId": "plan-task-1782356588080",
+          "count": 1,
+          "p50": 22637,
+          "p95": 22637,
+          "p99": 22637,
+          "min": 22637,
+          "max": 22637,
+          "avg": 22637
+        },
+        {
+          "agentId": "plan-task-1782319820984",
+          "count": 1,
+          "p50": 33287,
+          "p95": 33287,
+          "p99": 33287,
+          "min": 33287,
+          "max": 33287,
+          "avg": 33287
+        },
+        {
+          "agentId": "plan-task-1782083576613",
+          "count": 1,
+          "p50": 23302,
+          "p95": 23302,
+          "p99": 23302,
+          "min": 23302,
+          "max": 23302,
+          "avg": 23302
+        },
+        {
+          "agentId": "plan-task-1782019582167",
+          "count": 1,
+          "p50": 28013,
+          "p95": 28013,
+          "p99": 28013,
+          "min": 28013,
+          "max": 28013,
+          "avg": 28013
+        },
+        {
+          "agentId": "plan-task-1782438589829",
+          "count": 1,
+          "p50": 14829,
+          "p95": 14829,
+          "p99": 14829,
+          "min": 14829,
+          "max": 14829,
+          "avg": 14829
+        },
+        {
+          "agentId": "plan-task-1782666563624",
+          "count": 1,
+          "p50": 29167,
+          "p95": 29167,
+          "p99": 29167,
+          "min": 29167,
+          "max": 29167,
+          "avg": 29167
+        },
+        {
+          "agentId": "plan-task-1782438610722",
+          "count": 1,
+          "p50": 15119,
+          "p95": 15119,
+          "p99": 15119,
+          "min": 15119,
+          "max": 15119,
+          "avg": 15119
+        },
+        {
+          "agentId": "plan-task-1782202638075",
+          "count": 1,
+          "p50": 21427,
+          "p95": 21427,
+          "p99": 21427,
+          "min": 21427,
+          "max": 21427,
+          "avg": 21427
+        },
+        {
+          "agentId": "plan-task-1782297383481",
+          "count": 1,
+          "p50": 32649,
+          "p95": 32649,
+          "p99": 32649,
+          "min": 32649,
+          "max": 32649,
+          "avg": 32649
+        },
+        {
+          "agentId": "plan-task-1782666789597",
+          "count": 1,
+          "p50": 14795,
+          "p95": 14795,
+          "p99": 14795,
+          "min": 14795,
+          "max": 14795,
+          "avg": 14795
+        },
+        {
+          "agentId": "plan-task-1782666228060",
+          "count": 1,
+          "p50": 30250,
+          "p95": 30250,
+          "p99": 30250,
+          "min": 30250,
+          "max": 30250,
+          "avg": 30250
+        },
+        {
+          "agentId": "plan-task-1782439049511",
+          "count": 1,
+          "p50": 12528,
+          "p95": 12528,
+          "p99": 12528,
+          "min": 12528,
+          "max": 12528,
+          "avg": 12528
+        },
+        {
+          "agentId": "plan-task-1782177389721",
+          "count": 1,
+          "p50": 12656,
+          "p95": 12656,
+          "p99": 12656,
+          "min": 12656,
+          "max": 12656,
+          "avg": 12656
+        },
+        {
+          "agentId": "plan-task-1782084311135",
+          "count": 1,
+          "p50": 13452,
+          "p95": 13452,
+          "p99": 13452,
+          "min": 13452,
+          "max": 13452,
+          "avg": 13452
+        },
+        {
+          "agentId": "plan-task-1782666535481",
+          "count": 1,
+          "p50": 28428,
+          "p95": 28428,
+          "p99": 28428,
+          "min": 28428,
+          "max": 28428,
+          "avg": 28428
+        },
+        {
+          "agentId": "plan-task-1782083779193",
+          "count": 1,
+          "p50": 22238,
+          "p95": 22238,
+          "p99": 22238,
+          "min": 22238,
+          "max": 22238,
+          "avg": 22238
+        },
+        {
+          "agentId": "plan-task-1782437426652",
+          "count": 1,
+          "p50": 17420,
+          "p95": 17420,
+          "p99": 17420,
+          "min": 17420,
+          "max": 17420,
+          "avg": 17420
+        },
+        {
+          "agentId": "plan-task-1782019463650",
+          "count": 1,
+          "p50": 21384,
+          "p95": 21384,
+          "p99": 21384,
+          "min": 21384,
+          "max": 21384,
+          "avg": 21384
+        },
+        {
+          "agentId": "plan-task-1782203880949",
+          "count": 1,
+          "p50": 37262,
+          "p95": 37262,
+          "p99": 37262,
+          "min": 37262,
+          "max": 37262,
+          "avg": 37262
+        },
+        {
+          "agentId": "plan-task-1782177050921",
+          "count": 1,
+          "p50": 19905,
+          "p95": 19905,
+          "p99": 19905,
+          "min": 19905,
+          "max": 19905,
+          "avg": 19905
+        },
+        {
+          "agentId": "plan-task-1782355929090",
+          "count": 1,
+          "p50": 13007,
+          "p95": 13007,
+          "p99": 13007,
+          "min": 13007,
+          "max": 13007,
+          "avg": 13007
+        },
+        {
+          "agentId": "plan-task-1782251465332",
+          "count": 1,
+          "p50": 15230,
+          "p95": 15230,
+          "p99": 15230,
+          "min": 15230,
+          "max": 15230,
+          "avg": 15230
+        },
+        {
+          "agentId": "plan-task-1782084184389",
+          "count": 1,
+          "p50": 20165,
+          "p95": 20165,
+          "p99": 20165,
+          "min": 20165,
+          "max": 20165,
+          "avg": 20165
+        },
+        {
+          "agentId": "plan-task-1782204027356",
+          "count": 1,
+          "p50": 33456,
+          "p95": 33456,
+          "p99": 33456,
+          "min": 33456,
+          "max": 33456,
+          "avg": 33456
+        },
+        {
+          "agentId": "plan-task-1782176688057",
+          "count": 1,
+          "p50": 30151,
+          "p95": 30151,
+          "p99": 30151,
+          "min": 30151,
+          "max": 30151,
+          "avg": 30151
+        },
+        {
+          "agentId": "plan-task-1782086441269",
+          "count": 1,
+          "p50": 31973,
+          "p95": 31973,
+          "p99": 31973,
+          "min": 31973,
+          "max": 31973,
+          "avg": 31973
+        },
+        {
+          "agentId": "plan-task-1782666727861",
+          "count": 1,
+          "p50": 15287,
+          "p95": 15287,
+          "p99": 15287,
+          "min": 15287,
+          "max": 15287,
+          "avg": 15287
+        },
+        {
+          "agentId": "run-worker-writer_critic-1782438591002",
+          "count": 1,
+          "p50": 211154,
+          "p95": 211154,
+          "p99": 211154,
+          "min": 211154,
+          "max": 211154,
+          "avg": 211154
+        },
+        {
+          "agentId": "plan-task-1782353779322",
+          "count": 1,
+          "p50": 60827,
+          "p95": 60827,
+          "p99": 60827,
+          "min": 60827,
+          "max": 60827,
+          "avg": 60827
+        },
+        {
+          "agentId": "plan-task-1782082302067",
+          "count": 1,
+          "p50": 19858,
+          "p95": 19858,
+          "p99": 19858,
+          "min": 19858,
+          "max": 19858,
+          "avg": 19858
+        },
+        {
+          "agentId": "plan-task-1782666949014",
+          "count": 1,
+          "p50": 12122,
+          "p95": 12122,
+          "p99": 12122,
+          "min": 12122,
+          "max": 12122,
+          "avg": 12122
+        },
+        {
+          "agentId": "plan-task-1783554149498",
+          "count": 1,
+          "p50": 11823,
+          "p95": 11823,
+          "p99": 11823,
+          "min": 11823,
+          "max": 11823,
+          "avg": 11823
+        },
+        {
+          "agentId": "plan-task-1782438346561",
+          "count": 1,
+          "p50": 15976,
+          "p95": 15976,
+          "p99": 15976,
+          "min": 15976,
+          "max": 15976,
+          "avg": 15976
+        },
+        {
+          "agentId": "plan-task-1782666519277",
+          "count": 1,
+          "p50": 11488,
+          "p95": 11488,
+          "p99": 11488,
+          "min": 11488,
+          "max": 11488,
+          "avg": 11488
+        },
+        {
+          "agentId": "plan-task-1782437168597",
+          "count": 1,
+          "p50": 18048,
+          "p95": 18048,
+          "p99": 18048,
+          "min": 18048,
+          "max": 18048,
+          "avg": 18048
+        },
+        {
+          "agentId": "plan-task-1782666794519",
+          "count": 1,
+          "p50": 16832,
+          "p95": 16832,
+          "p99": 16832,
+          "min": 16832,
+          "max": 16832,
+          "avg": 16832
+        },
+        {
+          "agentId": "plan-task-1782203068743",
+          "count": 1,
+          "p50": 22664,
+          "p95": 22664,
+          "p99": 22664,
+          "min": 22664,
+          "max": 22664,
+          "avg": 22664
+        },
+        {
+          "agentId": "plan-task-1782438865851",
+          "count": 1,
+          "p50": 14714,
+          "p95": 14714,
+          "p99": 14714,
+          "min": 14714,
+          "max": 14714,
+          "avg": 14714
+        },
+        {
+          "agentId": "plan-task-1782083216672",
+          "count": 1,
+          "p50": 23048,
+          "p95": 23048,
+          "p99": 23048,
+          "min": 23048,
+          "max": 23048,
+          "avg": 23048
+        },
+        {
+          "agentId": "plan-task-1782438042706",
+          "count": 1,
+          "p50": 16806,
+          "p95": 16806,
+          "p99": 16806,
+          "min": 16806,
+          "max": 16806,
+          "avg": 16806
+        },
+        {
+          "agentId": "plan-task-1782299337363",
+          "count": 1,
+          "p50": 21491,
+          "p95": 21491,
+          "p99": 21491,
+          "min": 21491,
+          "max": 21491,
+          "avg": 21491
+        },
+        {
+          "agentId": "plan-task-1782666643446",
+          "count": 1,
+          "p50": 18230,
+          "p95": 18230,
+          "p99": 18230,
+          "min": 18230,
+          "max": 18230,
+          "avg": 18230
+        },
+        {
+          "agentId": "plan-task-1782083879667",
+          "count": 1,
+          "p50": 13498,
+          "p95": 13498,
+          "p99": 13498,
+          "min": 13498,
+          "max": 13498,
+          "avg": 13498
+        },
+        {
+          "agentId": "plan-task-1782051756469",
+          "count": 1,
+          "p50": 11793,
+          "p95": 11793,
+          "p99": 11793,
+          "min": 11793,
+          "max": 11793,
+          "avg": 11793
+        },
+        {
+          "agentId": "plan-task-1782666891309",
+          "count": 1,
+          "p50": 16226,
+          "p95": 16226,
+          "p99": 16226,
+          "min": 16226,
+          "max": 16226,
+          "avg": 16226
+        },
+        {
+          "agentId": "plan-task-1782666841608",
+          "count": 1,
+          "p50": 12815,
+          "p95": 12815,
+          "p99": 12815,
+          "min": 12815,
+          "max": 12815,
+          "avg": 12815
+        },
+        {
+          "agentId": "run-worker-writer_chronicler-1782438070849",
+          "count": 1,
+          "p50": 103336,
+          "p95": 103336,
+          "p99": 103336,
+          "min": 103336,
+          "max": 103336,
+          "avg": 103336
+        },
+        {
+          "agentId": "plan-task-1782666770770",
+          "count": 1,
+          "p50": 12155,
+          "p95": 12155,
+          "p99": 12155,
+          "min": 12155,
+          "max": 12155,
+          "avg": 12155
+        },
+        {
+          "agentId": "plan-task-1782203329044",
+          "count": 1,
+          "p50": 28422,
+          "p95": 28422,
+          "p99": 28422,
+          "min": 28422,
+          "max": 28422,
+          "avg": 28422
+        },
+        {
+          "agentId": "plan-task-1782052080706",
+          "count": 1,
+          "p50": 14332,
+          "p95": 14332,
+          "p99": 14332,
+          "min": 14332,
+          "max": 14332,
+          "avg": 14332
+        },
+        {
+          "agentId": "plan-task-1782051920151",
+          "count": 1,
+          "p50": 11163,
+          "p95": 11163,
+          "p99": 11163,
+          "min": 11163,
+          "max": 11163,
+          "avg": 11163
+        },
+        {
+          "agentId": "plan-task-1782017756491",
+          "count": 1,
+          "p50": 6172,
+          "p95": 6172,
+          "p99": 6172,
+          "min": 6172,
+          "max": 6172,
+          "avg": 6172
+        },
+        {
+          "agentId": "plan-task-1782666535477",
+          "count": 1,
+          "p50": 19036,
+          "p95": 19036,
+          "p99": 19036,
+          "min": 19036,
+          "max": 19036,
+          "avg": 19036
+        },
+        {
+          "agentId": "plan-task-1782667244098",
+          "count": 1,
+          "p50": 19239,
+          "p95": 19239,
+          "p99": 19239,
+          "min": 19239,
+          "max": 19239,
+          "avg": 19239
+        },
+        {
+          "agentId": "plan-task-1782355239615",
+          "count": 1,
+          "p50": 24357,
+          "p95": 24357,
+          "p99": 24357,
+          "min": 24357,
+          "max": 24357,
+          "avg": 24357
+        },
+        {
+          "agentId": "plan-task-1782438602542",
+          "count": 1,
+          "p50": 20654,
+          "p95": 20654,
+          "p99": 20654,
+          "min": 20654,
+          "max": 20654,
+          "avg": 20654
+        },
+        {
+          "agentId": "plan-task-1782413403869",
+          "count": 1,
+          "p50": 19971,
+          "p95": 19971,
+          "p99": 19971,
+          "min": 19971,
+          "max": 19971,
+          "avg": 19971
+        },
+        {
+          "agentId": "plan-task-1782146367886",
+          "count": 1,
+          "p50": 23385,
+          "p95": 23385,
+          "p99": 23385,
+          "min": 23385,
+          "max": 23385,
+          "avg": 23385
+        },
+        {
+          "agentId": "plan-task-1782203533607",
+          "count": 1,
+          "p50": 29470,
+          "p95": 29470,
+          "p99": 29470,
+          "min": 29470,
+          "max": 29470,
+          "avg": 29470
+        },
+        {
+          "agentId": "plan-task-1782666293116",
+          "count": 1,
+          "p50": 19336,
+          "p95": 19336,
+          "p99": 19336,
+          "min": 19336,
+          "max": 19336,
+          "avg": 19336
+        },
+        {
+          "agentId": "run-worker-fast-1782438523658",
+          "count": 1,
+          "p50": 10887,
+          "p95": 10887,
+          "p99": 10887,
+          "min": 10887,
+          "max": 10887,
+          "avg": 10887
+        },
+        {
+          "agentId": "plan-task-1782203175867",
+          "count": 1,
+          "p50": 45043,
+          "p95": 45043,
+          "p99": 45043,
+          "min": 45043,
+          "max": 45043,
+          "avg": 45043
+        },
+        {
+          "agentId": "plan-task-1782354948221",
+          "count": 1,
+          "p50": 27253,
+          "p95": 27253,
+          "p99": 27253,
+          "min": 27253,
+          "max": 27253,
+          "avg": 27253
+        },
+        {
+          "agentId": "plan-task-1782019235470",
+          "count": 1,
+          "p50": 23359,
+          "p95": 23359,
+          "p99": 23359,
+          "min": 23359,
+          "max": 23359,
+          "avg": 23359
+        },
+        {
+          "agentId": "plan-task-1782083837003",
+          "count": 1,
+          "p50": 13251,
+          "p95": 13251,
+          "p99": 13251,
+          "min": 13251,
+          "max": 13251,
+          "avg": 13251
+        },
+        {
+          "agentId": "plan-task-1782241556970",
+          "count": 1,
+          "p50": 23543,
+          "p95": 23543,
+          "p99": 23543,
+          "min": 23543,
+          "max": 23543,
+          "avg": 23543
+        },
+        {
+          "agentId": "run-worker-fast-1782667133492",
+          "count": 1,
+          "p50": 45358,
+          "p95": 45358,
+          "p99": 45358,
+          "min": 45358,
+          "max": 45358,
+          "avg": 45358
+        },
+        {
+          "agentId": "run-worker-writer_muse-1782438896695",
+          "count": 1,
+          "p50": 95176,
+          "p95": 95176,
+          "p99": 95176,
+          "min": 95176,
+          "max": 95176,
+          "avg": 95176
+        },
+        {
+          "agentId": "run-worker-fast-1782667207589",
+          "count": 1,
+          "p50": 11239,
+          "p95": 11239,
+          "p99": 11239,
+          "min": 11239,
+          "max": 11239,
+          "avg": 11239
+        },
+        {
+          "agentId": "run-worker-powerful-1782241941755",
+          "count": 1,
+          "p50": 14598,
+          "p95": 14598,
+          "p99": 14598,
+          "min": 14598,
+          "max": 14598,
+          "avg": 14598
+        },
+        {
+          "agentId": "plan-task-1782666498326",
+          "count": 1,
+          "p50": 20361,
+          "p95": 20361,
+          "p99": 20361,
+          "min": 20361,
+          "max": 20361,
+          "avg": 20361
+        },
+        {
+          "agentId": "plan-task-1782667089358",
+          "count": 1,
+          "p50": 77946,
+          "p95": 77946,
+          "p99": 77946,
+          "min": 77946,
+          "max": 77946,
+          "avg": 77946
+        },
+        {
+          "agentId": "plan-task-1782666535479",
+          "count": 1,
+          "p50": 35148,
+          "p95": 35148,
+          "p99": 35148,
+          "min": 35148,
+          "max": 35148,
+          "avg": 35148
+        },
+        {
+          "agentId": "plan-task-1782436866858",
+          "count": 1,
+          "p50": 29430,
+          "p95": 29430,
+          "p99": 29430,
+          "min": 29430,
+          "max": 29430,
+          "avg": 29430
+        },
+        {
+          "agentId": "run-worker-fast-1782667193791",
+          "count": 1,
+          "p50": 9687,
+          "p95": 9687,
+          "p99": 9687,
+          "min": 9687,
+          "max": 9687,
+          "avg": 9687
+        },
+        {
+          "agentId": "plan-task-1782666891313",
+          "count": 1,
+          "p50": 26999,
+          "p95": 26999,
+          "p99": 26999,
+          "min": 26999,
+          "max": 26999,
+          "avg": 26999
+        },
+        {
+          "agentId": "plan-task-1782245816411",
+          "count": 1,
+          "p50": 49645,
+          "p95": 49645,
+          "p99": 49645,
+          "min": 49645,
+          "max": 49645,
+          "avg": 49645
+        },
+        {
+          "agentId": "plan-task-1782177184904",
+          "count": 1,
+          "p50": 20217,
+          "p95": 20217,
+          "p99": 20217,
+          "min": 20217,
+          "max": 20217,
+          "avg": 20217
+        },
+        {
+          "agentId": "plan-task-1782082787940",
+          "count": 1,
+          "p50": 7955,
+          "p95": 7955,
+          "p99": 7955,
+          "min": 7955,
+          "max": 7955,
+          "avg": 7955
+        },
+        {
+          "agentId": "run-worker-writer_critic-1782438629659",
+          "count": 1,
+          "p50": 141215,
+          "p95": 141215,
+          "p99": 141215,
+          "min": 141215,
+          "max": 141215,
+          "avg": 141215
+        },
+        {
+          "agentId": "plan-task-1782075356942",
+          "count": 1,
+          "p50": 13822,
+          "p95": 13822,
+          "p99": 13822,
+          "min": 13822,
+          "max": 13822,
+          "avg": 13822
+        },
+        {
+          "agentId": "plan-task-1782146589907",
+          "count": 1,
+          "p50": 16743,
+          "p95": 16743,
+          "p99": 16743,
+          "min": 16743,
+          "max": 16743,
+          "avg": 16743
+        },
+        {
+          "agentId": "run-worker-powerful-1782439004671",
+          "count": 1,
+          "p50": 33843,
+          "p95": 33843,
+          "p99": 33843,
+          "min": 33843,
+          "max": 33843,
+          "avg": 33843
+        },
+        {
+          "agentId": "plan-task-1782666468815",
+          "count": 1,
+          "p50": 19042,
+          "p95": 19042,
+          "p99": 19042,
+          "min": 19042,
+          "max": 19042,
+          "avg": 19042
+        },
+        {
+          "agentId": "plan-task-1782666468813",
+          "count": 1,
+          "p50": 17594,
+          "p95": 17594,
+          "p99": 17594,
+          "min": 17594,
+          "max": 17594,
+          "avg": 17594
+        },
+        {
+          "agentId": "plan-task-1782083668614",
+          "count": 1,
+          "p50": 20434,
+          "p95": 20434,
+          "p99": 20434,
+          "min": 20434,
+          "max": 20434,
+          "avg": 20434
+        },
+        {
+          "agentId": "plan-task-1782356430333",
+          "count": 1,
+          "p50": 23937,
+          "p95": 23937,
+          "p99": 23937,
+          "min": 23937,
+          "max": 23937,
+          "avg": 23937
+        },
+        {
+          "agentId": "plan-task-1782241880983",
+          "count": 1,
+          "p50": 31949,
+          "p95": 31949,
+          "p99": 31949,
+          "min": 31949,
+          "max": 31949,
+          "avg": 31949
+        },
+        {
+          "agentId": "plan-task-1782203649412",
+          "count": 1,
+          "p50": 22195,
+          "p95": 22195,
+          "p99": 22195,
+          "min": 22195,
+          "max": 22195,
+          "avg": 22195
+        },
+        {
+          "agentId": "plan-task-1783554323989",
+          "count": 1,
+          "p50": 16814,
+          "p95": 16814,
+          "p99": 16814,
+          "min": 16814,
+          "max": 16814,
+          "avg": 16814
+        },
+        {
+          "agentId": "plan-task-1782666991392",
+          "count": 1,
+          "p50": 12699,
+          "p95": 12699,
+          "p99": 12699,
+          "min": 12699,
+          "max": 12699,
+          "avg": 12699
+        },
+        {
+          "agentId": "run-worker-cloud-1782667228156",
+          "count": 1,
+          "p50": 17645,
+          "p95": 17645,
+          "p99": 17645,
+          "min": 17645,
+          "max": 17645,
+          "avg": 17645
+        },
+        {
+          "agentId": "plan-task-1782666535475",
+          "count": 1,
+          "p50": 14117,
+          "p95": 14117,
+          "p99": 14117,
+          "min": 14117,
+          "max": 14117,
+          "avg": 14117
+        },
+        {
+          "agentId": "plan-task-1782249031246",
+          "count": 1,
+          "p50": 26814,
+          "p95": 26814,
+          "p99": 26814,
+          "min": 26814,
+          "max": 26814,
+          "avg": 26814
+        },
+        {
+          "agentId": "plan-task-1782082882240",
+          "count": 1,
+          "p50": 7320,
+          "p95": 7320,
+          "p99": 7320,
+          "min": 7320,
+          "max": 7320,
+          "avg": 7320
+        },
+        {
+          "agentId": "plan-task-1782666841611",
+          "count": 1,
+          "p50": 14195,
+          "p95": 14195,
+          "p99": 14195,
+          "min": 14195,
+          "max": 14195,
+          "avg": 14195
+        },
+        {
+          "agentId": "contentAgent",
+          "count": 1,
+          "p50": 52926,
+          "p95": 52926,
+          "p99": 52926,
+          "min": 52926,
+          "max": 52926,
+          "avg": 52926
+        },
+        {
+          "agentId": "plan-task-1782299240017",
+          "count": 1,
+          "p50": 26209,
+          "p95": 26209,
+          "p99": 26209,
+          "min": 26209,
+          "max": 26209,
+          "avg": 26209
+        },
+        {
+          "agentId": "plan-task-1782075610769",
+          "count": 1,
+          "p50": 14235,
+          "p95": 14235,
+          "p99": 14235,
+          "min": 14235,
+          "max": 14235,
+          "avg": 14235
+        },
+        {
+          "agentId": "plan-task-1782666901682",
+          "count": 1,
+          "p50": 37821,
+          "p95": 37821,
+          "p99": 37821,
+          "min": 37821,
+          "max": 37821,
+          "avg": 37821
+        },
+        {
+          "agentId": "plan-task-1782666414903",
+          "count": 1,
+          "p50": 17605,
+          "p95": 17605,
+          "p99": 17605,
+          "min": 17605,
+          "max": 17605,
+          "avg": 17605
+        },
+        {
+          "agentId": "plan-task-1782050298945",
+          "count": 1,
+          "p50": 20749,
+          "p95": 20749,
+          "p99": 20749,
+          "min": 20749,
+          "max": 20749,
+          "avg": 20749
+        },
+        {
+          "agentId": "plan-task-1782667089365",
+          "count": 1,
+          "p50": 34646,
+          "p95": 34646,
+          "p99": 34646,
+          "min": 34646,
+          "max": 34646,
+          "avg": 34646
+        },
+        {
+          "agentId": "security-review-agent",
+          "count": 1,
+          "p50": 3928,
+          "p95": 3928,
+          "p99": 3928,
+          "min": 3928,
+          "max": 3928,
+          "avg": 3928
+        },
+        {
+          "agentId": "plan-task-1783540190669",
+          "count": 1,
+          "p50": 14886,
+          "p95": 14886,
+          "p99": 14886,
+          "min": 14886,
+          "max": 14886,
+          "avg": 14886
+        },
+        {
+          "agentId": "plan-task-1782666691652",
+          "count": 1,
+          "p50": 17336,
+          "p95": 17336,
+          "p99": 17336,
+          "min": 17336,
+          "max": 17336,
+          "avg": 17336
+        },
+        {
+          "agentId": "plan-task-1782246003559",
+          "count": 1,
+          "p50": 28151,
+          "p95": 28151,
+          "p99": 28151,
+          "min": 28151,
+          "max": 28151,
+          "avg": 28151
+        },
+        {
+          "agentId": "run-worker-music-1782202290233",
+          "count": 1,
+          "p50": 134213,
+          "p95": 134213,
+          "p99": 134213,
+          "min": 134213,
+          "max": 134213,
+          "avg": 134213
+        },
+        {
+          "agentId": "plan-task-1782051243793",
+          "count": 1,
+          "p50": 38061,
+          "p95": 38061,
+          "p99": 38061,
+          "min": 38061,
+          "max": 38061,
+          "avg": 38061
+        },
+        {
+          "agentId": "plan-task-1782355856651",
+          "count": 1,
+          "p50": 13635,
+          "p95": 13635,
+          "p99": 13635,
+          "min": 13635,
+          "max": 13635,
+          "avg": 13635
+        },
+        {
+          "agentId": "plan-task-1782667089367",
+          "count": 1,
+          "p50": 57841,
+          "p95": 57841,
+          "p99": 57841,
+          "min": 57841,
+          "max": 57841,
+          "avg": 57841
+        },
+        {
+          "agentId": "plan-task-1782356551277",
+          "count": 1,
+          "p50": 16604,
+          "p95": 16604,
+          "p99": 16604,
+          "min": 16604,
+          "max": 16604,
+          "avg": 16604
+        },
+        {
+          "agentId": "plan-task-1782667089361",
+          "count": 1,
+          "p50": 63392,
+          "p95": 63392,
+          "p99": 63392,
+          "min": 63392,
+          "max": 63392,
+          "avg": 63392
+        },
+        {
+          "agentId": "plan-task-1782083135231",
+          "count": 1,
+          "p50": 15893,
+          "p95": 15893,
+          "p99": 15893,
+          "min": 15893,
+          "max": 15893,
+          "avg": 15893
+        },
+        {
+          "agentId": "plan-task-1782082671294",
+          "count": 1,
+          "p50": 12524,
+          "p95": 12524,
+          "p99": 12524,
+          "min": 12524,
+          "max": 12524,
+          "avg": 12524
+        },
+        {
+          "agentId": "plan-task-1782202144661",
+          "count": 1,
+          "p50": 42056,
+          "p95": 42056,
+          "p99": 42056,
+          "min": 42056,
+          "max": 42056,
+          "avg": 42056
+        },
+        {
+          "agentId": "plan-task-1782666672513",
+          "count": 1,
+          "p50": 12367,
+          "p95": 12367,
+          "p99": 12367,
+          "min": 12367,
+          "max": 12367,
+          "avg": 12367
+        },
+        {
+          "agentId": "plan-task-1782050767676",
+          "count": 1,
+          "p50": 23517,
+          "p95": 23517,
+          "p99": 23517,
+          "min": 23517,
+          "max": 23517,
+          "avg": 23517
+        },
+        {
+          "agentId": "plan-task-1782438017540",
+          "count": 1,
+          "p50": 16526,
+          "p95": 16526,
+          "p99": 16526,
+          "min": 16526,
+          "max": 16526,
+          "avg": 16526
+        },
+        {
+          "agentId": "plan-task-1782437136297",
+          "count": 1,
+          "p50": 16347,
+          "p95": 16347,
+          "p99": 16347,
+          "min": 16347,
+          "max": 16347,
+          "avg": 16347
+        },
+        {
+          "agentId": "plan-task-1782418670320",
+          "count": 1,
+          "p50": 27229,
+          "p95": 27229,
+          "p99": 27229,
+          "min": 27229,
+          "max": 27229,
+          "avg": 27229
+        },
+        {
+          "agentId": "analytics-agent",
+          "count": 1,
+          "p50": 34134,
+          "p95": 34134,
+          "p99": 34134,
+          "min": 34134,
+          "max": 34134,
+          "avg": 34134
+        }
+      ],
+      "cost": {
+        "totalUsd": 30.06061,
+        "byAgent": [
+          {
+            "agentId": "automationArchitect",
+            "usd": 6.86638,
+            "tokens": 15436322
+          },
+          {
+            "agentId": "meta-agent",
+            "usd": 5.038175,
+            "tokens": 10900471
+          },
+          {
+            "agentId": "researcherAgent",
+            "usd": 3.681653,
+            "tokens": 8315382
+          },
+          {
+            "agentId": "observational-memory-observer",
+            "usd": 2.960965,
+            "tokens": 9191606
+          },
+          {
+            "agentId": "huntAgent",
+            "usd": 2.826635,
+            "tokens": 6346320
+          },
+          {
+            "agentId": "writerAgent",
+            "usd": 2.498506,
+            "tokens": 5567283
+          },
+          {
+            "agentId": "filmmakerAgent",
+            "usd": 1.885805,
+            "tokens": 4249661
+          },
+          {
+            "agentId": "n8nMcpEngineer",
+            "usd": 1.613484,
+            "tokens": 3585345
+          },
+          {
+            "agentId": "musicianAgent",
+            "usd": 1.190213,
+            "tokens": 2654733
+          },
+          {
+            "agentId": "salesAgent",
+            "usd": 0.375069,
+            "tokens": 75030
+          },
+          {
+            "agentId": "codingAgent",
+            "usd": 0.165357,
+            "tokens": 373690
+          },
+          {
+            "agentId": "knowledgeAgent",
+            "usd": 0.161823,
+            "tokens": 360365
+          },
+          {
+            "agentId": "marketingAgent",
+            "usd": 0.154003,
+            "tokens": 353922
+          },
+          {
+            "agentId": "contentAgent",
+            "usd": 0.073817,
+            "tokens": 165643
+          },
+          {
+            "agentId": "chefAgent",
+            "usd": 0.064388,
+            "tokens": 145654
+          },
+          {
+            "agentId": "designAgent",
+            "usd": 0.058213,
+            "tokens": 132250
+          },
+          {
+            "agentId": "judge",
+            "usd": 0.057614,
+            "tokens": 8004
+          },
+          {
+            "agentId": "analytics-agent",
+            "usd": 0.04938,
+            "tokens": 110893
+          },
+          {
+            "agentId": "run-worker-writer_critic-1782438591002",
+            "usd": 0.042764,
+            "tokens": 80892
+          },
+          {
+            "agentId": "run-worker-writer_critic-1782438629659",
+            "usd": 0.026686,
+            "tokens": 50661
+          },
+          {
+            "agentId": "analyticsAgent",
+            "usd": 0.020176,
+            "tokens": 112719
+          },
+          {
+            "agentId": "run-worker-cloud-1782667228156",
+            "usd": 0.01912,
+            "tokens": 42862
+          },
+          {
+            "agentId": "run-worker-writer_muse-1782438896695",
+            "usd": 0.018891,
+            "tokens": 38516
+          },
+          {
+            "agentId": "run-worker-powerful-1782241941755",
+            "usd": 0.016039,
+            "tokens": 35748
+          },
+          {
+            "agentId": "run-worker-writer_chronicler-1782438070849",
+            "usd": 0.013839,
+            "tokens": 23743
+          },
+          {
+            "agentId": "run-worker-music-1782202290233",
+            "usd": 0.013691,
+            "tokens": 24211
+          },
+          {
+            "agentId": "plan-task-1782245816411",
+            "usd": 0.006043,
+            "tokens": 7673
+          },
+          {
+            "agentId": "codeReviewAgent",
+            "usd": 0.005971,
+            "tokens": 13265
+          },
+          {
+            "agentId": "plan-task-1782251413478",
+            "usd": 0.00479,
+            "tokens": 7213
+          },
+          {
+            "agentId": "plan-task-1782241880983",
+            "usd": 0.004265,
+            "tokens": 6091
+          },
+          {
+            "agentId": "plan-task-1782319448023",
+            "usd": 0.004203,
+            "tokens": 5745
+          },
+          {
+            "agentId": "plan-task-1782319820984",
+            "usd": 0.003788,
+            "tokens": 6268
+          },
+          {
+            "agentId": "plan-task-1782249031246",
+            "usd": 0.003515,
+            "tokens": 4923
+          },
+          {
+            "agentId": "plan-task-1782250457574",
+            "usd": 0.003507,
+            "tokens": 4823
+          },
+          {
+            "agentId": "plan-task-1782176688057",
+            "usd": 0.003483,
+            "tokens": 5305
+          },
+          {
+            "agentId": "plan-task-1782245887927",
+            "usd": 0.003408,
+            "tokens": 4636
+          },
+          {
+            "agentId": "plan-task-1782241556970",
+            "usd": 0.003344,
+            "tokens": 5024
+          },
+          {
+            "agentId": "plan-task-1782246003559",
+            "usd": 0.003226,
+            "tokens": 4436
+          },
+          {
+            "agentId": "plan-task-1782051243793",
+            "usd": 0.003116,
+            "tokens": 4035
+          },
+          {
+            "agentId": "plan-task-1782176746718",
+            "usd": 0.003043,
+            "tokens": 5007
+          },
+          {
+            "agentId": "plan-task-1782083409145",
+            "usd": 0.003018,
+            "tokens": 4007
+          },
+          {
+            "agentId": "plan-task-1782086441269",
+            "usd": 0.002952,
+            "tokens": 3912
+          },
+          {
+            "agentId": "plan-task-1782203175867",
+            "usd": 0.002885,
+            "tokens": 3977
+          },
+          {
+            "agentId": "plan-task-1782202144661",
+            "usd": 0.002851,
+            "tokens": 4417
+          },
+          {
+            "agentId": "plan-task-1782297157578",
+            "usd": 0.002848,
+            "tokens": 4034
+          },
+          {
+            "agentId": "security-review-agent",
+            "usd": 0.00273,
+            "tokens": 5982
+          },
+          {
+            "agentId": "plan-task-1782019582167",
+            "usd": 0.00267,
+            "tokens": 3345
+          },
+          {
+            "agentId": "plan-task-1782082302067",
+            "usd": 0.002622,
+            "tokens": 3620
+          },
+          {
+            "agentId": "plan-task-1782083576613",
+            "usd": 0.002558,
+            "tokens": 3407
+          },
+          {
+            "agentId": "plan-task-1782083779193",
+            "usd": 0.002551,
+            "tokens": 3317
+          },
+          {
+            "agentId": "plan-task-1782082942534",
+            "usd": 0.00252,
+            "tokens": 3218
+          },
+          {
+            "agentId": "plan-task-1782083668614",
+            "usd": 0.002513,
+            "tokens": 3242
+          },
+          {
+            "agentId": "plan-task-1782083216672",
+            "usd": 0.002507,
+            "tokens": 3309
+          },
+          {
+            "agentId": "plan-task-1782084184389",
+            "usd": 0.002461,
+            "tokens": 3248
+          },
+          {
+            "agentId": "plan-task-1782297383481",
+            "usd": 0.002397,
+            "tokens": 3268
+          },
+          {
+            "agentId": "plan-task-1782299240017",
+            "usd": 0.002354,
+            "tokens": 3359
+          },
+          {
+            "agentId": "plan-task-1782083018118",
+            "usd": 0.002326,
+            "tokens": 2993
+          },
+          {
+            "agentId": "plan-task-1782146367886",
+            "usd": 0.002156,
+            "tokens": 2973
+          },
+          {
+            "agentId": "plan-task-1782246312421",
+            "usd": 0.002138,
+            "tokens": 2814
+          },
+          {
+            "agentId": "plan-task-1782019235470",
+            "usd": 0.002068,
+            "tokens": 2641
+          },
+          {
+            "agentId": "plan-task-1782050767676",
+            "usd": 0.002068,
+            "tokens": 2830
+          },
+          {
+            "agentId": "plan-task-1782083085438",
+            "usd": 0.002016,
+            "tokens": 2657
+          },
+          {
+            "agentId": "plan-task-1782019463650",
+            "usd": 0.00201,
+            "tokens": 2591
+          },
+          {
+            "agentId": "plan-task-1782049619760",
+            "usd": 0.001981,
+            "tokens": 2667
+          },
+          {
+            "agentId": "plan-task-1782177050921",
+            "usd": 0.001963,
+            "tokens": 2552
+          },
+          {
+            "agentId": "plan-task-1782086869341",
+            "usd": 0.001928,
+            "tokens": 2564
+          },
+          {
+            "agentId": "plan-task-1782251465332",
+            "usd": 0.001923,
+            "tokens": 2623
+          },
+          {
+            "agentId": "plan-task-1782299337363",
+            "usd": 0.0019,
+            "tokens": 2621
+          },
+          {
+            "agentId": "plan-task-1782050298945",
+            "usd": 0.001891,
+            "tokens": 2672
+          },
+          {
+            "agentId": "plan-task-1782204461361",
+            "usd": 0.001842,
+            "tokens": 2371
+          },
+          {
+            "agentId": "plan-task-1782203880949",
+            "usd": 0.001833,
+            "tokens": 2553
+          },
+          {
+            "agentId": "plan-task-1782204027356",
+            "usd": 0.001754,
+            "tokens": 2364
+          },
+          {
+            "agentId": "plan-task-1782083879667",
+            "usd": 0.001728,
+            "tokens": 2302
+          },
+          {
+            "agentId": "plan-task-1782083837003",
+            "usd": 0.001698,
+            "tokens": 2288
+          },
+          {
+            "agentId": "plan-task-1782203533607",
+            "usd": 0.001685,
+            "tokens": 2305
+          },
+          {
+            "agentId": "plan-task-1782177184904",
+            "usd": 0.00165,
+            "tokens": 2237
+          },
+          {
+            "agentId": "plan-task-1782075631654",
+            "usd": 0.001636,
+            "tokens": 2099
+          },
+          {
+            "agentId": "plan-task-1782083135231",
+            "usd": 0.001622,
+            "tokens": 2282
+          },
+          {
+            "agentId": "plan-task-1782082671294",
+            "usd": 0.001619,
+            "tokens": 2158
+          },
+          {
+            "agentId": "plan-task-1782075220138",
+            "usd": 0.001567,
+            "tokens": 2386
+          },
+          {
+            "agentId": "plan-task-1782203329044",
+            "usd": 0.001556,
+            "tokens": 2178
+          },
+          {
+            "agentId": "plan-task-1782052381392",
+            "usd": 0.001521,
+            "tokens": 2209
+          },
+          {
+            "agentId": "plan-task-1782203068743",
+            "usd": 0.001518,
+            "tokens": 2362
+          },
+          {
+            "agentId": "plan-task-1782075356942",
+            "usd": 0.001481,
+            "tokens": 1905
+          },
+          {
+            "agentId": "plan-task-1782084311135",
+            "usd": 0.001476,
+            "tokens": 2027
+          },
+          {
+            "agentId": "plan-task-1782203783380",
+            "usd": 0.001389,
+            "tokens": 2034
+          },
+          {
+            "agentId": "plan-task-1782052080706",
+            "usd": 0.001336,
+            "tokens": 1884
+          },
+          {
+            "agentId": "plan-task-1782084419860",
+            "usd": 0.001332,
+            "tokens": 1806
+          },
+          {
+            "agentId": "plan-task-1782051756469",
+            "usd": 0.001306,
+            "tokens": 1920
+          },
+          {
+            "agentId": "plan-task-1782146589907",
+            "usd": 0.001304,
+            "tokens": 1701
+          },
+          {
+            "agentId": "plan-task-1782203649412",
+            "usd": 0.001257,
+            "tokens": 1809
+          },
+          {
+            "agentId": "plan-task-1782204308800",
+            "usd": 0.001249,
+            "tokens": 1973
+          },
+          {
+            "agentId": "plan-task-1782146689873",
+            "usd": 0.001171,
+            "tokens": 1530
+          },
+          {
+            "agentId": "plan-task-1782202638075",
+            "usd": 0.001169,
+            "tokens": 1595
+          },
+          {
+            "agentId": "plan-task-1782177389721",
+            "usd": 0.00113,
+            "tokens": 1702
+          },
+          {
+            "agentId": "plan-task-1782051920151",
+            "usd": 0.001117,
+            "tokens": 1662
+          },
+          {
+            "agentId": "plan-task-1782082882240",
+            "usd": 0.000987,
+            "tokens": 1451
+          },
+          {
+            "agentId": "plan-task-1782075610769",
+            "usd": 0.000983,
+            "tokens": 1341
+          },
+          {
+            "agentId": "plan-task-1782082787940",
+            "usd": 0.000906,
+            "tokens": 1314
+          },
+          {
+            "agentId": "plan-task-1782017756491",
+            "usd": 0.000592,
+            "tokens": 893
+          },
+          {
+            "agentId": "plan-task-1782353779322",
+            "usd": 0,
+            "tokens": 1845
+          },
+          {
+            "agentId": "plan-task-1782354948221",
+            "usd": 0,
+            "tokens": 2085
+          },
+          {
+            "agentId": "plan-task-1782355239615",
+            "usd": 0,
+            "tokens": 1960
+          },
+          {
+            "agentId": "plan-task-1782355856651",
+            "usd": 0,
+            "tokens": 1395
+          },
+          {
+            "agentId": "plan-task-1782355929090",
+            "usd": 0,
+            "tokens": 1247
+          },
+          {
+            "agentId": "plan-task-1782356430333",
+            "usd": 0,
+            "tokens": 1734
+          },
+          {
+            "agentId": "plan-task-1782356551277",
+            "usd": 0,
+            "tokens": 1767
+          },
+          {
+            "agentId": "plan-task-1782356588080",
+            "usd": 0,
+            "tokens": 1867
+          },
+          {
+            "agentId": "plan-task-1782413403869",
+            "usd": 0,
+            "tokens": 1928
+          },
+          {
+            "agentId": "plan-task-1782416363508",
+            "usd": 0,
+            "tokens": 1628
+          },
+          {
+            "agentId": "plan-task-1782418670320",
+            "usd": 0,
+            "tokens": 1735
+          },
+          {
+            "agentId": "plan-task-1782421024800",
+            "usd": 0,
+            "tokens": 2077
+          },
+          {
+            "agentId": "plan-task-1782436866858",
+            "usd": 0,
+            "tokens": 2231
+          },
+          {
+            "agentId": "plan-task-1782437136297",
+            "usd": 0,
+            "tokens": 2204
+          },
+          {
+            "agentId": "plan-task-1782437168597",
+            "usd": 0,
+            "tokens": 1863
+          },
+          {
+            "agentId": "plan-task-1782437426652",
+            "usd": 0,
+            "tokens": 1608
+          },
+          {
+            "agentId": "plan-task-1782437757771",
+            "usd": 0,
+            "tokens": 1166
+          },
+          {
+            "agentId": "plan-task-1782438017540",
+            "usd": 0,
+            "tokens": 1232
+          },
+          {
+            "agentId": "plan-task-1782438042706",
+            "usd": 0,
+            "tokens": 1040
+          },
+          {
+            "agentId": "plan-task-1782438075403",
+            "usd": 0,
+            "tokens": 1257
+          },
+          {
+            "agentId": "plan-task-1782438326891",
+            "usd": 0,
+            "tokens": 1245
+          },
+          {
+            "agentId": "plan-task-1782438346561",
+            "usd": 0,
+            "tokens": 1638
+          },
+          {
+            "agentId": "run-worker-fast-1782438523658",
+            "usd": 0,
+            "tokens": 4096
+          },
+          {
+            "agentId": "plan-task-1782438589829",
+            "usd": 0,
+            "tokens": 932
+          },
+          {
+            "agentId": "plan-task-1782438602542",
+            "usd": 0,
+            "tokens": 1791
+          },
+          {
+            "agentId": "plan-task-1782438610722",
+            "usd": 0,
+            "tokens": 925
+          },
+          {
+            "agentId": "plan-task-1782438865851",
+            "usd": 0,
+            "tokens": 830
+          },
+          {
+            "agentId": "run-worker-powerful-1782439004671",
+            "usd": 0,
+            "tokens": 8192
+          },
+          {
+            "agentId": "plan-task-1782439049511",
+            "usd": 0,
+            "tokens": 910
+          },
+          {
+            "agentId": "plan-task-1782666228060",
+            "usd": 0,
+            "tokens": 2066
+          },
+          {
+            "agentId": "plan-task-1782666293116",
+            "usd": 0,
+            "tokens": 1589
+          },
+          {
+            "agentId": "plan-task-1782666414903",
+            "usd": 0,
+            "tokens": 1415
+          },
+          {
+            "agentId": "plan-task-1782666468813",
+            "usd": 0,
+            "tokens": 1393
+          },
+          {
+            "agentId": "plan-task-1782666468815",
+            "usd": 0,
+            "tokens": 1488
+          },
+          {
+            "agentId": "plan-task-1782666498326",
+            "usd": 0,
+            "tokens": 1793
+          },
+          {
+            "agentId": "plan-task-1782666519277",
+            "usd": 0,
+            "tokens": 1218
+          },
+          {
+            "agentId": "plan-task-1782666535475",
+            "usd": 0,
+            "tokens": 1199
+          },
+          {
+            "agentId": "plan-task-1782666535477",
+            "usd": 0,
+            "tokens": 1337
+          },
+          {
+            "agentId": "plan-task-1782666535481",
+            "usd": 0,
+            "tokens": 1135
+          },
+          {
+            "agentId": "plan-task-1782666535479",
+            "usd": 0,
+            "tokens": 1241
+          },
+          {
+            "agentId": "plan-task-1782666535473",
+            "usd": 0,
+            "tokens": 1477
+          },
+          {
+            "agentId": "plan-task-1782666563624",
+            "usd": 0,
+            "tokens": 2053
+          },
+          {
+            "agentId": "plan-task-1782666643446",
+            "usd": 0,
+            "tokens": 1483
+          },
+          {
+            "agentId": "plan-task-1782666672513",
+            "usd": 0,
+            "tokens": 1373
+          },
+          {
+            "agentId": "plan-task-1782666691652",
+            "usd": 0,
+            "tokens": 1625
+          },
+          {
+            "agentId": "plan-task-1782666727861",
+            "usd": 0,
+            "tokens": 1395
+          },
+          {
+            "agentId": "plan-task-1782666726422",
+            "usd": 0,
+            "tokens": 1597
+          },
+          {
+            "agentId": "plan-task-1782666770770",
+            "usd": 0,
+            "tokens": 1265
+          },
+          {
+            "agentId": "plan-task-1782666789597",
+            "usd": 0,
+            "tokens": 1271
+          },
+          {
+            "agentId": "plan-task-1782666794519",
+            "usd": 0,
+            "tokens": 1326
+          },
+          {
+            "agentId": "plan-task-1782666841608",
+            "usd": 0,
+            "tokens": 879
+          },
+          {
+            "agentId": "plan-task-1782666841611",
+            "usd": 0,
+            "tokens": 916
+          },
+          {
+            "agentId": "plan-task-1782666891309",
+            "usd": 0,
+            "tokens": 1204
+          },
+          {
+            "agentId": "plan-task-1782666891313",
+            "usd": 0,
+            "tokens": 1654
+          },
+          {
+            "agentId": "plan-task-1782666891312",
+            "usd": 0,
+            "tokens": 1418
+          },
+          {
+            "agentId": "plan-task-1782666901682",
+            "usd": 0,
+            "tokens": 1816
+          },
+          {
+            "agentId": "plan-task-1782666949014",
+            "usd": 0,
+            "tokens": 1379
+          },
+          {
+            "agentId": "plan-task-1782666991392",
+            "usd": 0,
+            "tokens": 1353
+          },
+          {
+            "agentId": "plan-task-1782667078387",
+            "usd": 0,
+            "tokens": 1373
+          },
+          {
+            "agentId": "plan-task-1782667078391",
+            "usd": 0,
+            "tokens": 1769
+          },
+          {
+            "agentId": "plan-task-1782667078390",
+            "usd": 0,
+            "tokens": 1494
+          },
+          {
+            "agentId": "plan-task-1782667089365",
+            "usd": 0,
+            "tokens": 1351
+          },
+          {
+            "agentId": "plan-task-1782667089363",
+            "usd": 0,
+            "tokens": 1287
+          },
+          {
+            "agentId": "plan-task-1782667089367",
+            "usd": 0,
+            "tokens": 1587
+          },
+          {
+            "agentId": "plan-task-1782667089361",
+            "usd": 0,
+            "tokens": 1591
+          },
+          {
+            "agentId": "plan-task-1782667089358",
+            "usd": 0,
+            "tokens": 1574
+          },
+          {
+            "agentId": "run-worker-fast-1782667133492",
+            "usd": 0,
+            "tokens": 3850
+          },
+          {
+            "agentId": "run-worker-fast-1782667193791",
+            "usd": 0,
+            "tokens": 4096
+          },
+          {
+            "agentId": "run-worker-fast-1782667207589",
+            "usd": 0,
+            "tokens": 4096
+          },
+          {
+            "agentId": "plan-task-1782667244098",
+            "usd": 0,
+            "tokens": 1479
+          },
+          {
+            "agentId": "plan-task-1783540190669",
+            "usd": 0,
+            "tokens": 690
+          },
+          {
+            "agentId": "plan-task-1783554149498",
+            "usd": 0,
+            "tokens": 893
+          },
+          {
+            "agentId": "plan-task-1783554323989",
+            "usd": 0,
+            "tokens": 1176
+          },
+          {
+            "agentId": "plan-task-1783554463082",
+            "usd": 0,
+            "tokens": 1189
+          },
+          {
+            "agentId": "plan-task-1783554669515",
+            "usd": 0,
+            "tokens": 1080
+          }
+        ],
+        "byModel": [
+          {
+            "model": "deepseek-v4-pro",
+            "usd": 28.798732,
+            "tokens": 64193271,
+            "invocations": 521
+          },
+          {
+            "model": "deepseek-v4-flash",
+            "usd": 0.591512,
+            "tokens": 4031913,
+            "invocations": 164
+          },
+          {
+            "model": "claude-opus-4.8",
+            "usd": 0.368615,
+            "tokens": 61571,
+            "invocations": 5
+          },
+          {
+            "model": "claude-sonnet-4.6",
+            "usd": 0.244137,
+            "tokens": 78227,
+            "invocations": 1
+          },
+          {
+            "model": "gemini-2.5-pro",
+            "usd": 0.057614,
+            "tokens": 8004,
+            "invocations": 9
+          },
+          {
+            "model": "maxwellb/gemma4-12b-it-oym",
+            "usd": 0,
+            "tokens": 290447,
+            "invocations": 76
+          },
+          {
+            "model": "laguna-m.1:free",
+            "usd": 0,
+            "tokens": 68661,
+            "invocations": 2
+          },
+          {
+            "model": "gemma4:e4b",
+            "usd": 0,
+            "tokens": 16138,
+            "invocations": 4
+          }
+        ],
+        "byDay": [
+          {
+            "date": "2026-06-20",
+            "usd": 0.01839,
+            "tokens": 42150
+          },
+          {
+            "date": "2026-06-21",
+            "usd": 4.890391,
+            "tokens": 12093546
+          },
+          {
+            "date": "2026-06-22",
+            "usd": 0.573749,
+            "tokens": 1381245
+          },
+          {
+            "date": "2026-06-23",
+            "usd": 2.633486,
+            "tokens": 6772701
+          },
+          {
+            "date": "2026-06-24",
+            "usd": 2.212822,
+            "tokens": 5216084
+          },
+          {
+            "date": "2026-06-25",
+            "usd": 6.658826,
+            "tokens": 13858551
+          },
+          {
+            "date": "2026-06-26",
+            "usd": 4.050846,
+            "tokens": 9068618
+          },
+          {
+            "date": "2026-06-27",
+            "usd": 0.022151,
+            "tokens": 50747
+          },
+          {
+            "date": "2026-06-28",
+            "usd": 8.158157,
+            "tokens": 18332537
+          },
+          {
+            "date": "2026-06-29",
+            "usd": 0.159203,
+            "tokens": 362416
+          },
+          {
+            "date": "2026-07-08",
+            "usd": 0.660471,
+            "tokens": 1518926
+          },
+          {
+            "date": "2026-07-11",
+            "usd": 0.022119,
+            "tokens": 50711
+          }
+        ]
+      },
+      "scores": [
+        {
+          "scorerId": "completeness-scorer",
+          "totalEvaluations": 9,
+          "avgScore": 0.227,
+          "passRate": 0,
+          "byEntity": [
+            {
+              "entityId": "weather-agent",
+              "entityType": "AGENT",
+              "count": 9,
+              "avgScore": 0.227
+            }
+          ],
+          "scoreDistribution": {
+            "0-0.3": 5,
+            "0.3-0.7": 4,
+            "0.7-1.0": 0
+          }
+        },
+        {
+          "scorerId": "translation-quality-scorer",
+          "totalEvaluations": 9,
+          "avgScore": 0.556,
+          "passRate": 0.5555555555555556,
+          "byEntity": [
+            {
+              "entityId": "weather-agent",
+              "entityType": "AGENT",
+              "count": 9,
+              "avgScore": 0.556
+            }
+          ],
+          "scoreDistribution": {
+            "0-0.3": 4,
+            "0.3-0.7": 0,
+            "0.7-1.0": 5
+          }
+        },
+        {
+          "scorerId": "code-tool-call-accuracy-scorer",
+          "totalEvaluations": 9,
+          "avgScore": 0.111,
+          "passRate": 0.1111111111111111,
+          "byEntity": [
+            {
+              "entityId": "weather-agent",
+              "entityType": "AGENT",
+              "count": 9,
+              "avgScore": 0.111
+            }
+          ],
+          "scoreDistribution": {
+            "0-0.3": 8,
+            "0.3-0.7": 0,
+            "0.7-1.0": 1
+          }
+        }
+      ]
+    }
+  }
+}

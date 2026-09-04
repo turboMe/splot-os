@@ -1,0 +1,51 @@
+/* ePub stylesheet for The Second Son of the House of Bells */
+
+body {
+    font-family: "Georgia", "Palatino", serif;
+    line-height: 1.5;
+    margin: 1em;
+}
+
+h1 {
+    font-size: 1.6em;
+    text-align: center;
+    margin-top: 2em;
+    margin-bottom: 1.5em;
+    font-weight: normal;
+    font-style: italic;
+}
+
+/* Scene breaks */
+hr {
+    border: none;
+    text-align: center;
+    margin: 1.5em 0;
+}
+
+hr::after {
+    content: "• • •";
+    color: #555;
+    font-size: 0.9em;
+    letter-spacing: 0.5em;
+}
+
+p {
+    text-indent: 1.5em;
+    margin: 0;
+}
+
+/* First paragraph after heading or scene break — no indent */
+h1 + p,
+hr + p {
+    text-indent: 0;
+}
+
+/* Italic for internal thoughts */
+em {
+    font-style: italic;
+}
+
+blockquote {
+    font-style: italic;
+    margin: 1em 2em;
+}

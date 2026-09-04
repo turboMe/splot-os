@@ -1,0 +1,18 @@
+{
+  "blockId": "json-validator",
+  "description": "Validates incoming JSON structure and rejects malformed data",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst validated = [];\nconst rejected = [];\n\nfor (const item of items) {\n  try {\n    const data = typeof item.json === 'string' ? JSON.parse(item.json) : item.json;\n    if (data && typeof data === 'object') {\n      validated.push({ json: { ...data, _validated: true } });\n    } else {\n      rejected.push({ json: { error: 'Not a valid object', raw: item.json } });\n    }\n  } catch (e) {\n    rejected.push({ json: { error: e.message, raw: String(item.json).slice(0, 500) } });\n  }\n}\n\nreturn validated.length > 0 ? validated : [{ json: { _empty: true, rejectedCount: rejected.length } }];"
+      },
+      "id": "json_validator",
+      "name": "JSON Validator",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [0, 300]
+    }
+  ],
+  "params": {},
+  "outputNode": "JSON Validator"
+}

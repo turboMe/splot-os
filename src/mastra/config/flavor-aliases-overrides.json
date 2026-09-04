@@ -1,0 +1,112 @@
+{
+  "_comment": "Manual chef-ingredient → FlavorDB overrides for high-value misses the bge-m3 resolver gets wrong. Each entry maps a (Polish) chef ingredient name to either a FlavorDB ingredient name (`flavordbName`, resolved to its entityId at build) or `unresolved:true` to suppress a bad auto-match. Used by scripts/build-flavor-aliases.ts. Add entries when the coverage report flags a frequent miss.",
+  "overrides": [
+    { "chefName": "rokitnik", "flavordbName": "sea buckthorn", "note": "may be absent from FlavorDB scrape; will store unresolved if not found" },
+    { "chefName": "borowik", "flavordbName": "mushroom" },
+    { "chefName": "podgrzybek", "flavordbName": "mushroom" },
+    { "chefName": "natka pietruszki", "flavordbName": "parsley" },
+    { "chefName": "kasza gryczana", "flavordbName": "buckwheat" },
+
+    { "chefName": "cebula", "flavordbName": "onion" },
+    { "chefName": "cebuli", "flavordbName": "onion" },
+    { "chefName": "cebule", "flavordbName": "onion" },
+    { "chefName": "cebulę", "flavordbName": "onion" },
+    { "chefName": "cebulą", "flavordbName": "onion" },
+    { "chefName": "cebulka", "flavordbName": "onion" },
+
+    { "chefName": "jajo", "flavordbName": "egg" },
+    { "chefName": "jaja", "flavordbName": "egg" },
+    { "chefName": "jajko", "flavordbName": "egg" },
+    { "chefName": "jajka", "flavordbName": "egg" },
+    { "chefName": "jaj", "flavordbName": "egg" },
+    { "chefName": "żółtko", "flavordbName": "egg" },
+    { "chefName": "żółtka", "flavordbName": "egg" },
+    { "chefName": "żółtek", "flavordbName": "egg" },
+    { "chefName": "białko", "flavordbName": "egg" },
+    { "chefName": "białka", "flavordbName": "egg" },
+
+    { "chefName": "ziemniak", "flavordbName": "potato" },
+    { "chefName": "ziemniaki", "flavordbName": "potato" },
+    { "chefName": "ziemniaka", "flavordbName": "potato" },
+    { "chefName": "ziemniaków", "flavordbName": "potato" },
+    { "chefName": "ziemniakow", "flavordbName": "potato" },
+
+    { "chefName": "listek laurowy", "flavordbName": "bay leaf" },
+    { "chefName": "liść laurowy", "flavordbName": "bay leaf" },
+    { "chefName": "liście laurowe", "flavordbName": "bay leaf" },
+
+    { "chefName": "tłuszczu", "unresolved": true },
+    { "chefName": "tłuszcz", "unresolved": true },
+
+    { "chefName": "duża cebula", "flavordbName": "onion" },
+    { "chefName": "mała cebula", "flavordbName": "onion" },
+
+    { "chefName": "marchew", "flavordbName": "carrot" },
+    { "chefName": "marchewka", "flavordbName": "carrot" },
+    { "chefName": "marchewki", "flavordbName": "carrot" },
+    { "chefName": "marchwie", "flavordbName": "carrot" },
+
+    { "chefName": "pieczarka", "flavordbName": "mushroom" },
+    { "chefName": "pieczarki", "flavordbName": "mushroom" },
+    { "chefName": "pieczarek", "flavordbName": "mushroom" },
+
+    { "chefName": "goździk", "flavordbName": "clove" },
+    { "chefName": "goździki", "flavordbName": "clove" },
+    { "chefName": "goździków", "flavordbName": "clove" },
+
+    { "chefName": "drożdże", "flavordbName": "yeast" },
+    { "chefName": "drożdży", "flavordbName": "yeast" },
+
+    { "chefName": "nać pietruszki", "flavordbName": "parsley" },
+
+    { "chefName": "majeranek", "flavordbName": "marjoram" },
+
+    { "chefName": "słonina", "flavordbName": "lard" },
+    { "chefName": "słoniny", "flavordbName": "lard" },
+    { "chefName": "smalec", "flavordbName": "lard" },
+    { "chefName": "smalcu", "flavordbName": "lard" },
+
+    { "chefName": "śmietana", "flavordbName": "cream" },
+    { "chefName": "śmietany", "flavordbName": "cream" },
+
+    { "chefName": "mąka pszenna", "flavordbName": "wheat" },
+    { "chefName": "mąki pszennej", "flavordbName": "wheat" },
+    { "chefName": "mąka ziemniaczana", "flavordbName": "potato" },
+    { "chefName": "mąki ziemniaczanej", "flavordbName": "potato" },
+
+    { "chefName": "bułka tarta", "flavordbName": "bread" },
+    { "chefName": "tartej bułki", "flavordbName": "bread" },
+
+    { "chefName": "bay leaves", "flavordbName": "bay leaf" },
+
+    { "chefName": "czosnek", "flavordbName": "garlic" },
+    { "chefName": "czosnku", "flavordbName": "garlic" },
+    { "chefName": "ząbek czosnku", "flavordbName": "garlic" },
+    { "chefName": "ząbki czosnku", "flavordbName": "garlic" },
+    { "chefName": "ząbków czosnku", "flavordbName": "garlic" },
+
+    { "chefName": "koncentrat pomidorowy", "flavordbName": "tomato" },
+    { "chefName": "koncentratu pomidorowego", "flavordbName": "tomato" },
+    { "chefName": "przecier pomidorowy", "flavordbName": "tomato" },
+    { "chefName": "pomidory", "flavordbName": "tomato" },
+    { "chefName": "pomidorów", "flavordbName": "tomato" },
+
+    { "chefName": "gałka muszkatołowa", "flavordbName": "nutmeg" },
+    { "chefName": "gałki muszkatołowej", "flavordbName": "nutmeg" },
+
+    { "chefName": "pietruszka", "flavordbName": "parsley" },
+    { "chefName": "pietruszki", "flavordbName": "parsley" },
+
+    { "chefName": "rodzynki", "flavordbName": "raisin" },
+    { "chefName": "rodzynków", "flavordbName": "raisin" },
+
+    { "chefName": "grzyby suszone", "flavordbName": "mushroom" },
+    { "chefName": "grzybów suszonych", "flavordbName": "mushroom" },
+
+    { "chefName": "śmietanka", "flavordbName": "cream" },
+    { "chefName": "śmietanki", "flavordbName": "cream" },
+
+    { "chefName": "large eggs", "flavordbName": "egg" },
+    { "chefName": "tarta bułka", "flavordbName": "bread" }
+  ]
+}

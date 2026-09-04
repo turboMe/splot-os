@@ -1,0 +1,21 @@
+{
+  "blockId": "code-transform",
+  "description": "Custom JavaScript code transformation",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "{{jsCode}}",
+        "mode": "runOnceForAllItems"
+      },
+      "id": "code_transform",
+      "name": "Code Transform",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [0, 300]
+    }
+  ],
+  "params": {
+    "jsCode": { "description": "JavaScript code to execute", "default": "return $input.all();", "required": true }
+  },
+  "outputNode": "Code Transform"
+}

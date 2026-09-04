@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Etap 8 — refresh the code graph after a merge/pull (fail-soft, backgrounded).
+"$(git rev-parse --show-toplevel)/scripts/graph-refresh.sh" >/dev/null 2>&1 || true

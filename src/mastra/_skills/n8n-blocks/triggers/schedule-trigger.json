@@ -1,0 +1,18 @@
+{
+  "blockId": "schedule-trigger",
+  "description": "Runs on a time schedule (default: every 30 minutes)",
+  "nodes": [
+    {
+      "parameters": { "rule": { "interval": [{ "field": "minutes", "minutesInterval": "{{intervalMinutes}}" }] } },
+      "id": "schedule_trigger",
+      "name": "Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [250, 300]
+    }
+  ],
+  "params": {
+    "intervalMinutes": { "description": "Interval in minutes", "default": 30, "required": false }
+  },
+  "outputNode": "Schedule"
+}

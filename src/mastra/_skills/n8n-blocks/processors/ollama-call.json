@@ -1,0 +1,28 @@
+{
+  "blockId": "ollama-call",
+  "description": "Call local Ollama LLM via HTTP Request",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "{{ollamaBaseUrl}}/api/chat",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: '{{defaultLocalModel}}', stream: false, messages: [{ role: 'system', content: '{{systemPrompt}}' }, { role: 'user', content: JSON.stringify($json).slice(0, 5000) }] }) }}",
+        "options": {}
+      },
+      "id": "ollama_call",
+      "name": "Ollama Chat",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [0, 300]
+    }
+  ],
+  "params": {
+    "systemPrompt": { "description": "System prompt for the LLM", "default": "You are a helpful assistant.", "required": false },
+    "ollamaBaseUrl": { "description": "Ollama base URL", "default": "http://localhost:11434", "required": false },
+    "defaultLocalModel": { "description": "Default local model name", "default": "gemma4:26b", "required": false }
+  },
+  "outputNode": "Ollama Chat"
+}

@@ -1,0 +1,23 @@
+{
+  "blockId": "mongodb-save",
+  "description": "Save data to MongoDB collection",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "insert",
+        "collection": "{{collection}}",
+        "fields": "={{ JSON.stringify($json) }}"
+      },
+      "id": "mongodb_save",
+      "name": "MongoDB Save",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1,
+      "position": [0, 300],
+      "credentials": { "mongoDb": { "id": "1", "name": "MongoDB" } }
+    }
+  ],
+  "params": {
+    "collection": { "description": "MongoDB collection name", "default": "data", "required": true }
+  },
+  "outputNode": "MongoDB Save"
+}

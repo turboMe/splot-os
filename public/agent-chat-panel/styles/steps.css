@@ -1,0 +1,652 @@
+/**
+ * STEPS & EXECUTION ACCORDION - AGENT CHAT PANEL
+ * Główny system trajektorii kroków, osi czasu, animacji akordeonów i podglądu narzędzi.
+ */
+
+/* 1. KONTENER ZASOBNIKA KROKÓW (STEP TRAY) */
+.step-tray {
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin: 4px 0 12px;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.step-tray.is-running {
+  border-color: var(--accent);
+  box-shadow: 0 0 14px rgba(255, 77, 0, 0.08);
+}
+
+/* NAGŁÓWEK AKORDEONU (COLLAPSIBLE TRAY HEADER) */
+.step-tray-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-2);
+  background: var(--bg-2);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.step-tray-header:hover {
+  background: var(--bg-3);
+  color: var(--ink);
+}
+
+.step-tray-header .tray-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 12px;
+}
+
+.step-tray.is-running .tray-icon {
+  animation: spin-icon 1.6s infinite linear;
+}
+
+@keyframes spin-icon {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.step-tray-header .tray-status-text {
+  font-weight: 500;
+}
+
+.step-tray-header .tray-metrics {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10.5px;
+  color: var(--muted);
+}
+
+.step-tray-header .tray-metrics .ok-cnt {
+  color: var(--success);
+}
+
+.step-tray-header .tray-metrics .err-cnt {
+  color: var(--error);
+}
+
+.step-tray-header .tray-chev {
+  font-size: 8.5px;
+  color: var(--faint);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-left: 2px;
+}
+
+.step-tray.is-open .step-tray-header .tray-chev {
+  transform: rotate(90deg);
+}
+
+/* 2. PŁYNNA ANIMACJA CSS GRID BEZ MAX-HEIGHT HACKÓW */
+.step-tray-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.step-tray.is-open .step-tray-collapse {
+  grid-template-rows: 1fr;
+}
+
+.step-tray-content {
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  background: var(--bg-1);
+}
+
+/* 3. OŚ CZASU KROKÓW (STEP TIMELINE) */
+.step-timeline {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.step-item {
+  position: relative;
+  display: flex;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+/* Linia łącząca punkty osi czasu */
+.step-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 18px;
+  bottom: -12px;
+  width: 1px;
+  background: var(--line);
+}
+
+.step-item .step-bullet {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  z-index: 1;
+}
+
+/* Stany punktu osi */
+.step-item.status-running .step-bullet {
+  border-color: var(--accent);
+  color: var(--accent);
+  animation: pulse-bullet 1.2s infinite ease-in-out;
+}
+
+.step-item.status-ok .step-bullet {
+  border-color: var(--success);
+  color: var(--success);
+  background: rgba(46, 230, 168, 0.08);
+}
+
+.step-item.status-error .step-bullet {
+  border-color: var(--error);
+  color: var(--error);
+  background: rgba(255, 59, 48, 0.08);
+}
+
+@keyframes pulse-bullet {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.18); opacity: 0.6; }
+}
+
+.step-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.step-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.step-title-row .step-type-tag {
+  font-size: 9px;
+  padding: 1px 5px;
+  border-radius: var(--radius-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: var(--bg-3);
+  color: var(--muted);
+  border: 1px solid var(--line);
+}
+
+.step-title-row .step-type-tag.type-plan {
+  color: var(--accent);
+  border-color: rgba(255, 77, 0, 0.2);
+}
+
+.step-title-row .step-type-tag.type-tool {
+  color: var(--info);
+  border-color: rgba(91, 141, 239, 0.2);
+}
+
+.step-title-row .step-label {
+  font-weight: 500;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.step-title-row .step-duration {
+  margin-left: auto;
+  font-size: 10px;
+  color: var(--faint);
+  flex-shrink: 0;
+}
+
+/* 4. WIADOMOŚĆ POŚREDNIA W PROCESIE */
+.intermediate-note {
+  padding: 6px 10px;
+  background: rgba(91, 141, 239, 0.06);
+  border-left: 2px solid var(--info);
+  color: var(--ink-2);
+  font-size: 11px;
+  border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+  margin: 2px 0;
+  line-height: 1.4;
+}
+
+.intermediate-note strong {
+  color: var(--info);
+  font-weight: 600;
+}
+
+/* 5. PODGLĄD DANYCH NARZĘDZIA (JSON / DIFF PAYLOADS) */
+.step-details-toggle {
+  font-size: 10px;
+  color: var(--muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+  width: fit-content;
+  user-select: none;
+  transition: var(--trans-fast);
+}
+
+.step-details-toggle:hover {
+  color: var(--ink-2);
+}
+
+.step-payload {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xs);
+  padding: 8px 12px;
+  margin-top: 4px;
+  font-size: 10.5px;
+  color: var(--ink-2);
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 280px;
+  overflow-y: auto;
+  display: none;
+}
+
+.step-payload.is-visible {
+  display: block;
+}
+
+/* 6. ZAGNIEŻDŻONE KARTY DELEGACJI (NESTED SUB-ACCORDIONS) */
+.delegation-card {
+  border: 1px solid var(--line-strong, rgba(255, 255, 255, 0.12));
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--radius-sm, 6px);
+  margin: 6px 0;
+  overflow: hidden;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.delegation-card.status-running {
+  border-color: rgba(255, 77, 0, 0.4);
+  background: rgba(255, 77, 0, 0.02);
+}
+
+.delegation-card.status-ok {
+  border-color: rgba(46, 230, 168, 0.3);
+}
+
+.del-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  background: var(--bg-2);
+  transition: background 0.15s ease;
+}
+
+.del-header:hover {
+  background: var(--bg-3);
+}
+
+.del-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 700;
+  color: var(--accent, var(--signal));
+}
+
+.del-brief {
+  color: var(--ink-1);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 380px;
+}
+
+.del-meta {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.del-status-running {
+  color: var(--accent);
+}
+
+.del-status-ok {
+  color: var(--success);
+}
+
+.del-chev {
+  font-size: 8px;
+  color: var(--faint);
+  transition: transform 0.2s ease;
+}
+
+.delegation-card.is-open .del-chev {
+  transform: rotate(90deg);
+}
+
+.del-nested-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.delegation-card.is-open .del-nested-collapse {
+  grid-template-rows: 1fr;
+}
+
+.del-nested-timeline {
+  overflow: hidden;
+  padding: 8px 12px 10px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid var(--line);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.sub-step-item {
+  position: relative;
+  display: flex;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--ink-2);
+}
+
+.sub-step-item .sub-step-bullet {
+  font-size: 9px;
+  color: var(--info);
+}
+
+.sub-step-item.status-ok .sub-step-bullet {
+  color: var(--success);
+}
+
+.sub-step-item .sub-step-label {
+  font-weight: 500;
+  color: var(--ink-1);
+}
+
+.sub-step-item .sub-step-duration {
+  margin-left: auto;
+  font-size: 9.5px;
+  color: var(--faint);
+}
+
+.del-detail-section {
+  margin: 4px 0 6px 0;
+}
+
+.del-section-title {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.del-section-content {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-size: 11px;
+  line-height: 1.55;
+  color: var(--ink-1);
+}
+
+.del-brief-content {
+  border-left: 2px solid var(--signal, #FF4D00);
+  background: rgba(255, 77, 0, 0.03);
+}
+
+.del-result-content {
+  border-left: 2px solid var(--success, #2EE6A8);
+  background: rgba(46, 230, 168, 0.03);
+}
+
+.del-substeps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* 7. ZBIORCZY AKORDEON DLA OPERACJI NARZĘDZIOWYCH (TOOLS ACCORDION) */
+.tools-group-card {
+  border: 1px solid var(--line-strong, rgba(255, 255, 255, 0.12));
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--radius-sm, 6px);
+  margin: 6px 0;
+  overflow: hidden;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.tools-group-card.status-running {
+  border-color: rgba(255, 77, 0, 0.4);
+}
+
+.tools-group-card.status-ok {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.tools-group-card.status-error {
+  border-color: rgba(235, 87, 87, 0.4);
+}
+
+.tools-group-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  background: var(--bg-2);
+  transition: background 0.15s ease;
+}
+
+.tools-group-header:hover {
+  background: var(--bg-3);
+}
+
+.tools-group-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 700;
+  color: var(--ink-1);
+}
+
+.tools-group-meta {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.tools-group-count {
+  color: var(--ink-2);
+  font-weight: 500;
+}
+
+.tools-group-duration {
+  color: var(--signal);
+}
+
+.tools-group-chev {
+  font-size: 8px;
+  color: var(--faint);
+  transition: transform 0.2s ease;
+}
+
+.tools-group-card.is-open .tools-group-chev {
+  transform: rotate(90deg);
+}
+
+.tools-group-nested-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tools-group-card.is-open .tools-group-nested-collapse {
+  grid-template-rows: 1fr;
+}
+
+.tools-group-nested-timeline {
+  overflow: hidden;
+  padding: 8px 12px 10px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-top: 1px solid var(--line);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* 8. KARTA MYŚLI I PLANU (.thought-card) */
+.thought-card {
+  border: 1px solid rgba(153, 102, 255, 0.22);
+  border-left: 3px solid #9966FF;
+  background: rgba(153, 102, 255, 0.035);
+  border-radius: var(--radius-sm, 6px);
+  margin: 6px 0 8px 0;
+  padding: 9px 12px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.thought-card:hover {
+  border-color: rgba(153, 102, 255, 0.4);
+  background: rgba(153, 102, 255, 0.055);
+}
+
+.thought-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.thought-icon {
+  font-size: 13px;
+}
+
+.thought-title {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.thought-meta {
+  margin-left: auto;
+  font-size: 9.5px;
+  color: #bfa3ff;
+  font-weight: 500;
+}
+
+.thought-body {
+  font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--ink-1, #e0e0e0);
+  transition: max-height 0.25s ease;
+}
+
+.thought-body.is-collapsed {
+  max-height: 105px;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+}
+
+.thought-paragraph {
+  margin: 0 0 6px 0;
+}
+
+.thought-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.thought-inline-code {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #2EE6A8;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.thought-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 3px 0;
+}
+
+.thought-bullet {
+  color: #9966FF;
+  font-weight: bold;
+}
+
+.thought-expand-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: rgba(153, 102, 255, 0.08);
+  border: 1px solid rgba(153, 102, 255, 0.2);
+  border-radius: 4px;
+  color: #d1b3ff;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 4px 8px;
+  margin-top: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.thought-expand-btn:hover {
+  background: rgba(153, 102, 255, 0.18);
+  border-color: rgba(153, 102, 255, 0.45);
+  color: #ffffff;
+}
+

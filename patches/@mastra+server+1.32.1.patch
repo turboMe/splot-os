@@ -1,0 +1,85 @@
+diff --git a/node_modules/@mastra/server/dist/chunk-V4DZUIDM.cjs b/node_modules/@mastra/server/dist/chunk-V4DZUIDM.cjs
+index 23a4b75..afbba21 100644
+--- a/node_modules/@mastra/server/dist/chunk-V4DZUIDM.cjs
++++ b/node_modules/@mastra/server/dist/chunk-V4DZUIDM.cjs
+@@ -732,9 +732,16 @@ var GET_THREAD_BY_ID_ROUTE = chunk7LAFXMXB_cjs.createRoute({
+       }
+       const memory = await getMemoryFromContext({ mastra, agentId, requestContext, allowMissingAgent: true });
+       if (memory) {
+-        const thread = await memory.getThreadById({ threadId: effectiveThreadId });
++        let thread = await memory.getThreadById({ threadId: effectiveThreadId });
+         if (!thread) {
+-          throw new chunk64ITUOXI_cjs.HTTPException(404, { message: "Thread not found" });
++          // Race-condition guard: Studio may request thread before stream handler persists it.
++          for (let _retry = 0; _retry < 3 && !thread; _retry++) {
++            await new Promise(r => setTimeout(r, 250 * Math.pow(2, _retry)));
++            thread = await memory.getThreadById({ threadId: effectiveThreadId });
++          }
++          if (!thread) {
++            throw new chunk64ITUOXI_cjs.HTTPException(404, { message: "Thread not found" });
++          }
+         }
+         await chunk64YJOWH2_cjs.enforceThreadAccess({
+           mastra,
+@@ -833,9 +840,16 @@ var LIST_MESSAGES_ROUTE = chunk7LAFXMXB_cjs.createRoute({
+       }
+       const memory = await getMemoryFromContext({ mastra, agentId, requestContext, allowMissingAgent: true });
+       if (memory) {
+-        const thread = await memory.getThreadById({ threadId: effectiveThreadId });
++        let thread = await memory.getThreadById({ threadId: effectiveThreadId });
+         if (!thread) {
+-          throw new chunk64ITUOXI_cjs.HTTPException(404, { message: "Thread not found" });
++          // Race-condition guard for messages endpoint (same race as GET /memory/threads/:threadId)
++          for (let _retry = 0; _retry < 3 && !thread; _retry++) {
++            await new Promise(r => setTimeout(r, 250 * Math.pow(2, _retry)));
++            thread = await memory.getThreadById({ threadId: effectiveThreadId });
++          }
++          if (!thread) {
++            throw new chunk64ITUOXI_cjs.HTTPException(404, { message: "Thread not found" });
++          }
+         }
+         await chunk64YJOWH2_cjs.enforceThreadAccess({
+           mastra,
+diff --git a/node_modules/@mastra/server/dist/chunk-XCIJHMUE.js b/node_modules/@mastra/server/dist/chunk-XCIJHMUE.js
+index 87805ff..f46fb4e 100644
+--- a/node_modules/@mastra/server/dist/chunk-XCIJHMUE.js
++++ b/node_modules/@mastra/server/dist/chunk-XCIJHMUE.js
+@@ -730,9 +730,17 @@ var GET_THREAD_BY_ID_ROUTE = createRoute({
+       }
+       const memory = await getMemoryFromContext({ mastra, agentId, requestContext, allowMissingAgent: true });
+       if (memory) {
+-        const thread = await memory.getThreadById({ threadId: effectiveThreadId });
++        let thread = await memory.getThreadById({ threadId: effectiveThreadId });
+         if (!thread) {
+-          throw new HTTPException(404, { message: "Thread not found" });
++          // Race-condition guard: Studio may request thread before stream handler persists it.
++          // Retry up to 3 times with exponential backoff (250ms, 500ms, 1000ms).
++          for (let _retry = 0; _retry < 3 && !thread; _retry++) {
++            await new Promise(r => setTimeout(r, 250 * Math.pow(2, _retry)));
++            thread = await memory.getThreadById({ threadId: effectiveThreadId });
++          }
++          if (!thread) {
++            throw new HTTPException(404, { message: "Thread not found" });
++          }
+         }
+         await enforceThreadAccess({
+           mastra,
+@@ -831,9 +839,16 @@ var LIST_MESSAGES_ROUTE = createRoute({
+       }
+       const memory = await getMemoryFromContext({ mastra, agentId, requestContext, allowMissingAgent: true });
+       if (memory) {
+-        const thread = await memory.getThreadById({ threadId: effectiveThreadId });
++        let thread = await memory.getThreadById({ threadId: effectiveThreadId });
+         if (!thread) {
+-          throw new HTTPException(404, { message: "Thread not found" });
++          // Race-condition guard for messages endpoint
++          for (let _retry = 0; _retry < 3 && !thread; _retry++) {
++            await new Promise(r => setTimeout(r, 250 * Math.pow(2, _retry)));
++            thread = await memory.getThreadById({ threadId: effectiveThreadId });
++          }
++          if (!thread) {
++            throw new HTTPException(404, { message: "Thread not found" });
++          }
+         }
+         await enforceThreadAccess({
+           mastra,

@@ -1,0 +1,72 @@
+{
+  "NARRATOR": {
+    "voice_id": "REPLACE_WITH_VOICE_ID",
+    "description": "George \u2014 Warm, Captivating Storyteller. British, middle-aged. Perfect for literary narration.",
+    "why": "narrative_story use case, warm and measured, the novel's register"
+  },
+  "CASS": {
+    "voice_id": "REPLACE_WITH_VOICE_ID",
+    "description": "Liam \u2014 young male. Energetic but can be restrained.",
+    "why": "youngest male voice available. 14-year-old protagonist."
+  },
+  "EDDAN": {
+    "voice_id": "REPLACE_WITH_VOICE_ID",
+    "description": "Brian \u2014 Deep, Resonant and Comforting. Middle-aged.",
+    "why": "deep and resonant matches the bellwright patriarch. The comfort is right for workshop scenes."
+  },
+  "PERIN": {
+    "voice_id": "REPLACE_WITH_VOICE_ID",
+    "description": "Daniel \u2014 Steady Broadcaster. British, middle-aged.",
+    "why": "steady and measured. Perin is precise, dry, controlled after 10 years of Corda service."
+  },
+  "LENNE": {
+    "voice_id": "REPLACE_WITH_VOICE_ID",
+    "description": "Jessica \u2014 Playful, Bright, Warm. Young female.",
+    "why": "bright and quick matches Lenne's intellectual energy. Young voice."
+  },
+  "TORVALD": {
+    "voice_id": "REPLACE_WITH_VOICE_ID",
+    "description": "Bill \u2014 Wise, Mature, Balanced. Old male.",
+    "why": "old, wise \u2014 the 63-year-old dye merchant. Gravelly warmth."
+  },
+  "MARET": {
+    "voice_id": "REPLACE_WITH_VOICE_ID",
+    "description": "Lily \u2014 Velvety Actress. British, middle-aged female.",
+    "why": "controlled, precise, powerful presence. Maret's stillness."
+  },
+  "DAV_SORN": {
+    "voice_id": "REPLACE_WITH_VOICE_ID",
+    "description": "Eric \u2014 Smooth, Trustworthy. Middle-aged male.",
+    "why": "formal trained voice for the Court Singer. Smooth but can be clipped."
+  },
+  "PROCTOR_FEN": {
+    "voice_id": "REPLACE_WITH_VOICE_ID",
+    "description": "Roger \u2014 Laid-Back, Casual, Resonant. Middle-aged male.",
+    "why": "dry, archly amused pedagogue. The casual resonance fits."
+  },
+  "FERREN": {
+    "voice_id": "REPLACE_WITH_VOICE_ID",
+    "description": "Chris \u2014 Charming, Down-to-Earth. Middle-aged male.",
+    "why": "clinical, professional acoustician. Down-to-earth delivery."
+  },
+  "MIRA_FEN": {
+    "voice_id": "REPLACE_WITH_VOICE_ID",
+    "description": "Alice \u2014 Clear, Engaging Educator. British, middle-aged female.",
+    "why": "Academy scholar, 60s, precise. Educational voice matches."
+  },
+  "VELLA": {
+    "voice_id": "REPLACE_WITH_VOICE_ID",
+    "description": "Matilda \u2014 Knowledgeable, Professional. Middle-aged female.",
+    "why": "Court Singer, formal, weighted. Professional matches."
+  },
+  "OSSIAN": {
+    "voice_id": "REPLACE_WITH_VOICE_ID",
+    "description": "Will \u2014 Relaxed Optimist. Young male.",
+    "why": "nervous, eager student. Young voice, can be less confident."
+  },
+  "MINOR": {
+    "voice_id": "REPLACE_WITH_VOICE_ID",
+    "description": "Roger \u2014 utility voice for unnamed characters.",
+    "why": "neutral enough for merchants, clerks, minor parts."
+  }
+}

@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Evaluation Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+  <style>
+    /* ── Reset & base ──────────────────────────────────────────── */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f172a;
+      --bg-card: #1e293b;
+      --bg-card-hover: #283548;
+      --border: #334155;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --accent: #3b82f6;
+      --green: #22c55e;
+      --yellow: #eab308;
+      --red: #ef4444;
+      --purple: #a855f7;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ── Layout ──────────────────────────────────────────────── */
+    header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    header h1 {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    header h1 span { color: var(--accent); }
+    .filters { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; flex: 1; }
+    .filters label { color: var(--text-muted); font-size: 0.85rem; }
+    select, input, button {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-family: inherit;
+    }
+    select:hover, button:hover { border-color: var(--accent); cursor: pointer; }
+    button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+      font-weight: 500;
+    }
+    button.primary:hover { background: #2563eb; }
+
+    main { padding: 1.5rem 2rem; max-width: 1600px; margin: 0 auto; }
+
+    .grid { display: grid; gap: 1rem; }
+    .grid-cards { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+
+    section { margin-bottom: 1.5rem; }
+    section h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Cards ──────────────────────────────────────────────── */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+    }
+    .card.metric .label {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .card.metric .value { font-size: 1.75rem; font-weight: 700; }
+    .card.metric .delta { font-size: 0.85rem; color: var(--text-dim); margin-top: 0.25rem; }
+    .card.metric .value.green { color: var(--green); }
+    .card.metric .value.yellow { color: var(--yellow); }
+    .card.metric .value.red { color: var(--red); }
+    .card.chart { padding: 1rem; }
+    .card.chart .chart-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+    .card.chart .chart-wrapper {
+      position: relative;
+      height: 280px;
+    }
+    .card.chart .chart-wrapper.tall { height: 360px; }
+
+    /* ── Tables ──────────────────────────────────────────────── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    table th, table td {
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    table th {
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.75rem;
+      background: rgba(0, 0, 0, 0.2);
+    }
+    table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    table tr:hover td { background: var(--bg-card-hover); }
+
+    /* ── Live Activity ─────────────────────────────────────── */
+    .live-dot {
+      display: inline-block;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--green);
+      vertical-align: middle;
+      margin-left: 8px;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    .live-dot.paused { background: var(--text-dim); animation: none; }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .live-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 8px 0 12px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+    .live-controls select {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 3px 8px;
+    }
+    .live-meta { margin-left: auto; font-variant-numeric: tabular-nums; }
+    .live-btn {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 4px 12px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .live-btn:hover { background: var(--bg-card-hover); }
+    .live-trace {
+      border-left: 3px solid var(--border);
+      margin: 8px 0;
+      padding: 8px 12px;
+      background: var(--bg);
+      border-radius: 0 4px 4px 0;
+    }
+    .live-trace.has-error { border-left-color: var(--red); }
+    .live-trace.has-delegation { border-left-color: var(--purple); }
+    .live-trace-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .live-event {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 0;
+      font-size: 13px;
+      border-top: 1px dashed var(--border);
+      cursor: pointer;
+    }
+    .live-event:first-child { border-top: none; }
+    .live-event:hover { background: var(--bg-card-hover); }
+    .live-event-time {
+      color: var(--text-dim);
+      font-variant-numeric: tabular-nums;
+      font-size: 11px;
+      min-width: 70px;
+    }
+    .live-agent-badge {
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--bg-card-hover);
+      color: var(--text);
+    }
+    .live-agent-badge.meta { background: rgba(168, 85, 247, 0.2); color: var(--purple); }
+    .live-agent-badge.coding { background: rgba(59, 130, 246, 0.2); color: var(--accent); }
+    .live-agent-badge.review { background: rgba(34, 197, 94, 0.2); color: var(--green); }
+    .live-event-tool {
+      font-family: 'SF Mono', Consolas, monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .live-event-status {
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+    .live-event-status.success { background: rgba(34, 197, 94, 0.15); color: var(--green); }
+    .live-event-status.error { background: rgba(239, 68, 68, 0.15); color: var(--red); }
+    .live-event-duration { color: var(--text-dim); font-size: 11px; margin-left: auto; }
+    .live-event-arrow { color: var(--purple); font-weight: bold; }
+    .live-event-details {
+      display: none;
+      margin: 8px 0 4px 78px;
+      padding: 8px;
+      background: var(--bg-card-hover);
+      border-radius: 4px;
+      font-family: 'SF Mono', Consolas, monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 240px;
+      overflow-y: auto;
+    }
+    .live-event.expanded .live-event-details { display: block; }
+    .live-event-details .label {
+      color: var(--accent);
+      font-weight: 600;
+      display: block;
+      margin-top: 4px;
+    }
+    .live-event-details .label:first-child { margin-top: 0; }
+    .live-event-details .err { color: var(--red); }
+    .pill {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    .pill.green { background: rgba(34, 197, 94, 0.15); color: var(--green); }
+    .pill.yellow { background: rgba(234, 179, 8, 0.15); color: var(--yellow); }
+    .pill.red { background: rgba(239, 68, 68, 0.15); color: var(--red); }
+    .pill.gray { background: rgba(100, 116, 139, 0.15); color: var(--text-muted); }
+
+    /* ── States ──────────────────────────────────────────────── */
+    .loading {
+      text-align: center;
+      color: var(--text-muted);
+      padding: 2rem;
+      font-style: italic;
+    }
+    .error {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid var(--red);
+      color: var(--red);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    .empty {
+      text-align: center;
+      color: var(--text-dim);
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+
+    /* ── Status indicator ─────────────────────────────────────── */
+    .status-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+    .status-dot.loading { background: var(--yellow); animation: pulse 1.5s ease-in-out infinite; }
+    .status-dot.error { background: var(--red); }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><span>🤖</span> Agent Evaluation Dashboard</h1>
+    <div class="filters">
+      <label>Window:</label>
+      <select id="windowSelect">
+        <option value="24h">Last 24h</option>
+        <option value="7d" selected>Last 7 days</option>
+        <option value="14d">Last 14 days</option>
+        <option value="30d">Last 30 days</option>
+        <option value="90d">Last 90 days</option>
+      </select>
+      <label>Granularity:</label>
+      <select id="granularitySelect">
+        <option value="hour">Hour</option>
+        <option value="day" selected>Day</option>
+      </select>
+      <button class="primary" id="refreshBtn">↻ Refresh</button>
+      <label style="margin-left: 0.5rem;">
+        <input type="checkbox" id="autoRefreshToggle" />
+        Auto-refresh (30s)
+      </label>
+    </div>
+    <div class="status-bar">
+      <span class="status-dot" id="statusDot"></span>
+      <span id="statusText">Ready</span>
+    </div>
+  </header>
+
+  <main>
+    <div id="errorContainer"></div>
+
+    <!-- ── Overview cards ─────────────────────────────────────── -->
+    <section>
+      <h2>Overview</h2>
+      <div class="grid grid-cards" id="overviewCards">
+        <div class="loading">Loading...</div>
+      </div>
+    </section>
+
+    <!-- ── Agents + Models ─────────────────────────────────────── -->
+    <section>
+      <h2>Agents & Models</h2>
+      <div class="grid grid-2">
+        <div class="card chart">
+          <div class="chart-title">Tasks per Agent (Success / Failure)</div>
+          <div class="chart-wrapper"><canvas id="agentsChart"></canvas></div>
+        </div>
+        <div class="card chart">
+          <div class="chart-title">Model Usage (by Cost USD)</div>
+          <div class="chart-wrapper"><canvas id="modelsChart"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Cost & Latency ─────────────────────────────────────── -->
+    <section>
+      <h2>Cost & Latency</h2>
+      <div class="grid grid-2">
+        <div class="card chart">
+          <div class="chart-title">Cost Trend (USD per day)</div>
+          <div class="chart-wrapper"><canvas id="costChart"></canvas></div>
+        </div>
+        <div class="card chart">
+          <div class="chart-title">Latency P50 / P95 / P99 per Agent (ms)</div>
+          <div class="chart-wrapper"><canvas id="latencyChart"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Timeline + Skills ─────────────────────────────────── -->
+    <section>
+      <h2>Activity & Skills</h2>
+      <div class="grid grid-2">
+        <div class="card chart">
+          <div class="chart-title">Event Timeline</div>
+          <div class="chart-wrapper"><canvas id="timelineChart"></canvas></div>
+        </div>
+        <div class="card chart">
+          <div class="chart-title">Top Skills (by uses)</div>
+          <div class="chart-wrapper"><canvas id="skillsChart"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Live Agent Activity (delegations + tool calls) ────── -->
+    <section>
+      <h2>
+        Live Agent Activity
+        <span class="live-dot" id="liveDot" title="Auto-refresh status"></span>
+      </h2>
+      <div class="card live-activity">
+        <div class="live-controls">
+          <label><input type="checkbox" id="liveAutoRefresh" checked /> Auto-refresh co 2s</label>
+          <label>Pokaż ostatnie:
+            <select id="liveWindow">
+              <option value="60">1 min</option>
+              <option value="300" selected>5 min</option>
+              <option value="900">15 min</option>
+              <option value="3600">1h</option>
+            </select>
+          </label>
+          <span class="live-meta" id="liveMeta">—</span>
+          <button id="liveClearBtn" class="live-btn">Wyczyść</button>
+        </div>
+        <div id="liveActivityList"><div class="empty">Brak aktywności w wybranym oknie</div></div>
+      </div>
+    </section>
+
+    <!-- ── Tables: agents, models, scores ─────────────────────── -->
+    <section>
+      <h2>Detailed Tables</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="chart-title">Agents</div>
+          <div id="agentsTable"><div class="loading">Loading...</div></div>
+        </div>
+        <div class="card">
+          <div class="chart-title">Models</div>
+          <div id="modelsTable"><div class="loading">Loading...</div></div>
+        </div>
+        <div class="card">
+          <div class="chart-title">Scorers</div>
+          <div id="scoresTable"><div class="loading">Loading...</div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // ────────────────────────────────────────────────────────
+    // API client
+    // ────────────────────────────────────────────────────────
+    const API_BASE = '/dashboard';
+
+    async function fetchEndpoint(path, params = {}) {
+      const qs = new URLSearchParams(params).toString();
+      const url = `${API_BASE}${path}${qs ? '?' + qs : ''}`;
+      const res = await fetch(url);
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`${path} → ${res.status}: ${text.slice(0, 200)}`);
+      }
+      return res.json();
+    }
+
+    // ────────────────────────────────────────────────────────
+    // State + UI
+    // ────────────────────────────────────────────────────────
+    const state = {
+      window: '7d',
+      granularity: 'day',
+      autoRefresh: false,
+      autoRefreshTimer: null,
+      charts: {},
+    };
+
+    function setStatus(text, kind = 'ok') {
+      document.getElementById('statusText').textContent = text;
+      const dot = document.getElementById('statusDot');
+      dot.className = 'status-dot' + (kind === 'ok' ? '' : ' ' + kind);
+    }
+
+    function showError(msg) {
+      document.getElementById('errorContainer').innerHTML =
+        `<div class="error">⚠️ ${msg}</div>`;
+    }
+    function clearError() {
+      document.getElementById('errorContainer').innerHTML = '';
+    }
+
+    // ────────────────────────────────────────────────────────
+    // Formatters
+    // ────────────────────────────────────────────────────────
+    const fmt = {
+      usd: (n) => '$' + (n ?? 0).toFixed(4),
+      pct: (n) => ((n ?? 0) * 100).toFixed(1) + '%',
+      num: (n) => (n ?? 0).toLocaleString('en-US'),
+      ms: (n) => Math.round(n ?? 0) + 'ms',
+      tokens: (n) => {
+        const v = n ?? 0;
+        if (v >= 1_000_000) return (v / 1_000_000).toFixed(2) + 'M';
+        if (v >= 1_000) return (v / 1_000).toFixed(1) + 'k';
+        return String(v);
+      },
+    };
+
+    function rateClass(rate) {
+      if (rate >= 0.9) return 'green';
+      if (rate >= 0.7) return 'yellow';
+      return 'red';
+    }
+
+    // ────────────────────────────────────────────────────────
+    // Chart helpers
+    // ────────────────────────────────────────────────────────
+    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.borderColor = '#334155';
+    Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif';
+
+    const COLORS = {
+      green: '#22c55e',
+      red: '#ef4444',
+      blue: '#3b82f6',
+      yellow: '#eab308',
+      purple: '#a855f7',
+      cyan: '#06b6d4',
+      orange: '#f97316',
+      pink: '#ec4899',
+    };
+    const PALETTE = Object.values(COLORS);
+
+    function makeOrUpdate(id, type, data, options = {}) {
+      const ctx = document.getElementById(id);
+      if (!ctx) return;
+      if (state.charts[id]) {
+        state.charts[id].data = data;
+        state.charts[id].options = { ...state.charts[id].options, ...options };
+        state.charts[id].update();
+      } else {
+        state.charts[id] = new Chart(ctx, { type, data, options: {
+          maintainAspectRatio: false,
+          responsive: true,
+          ...options,
+        }});
+      }
+    }
+
+    // ────────────────────────────────────────────────────────
+    // Renderers
+    // ────────────────────────────────────────────────────────
+    function renderOverview(data) {
+      const successClass = rateClass(data.successRate);
+      const errorClass = data.toolErrorRate > 0.05 ? 'red' : data.toolErrorRate > 0.02 ? 'yellow' : 'green';
+      const html = `
+        <div class="card metric">
+          <div class="label">Tasks</div>
+          <div class="value">${fmt.num(data.totalTasks)}</div>
+          <div class="delta">${data.uniqueAgents} agents · ${data.uniqueModels} models</div>
+        </div>
+        <div class="card metric">
+          <div class="label">Success Rate</div>
+          <div class="value ${successClass}">${fmt.pct(data.successRate)}</div>
+          <div class="delta">${data.totalErrors} errors total</div>
+        </div>
+        <div class="card metric">
+          <div class="label">Cost</div>
+          <div class="value">${fmt.usd(data.totalCostUsd)}</div>
+          <div class="delta">${fmt.tokens(data.totalTokens)} tokens</div>
+        </div>
+        <div class="card metric">
+          <div class="label">Avg Latency</div>
+          <div class="value">${fmt.ms(data.avgLatencyMs)}</div>
+          <div class="delta">across all tasks</div>
+        </div>
+        <div class="card metric">
+          <div class="label">Tool Calls</div>
+          <div class="value">${fmt.num(data.totalToolCalls)}</div>
+          <div class="delta">error rate <span class="pill ${errorClass}">${fmt.pct(data.toolErrorRate)}</span></div>
+        </div>
+      `;
+      document.getElementById('overviewCards').innerHTML = html;
+    }
+
+    function renderAgentsChart(rows) {
+      const labels = rows.map(r => r.agentId);
+      const completed = rows.map(r => r.completed);
+      const failed = rows.map(r => r.failed);
+      makeOrUpdate('agentsChart', 'bar', {
+        labels,
+        datasets: [
+          { label: 'Completed', data: completed, backgroundColor: COLORS.green },
+          { label: 'Failed', data: failed, backgroundColor: COLORS.red },
+        ],
+      }, {
+        scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true } },
+        plugins: { legend: { position: 'top' } },
+      });
+    }
+
+    function renderAgentsTable(rows) {
+      if (!rows.length) { document.getElementById('agentsTable').innerHTML = '<div class="empty">No data</div>'; return; }
+      const html = `
+        <table>
+          <thead><tr>
+            <th>Agent</th>
+            <th class="num">Tasks</th>
+            <th class="num">Success</th>
+            <th class="num">Cost</th>
+            <th class="num">Avg latency</th>
+          </tr></thead>
+          <tbody>
+            ${rows.map(r => `
+              <tr>
+                <td><strong>${r.agentId}</strong></td>
+                <td class="num">${fmt.num(r.totalTasks)}</td>
+                <td class="num"><span class="pill ${rateClass(r.successRate)}">${fmt.pct(r.successRate)}</span></td>
+                <td class="num">${fmt.usd(r.costUsd)}</td>
+                <td class="num">${fmt.ms(r.avgLatencyMs)}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+      document.getElementById('agentsTable').innerHTML = html;
+    }
+
+    function renderModelsChart(rows) {
+      const top = rows.filter(r => r.costUsd > 0).slice(0, 8);
+      if (!top.length) {
+        // Fallback: invocations if all zero cost (e.g. local Ollama)
+        const fallback = rows.slice(0, 8);
+        makeOrUpdate('modelsChart', 'doughnut', {
+          labels: fallback.map(r => r.model),
+          datasets: [{ data: fallback.map(r => r.invocations), backgroundColor: PALETTE }],
+        }, { plugins: { legend: { position: 'right', labels: { boxWidth: 12 } } } });
+        return;
+      }
+      makeOrUpdate('modelsChart', 'doughnut', {
+        labels: top.map(r => r.model),
+        datasets: [{ data: top.map(r => r.costUsd), backgroundColor: PALETTE }],
+      }, {
+        plugins: {
+          legend: { position: 'right', labels: { boxWidth: 12 } },
+          tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${fmt.usd(ctx.parsed)}` } },
+        },
+      });
+    }
+
+    function renderModelsTable(rows) {
+      if (!rows.length) { document.getElementById('modelsTable').innerHTML = '<div class="empty">No data</div>'; return; }
+      const html = `
+        <table>
+          <thead><tr>
+            <th>Model</th>
+            <th class="num">Calls</th>
+            <th class="num">Tokens</th>
+            <th class="num">Cost</th>
+          </tr></thead>
+          <tbody>
+            ${rows.map(r => `
+              <tr>
+                <td>
+                  <div><strong>${r.model}</strong></div>
+                  <div style="color: var(--text-dim); font-size: 0.75rem;">${r.provider}</div>
+                </td>
+                <td class="num">${fmt.num(r.invocations)}</td>
+                <td class="num">${fmt.tokens(r.totalTokens)}</td>
+                <td class="num">${fmt.usd(r.costUsd)}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+      document.getElementById('modelsTable').innerHTML = html;
+    }
+
+    function renderCostChart(data) {
+      const days = data.byDay ?? [];
+      makeOrUpdate('costChart', 'line', {
+        labels: days.map(d => d.date),
+        datasets: [{
+          label: 'USD',
+          data: days.map(d => d.usd),
+          borderColor: COLORS.blue,
+          backgroundColor: COLORS.blue + '33',
+          fill: true,
+          tension: 0.3,
+        }],
+      }, {
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: (ctx) => fmt.usd(ctx.parsed.y) } },
+        },
+        scales: { y: { beginAtZero: true, ticks: { callback: (v) => '$' + v.toFixed(2) } } },
+      });
+    }
+
+    function renderLatencyChart(rows) {
+      makeOrUpdate('latencyChart', 'bar', {
+        labels: rows.map(r => r.agentId),
+        datasets: [
+          { label: 'P50', data: rows.map(r => r.p50), backgroundColor: COLORS.green },
+          { label: 'P95', data: rows.map(r => r.p95), backgroundColor: COLORS.yellow },
+          { label: 'P99', data: rows.map(r => r.p99), backgroundColor: COLORS.red },
+        ],
+      }, {
+        scales: { y: { beginAtZero: true, ticks: { callback: (v) => v + 'ms' } } },
+        plugins: { legend: { position: 'top' } },
+      });
+    }
+
+    function renderTimelineChart(rows) {
+      makeOrUpdate('timelineChart', 'line', {
+        labels: rows.map(r => r.bucket),
+        datasets: [
+          { label: 'Completed', data: rows.map(r => r.taskCompleted), borderColor: COLORS.green, backgroundColor: COLORS.green + '33', fill: true, tension: 0.2, stack: 'tasks' },
+          { label: 'Failed', data: rows.map(r => r.taskFailed), borderColor: COLORS.red, backgroundColor: COLORS.red + '33', fill: true, tension: 0.2, stack: 'tasks' },
+          { label: 'Tool errors', data: rows.map(r => r.toolError), borderColor: COLORS.orange, backgroundColor: 'transparent', tension: 0.2, borderDash: [4, 4] },
+        ],
+      }, {
+        plugins: { legend: { position: 'top' } },
+        scales: { y: { beginAtZero: true } },
+      });
+    }
+
+    function renderSkillsChart(rows) {
+      const top = rows.slice(0, 10);
+      makeOrUpdate('skillsChart', 'bar', {
+        labels: top.map(r => r.skillId),
+        datasets: [{
+          label: 'Uses',
+          data: top.map(r => r.uses),
+          backgroundColor: COLORS.purple,
+        }],
+      }, {
+        indexAxis: 'y',
+        plugins: { legend: { display: false } },
+        scales: { x: { beginAtZero: true } },
+      });
+    }
+
+    function renderScoresTable(rows) {
+      if (!rows.length) {
+        document.getElementById('scoresTable').innerHTML =
+          '<div class="empty">No scorer evaluations in this window</div>';
+        return;
+      }
+      const html = `
+        <table>
+          <thead><tr>
+            <th>Scorer</th>
+            <th class="num">N</th>
+            <th class="num">Avg score</th>
+            <th class="num">Pass rate</th>
+          </tr></thead>
+          <tbody>
+            ${rows.map(r => `
+              <tr>
+                <td><strong>${r.scorerId}</strong></td>
+                <td class="num">${fmt.num(r.totalEvaluations)}</td>
+                <td class="num"><span class="pill ${rateClass(r.avgScore)}">${(r.avgScore ?? 0).toFixed(2)}</span></td>
+                <td class="num">${fmt.pct(r.passRate)}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+      document.getElementById('scoresTable').innerHTML = html;
+    }
+
+    // ────────────────────────────────────────────────────────
+    // Loaders (parallel)
+    // ────────────────────────────────────────────────────────
+    async function loadAll() {
+      clearError();
+      setStatus('Loading...', 'loading');
+
+      const params = { since: state.window };
+
+      try {
+        const [
+          overview,
+          agents,
+          models,
+          cost,
+          latency,
+          timeline,
+          skills,
+          scores,
+        ] = await Promise.all([
+          fetchEndpoint('/overview', params),
+          fetchEndpoint('/agents', params),
+          fetchEndpoint('/models', params),
+          fetchEndpoint('/cost', params),
+          fetchEndpoint('/latency', params),
+          fetchEndpoint('/timeline', { ...params, granularity: state.granularity }),
+          fetchEndpoint('/skills', params),
+          fetchEndpoint('/scores', params),
+        ]);
+
+        renderOverview(overview);
+        renderAgentsChart(agents.data);
+        renderAgentsTable(agents.data);
+        renderModelsChart(models.data);
+        renderModelsTable(models.data);
+        renderCostChart(cost.data);
+        renderLatencyChart(latency.data);
+        renderTimelineChart(timeline.data);
+        renderSkillsChart(skills.data);
+        renderScoresTable(scores.data);
+
+        setStatus(`Updated ${new Date().toLocaleTimeString()}`, 'ok');
+      } catch (err) {
+        console.error(err);
+        showError(err.message || String(err));
+        setStatus('Error', 'error');
+      }
+    }
+
+    // ────────────────────────────────────────────────────────
+    // Live Activity (delegacje + tool calls live timeline)
+    // ────────────────────────────────────────────────────────
+    const liveState = {
+      timer: null,
+      windowSec: 300,
+      autoRefresh: true,
+      events: new Map(),       // eventId → event (do dedup)
+      lastFetchTs: null,
+    };
+
+    const AGENT_BADGE_CLASS = (agentId) => {
+      const id = (agentId || '').toLowerCase();
+      if (id.includes('meta')) return 'meta';
+      if (id.includes('coding') || id.includes('code-review')) return id.includes('review') ? 'review' : 'coding';
+      return '';
+    };
+
+    const fmtLocalTime = (iso) => {
+      const d = new Date(iso);
+      return d.toLocaleTimeString('pl-PL', { hour12: false }) + '.' + String(d.getMilliseconds()).padStart(3, '0');
+    };
+
+    const escapeHtml = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+    function renderLiveEvent(ev) {
+      const badgeClass = AGENT_BADGE_CLASS(ev.agentId);
+      const isError = ev.status === 'error' || ev.errorMessage;
+      const isDelegation = ev.type === 'delegation';
+      const arrow = isDelegation ? '<span class="live-event-arrow">→</span>' : '';
+
+      let label;
+      if (ev.type === 'delegation') label = 'delegation';
+      else if (ev.type === 'task_completed') label = 'task ✓';
+      else if (ev.type === 'task_failed') label = 'task ✗';
+      else if (ev.toolId) label = ev.toolId;
+      else label = ev.type;
+
+      const detailsParts = [];
+      if (ev.errorMessage) detailsParts.push(`<span class="label err">ERROR:</span>${escapeHtml(ev.errorMessage)}`);
+      if (ev.input) detailsParts.push(`<span class="label">IN:</span>${escapeHtml(ev.input)}`);
+      if (ev.output) detailsParts.push(`<span class="label">OUT:</span>${escapeHtml(ev.output)}`);
+      if (ev.model) detailsParts.push(`<span class="label">model:</span>${escapeHtml(ev.model)}`);
+      if (ev.tokenUsage) detailsParts.push(`<span class="label">tokens:</span>prompt=${ev.tokenUsage.prompt} completion=${ev.tokenUsage.completion}`);
+      const details = detailsParts.length
+        ? `<div class="live-event-details">${detailsParts.join('')}</div>`
+        : '';
+
+      return `
+        <div class="live-event ${isError ? 'has-error' : ''}" data-event-id="${ev.eventId}">
+          <span class="live-event-time">${fmtLocalTime(ev.timestamp)}</span>
+          <span class="live-agent-badge ${badgeClass}">${escapeHtml(ev.agentId || 'unknown')}</span>
+          ${arrow}
+          <span class="live-event-tool">${escapeHtml(label)}</span>
+          <span class="live-event-status ${isError ? 'error' : 'success'}">${ev.status || '-'}</span>
+          <span class="live-event-duration">${ev.durationMs ? ev.durationMs + 'ms' : ''}</span>
+        </div>
+        ${details}
+      `;
+    }
+
+    function renderLiveActivity() {
+      const list = document.getElementById('liveActivityList');
+      const allEvents = Array.from(liveState.events.values())
+        .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+      if (!allEvents.length) {
+        list.innerHTML = '<div class="empty">Brak aktywności w wybranym oknie</div>';
+        return;
+      }
+
+      // Group by taskId (trace id) preserving newest-first order
+      const groups = new Map();
+      for (const ev of allEvents) {
+        const key = ev.taskId || ev.eventId;
+        if (!groups.has(key)) groups.set(key, []);
+        groups.get(key).push(ev);
+      }
+
+      const html = Array.from(groups.entries()).map(([taskId, events]) => {
+        const hasError = events.some(e => e.status === 'error' || e.errorMessage);
+        const hasDelegation = events.some(e => e.type === 'delegation');
+        const cls = hasError ? 'has-error' : (hasDelegation ? 'has-delegation' : '');
+        const headerAgent = events[events.length - 1].agentId || 'unknown'; // root agent
+        const eventCount = events.length;
+        return `
+          <div class="live-trace ${cls}">
+            <div class="live-trace-header">
+              <span class="live-agent-badge ${AGENT_BADGE_CLASS(headerAgent)}">${escapeHtml(headerAgent)}</span>
+              <span style="color: var(--text-dim)">trace ${escapeHtml(taskId.slice(0, 12))}</span>
+              <span style="color: var(--text-dim); margin-left: auto">${eventCount} event(s)</span>
+            </div>
+            ${events.map(renderLiveEvent).join('')}
+          </div>
+        `;
+      }).join('');
+
+      list.innerHTML = html;
+
+      // Click handler for event expand/collapse
+      list.querySelectorAll('.live-event').forEach(el => {
+        el.addEventListener('click', () => el.classList.toggle('expanded'));
+      });
+    }
+
+    async function loadLiveActivity() {
+      try {
+        const since = new Date(Date.now() - liveState.windowSec * 1000).toISOString();
+        const res = await fetchEndpoint('/agent-activity', { since, limit: '200' });
+
+        // Drop events outside window, then upsert fresh ones
+        const cutoff = Date.now() - liveState.windowSec * 1000;
+        for (const [id, ev] of liveState.events) {
+          if (new Date(ev.timestamp).getTime() < cutoff) liveState.events.delete(id);
+        }
+        for (const ev of res.events) {
+          liveState.events.set(ev.eventId, ev);
+        }
+        liveState.lastFetchTs = new Date();
+
+        document.getElementById('liveMeta').textContent =
+          `${liveState.events.size} eventów · odświeżono ${liveState.lastFetchTs.toLocaleTimeString('pl-PL', {hour12: false})}`;
+        renderLiveActivity();
+      } catch (err) {
+        document.getElementById('liveMeta').textContent = `Błąd: ${err.message}`;
+      }
+    }
+
+    function startLivePolling() {
+      if (liveState.timer) clearInterval(liveState.timer);
+      if (!liveState.autoRefresh) return;
+      loadLiveActivity();
+      liveState.timer = setInterval(loadLiveActivity, 2000);
+      document.getElementById('liveDot').classList.remove('paused');
+    }
+
+    function stopLivePolling() {
+      if (liveState.timer) clearInterval(liveState.timer);
+      liveState.timer = null;
+      document.getElementById('liveDot').classList.add('paused');
+    }
+
+    document.getElementById('liveAutoRefresh').addEventListener('change', (e) => {
+      liveState.autoRefresh = e.target.checked;
+      if (liveState.autoRefresh) startLivePolling();
+      else stopLivePolling();
+    });
+
+    document.getElementById('liveWindow').addEventListener('change', (e) => {
+      liveState.windowSec = parseInt(e.target.value, 10);
+      liveState.events.clear();
+      loadLiveActivity();
+    });
+
+    document.getElementById('liveClearBtn').addEventListener('click', () => {
+      liveState.events.clear();
+      renderLiveActivity();
+      document.getElementById('liveMeta').textContent = 'Wyczyszczone';
+    });
+
+    // ────────────────────────────────────────────────────────
+    // Wire up
+    // ────────────────────────────────────────────────────────
+    document.getElementById('windowSelect').addEventListener('change', (e) => {
+      state.window = e.target.value;
+      loadAll();
+    });
+    document.getElementById('granularitySelect').addEventListener('change', (e) => {
+      state.granularity = e.target.value;
+      loadAll();
+    });
+    document.getElementById('refreshBtn').addEventListener('click', () => loadAll());
+    document.getElementById('autoRefreshToggle').addEventListener('change', (e) => {
+      state.autoRefresh = e.target.checked;
+      if (state.autoRefreshTimer) {
+        clearInterval(state.autoRefreshTimer);
+        state.autoRefreshTimer = null;
+      }
+      if (state.autoRefresh) {
+        state.autoRefreshTimer = setInterval(() => loadAll(), 30000);
+      }
+    });
+
+    // Initial load
+    loadAll();
+    startLivePolling();
+  </script>
+</body>
+</html>

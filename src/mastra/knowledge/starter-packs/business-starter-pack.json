@@ -1,0 +1,28 @@
+{
+  "category": "business",
+  "targetAgents": ["metaAgent", "marketingAgent", "salesAgent", "analyticsAgent", "huntAgent"],
+  "description": "Szablon notatnika biznesowego dla nowej firmy lub nowego projektu. Wskazuje strukturę i instrukcję wdrożenia wiedzy.",
+  "notebookTitlePattern": "{projectName} - Master Knowledge",
+  "recommendedSections": [
+    {
+      "name": "Oferta i Usługi (Product & Service Portfolio)",
+      "description": "Opis głównych produktów, pakietów wdrożeniowych, usług SaaS lub oferty handlowej."
+    },
+    {
+      "name": "Cennik i Warunki Handlowe (Pricing & Terms)",
+      "description": "Struktura cen, modele rozliczeń (subskrypcja, fixed-fee, prowizja), okresy próbne."
+    },
+    {
+      "name": "Idealny Profil Klienta (ICP & Target Audience)",
+      "description": "Branże docelowe, wielkość firm, stanowiska decydentów (CEO, Dyrektor Operacyjny, Szef Kuchni) i ich główne wyzwania."
+    },
+    {
+      "name": "Materiały i Linki (Website & Docs)",
+      "description": "Link do strony www, materiały PDF, prezentacje ofertowe, studia przypadków."
+    }
+  ],
+  "userOnboardingPrompt": {
+    "pl": "Zainicjalizowałem notatnik biznesowy dla Twojego projektu: **{projectName} - Master Knowledge**.\n\nAby agenci mogli precyzyjnie reprezentować Twoją firmę, tworzyć oferty i dopasowywać treści, dodaj do niego swoje pliki PDF, dokumenty ofertowe, cenniki lub wklej link do swojej strony www.",
+    "en": "I have initialized the business knowledge notebook: **{projectName} - Master Knowledge**.\n\nTo allow the agent fleet to accurately understand your company's offer, pricing, and value propositions, please add your PDF brochures, offer documents, pricing sheets, or website URL directly to this notebook."
+  }
+}

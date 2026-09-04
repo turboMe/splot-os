@@ -1,0 +1,23 @@
+{
+  "blockId": "telegram-message",
+  "description": "Send a Telegram message",
+  "nodes": [
+    {
+      "parameters": {
+        "chatId": "{{telegramChatId}}",
+        "text": "={{ $json.telegramMessage || $json.message || $json.text || JSON.stringify($json).slice(0, 4000) }}",
+        "additionalFields": { "parse_mode": "Markdown" }
+      },
+      "id": "telegram_send",
+      "name": "Telegram Send",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [0, 300],
+      "credentials": { "telegramApi": { "id": "1", "name": "Telegram Bot" } }
+    }
+  ],
+  "params": {
+    "telegramChatId": { "description": "Telegram chat ID to send messages to", "default": "", "required": true }
+  },
+  "outputNode": "Telegram Send"
+}

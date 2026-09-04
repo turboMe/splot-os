@@ -1,0 +1,21 @@
+{
+  "project_id": "demo-summer-postcard",
+  "track_id": "track-01",
+  "prompt_version": "v1",
+  "generation_mode": "lyrics2song",
+  "language": "en",
+  "vocal_type": "duet",
+  "style_prompt": "Bright indie folk-pop duet with acoustic guitar, brushed drums, light hand percussion, warm bass, close harmonies, and a natural live-room feel. The song should feel sunny, conversational, and commercially safe, with a memorable refrain and no named recording artists.",
+  "lyrics": "Verse 1\nYou sent a postcard from the coast\nSalt on the ink, a faded note\nI read it twice beneath the fan\nLike summer waiting in my hands\n\nChorus\nMeet me where the daylight bends\nWhere the road runs out and the blue begins\nWe can start with a simple line\nYour hand in mine, your hand in mine\n\nVerse 2\nI kept the ticket from the train\nA paper moon, a window frame\nYou laughed and said the world was wide\nI said I only need this ride\n\nChorus\nMeet me where the daylight bends\nWhere the road runs out and the blue begins\nWe can start with a simple line\nYour hand in mine, your hand in mine\n\nBridge\nNo rush to name what we become\nJust two voices chasing sun\n\nFinal Chorus\nMeet me where the daylight bends\nWhere the road runs out and the blue begins\nWe can start with a simple line\nYour hand in mine, your hand in mine",
+  "structure": [
+    "verse",
+    "chorus",
+    "verse",
+    "chorus",
+    "bridge",
+    "final_chorus"
+  ],
+  "length_ms": 210000,
+  "output_format": "mp3",
+  "reference_audio": []
+}

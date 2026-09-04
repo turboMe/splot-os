@@ -1,0 +1,22 @@
+{
+  "blockId": "switch-router",
+  "description": "Multi-way routing based on field value",
+  "nodes": [
+    {
+      "parameters": {
+        "rules": {
+          "values": []
+        },
+        "fallbackOutput": "extra"
+      },
+      "id": "switch_router",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [0, 300]
+    }
+  ],
+  "params": {},
+  "outputNode": "Switch",
+  "outputs": 4
+}

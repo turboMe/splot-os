@@ -1,0 +1,37 @@
+{
+  "spike": "GAP-MODEL-ABORT-01",
+  "at": "2026-07-23T18:05:42.692Z",
+  "env": {
+    "model": "huihui_ai/qwen3.5-abliterated:9b",
+    "base": "http://localhost:11434",
+    "abortAfterMs": 2800,
+    "aiSdk": "6.x",
+    "openaiCompatible": "2.x",
+    "node": "v22.20.0"
+  },
+  "control": {
+    "chunks": 350,
+    "totalMs": 6323.3513299999995
+  },
+  "stream": {
+    "chunksBeforeAbort": 143,
+    "chunksAfterAbort": 0,
+    "abortToStopMs": 2.039994000000661,
+    "observedAbort": true,
+    "errorName": "abort-part",
+    "totalMs": 2803.5915429999995
+  },
+  "generate": {
+    "rejected": true,
+    "errorName": "AbortError",
+    "elapsedMs": 2805.176464
+  },
+  "criteria": {
+    "controlMeaningful": true,
+    "streamStops": true,
+    "generateStops": true
+  },
+  "verdict": "ABORT_WORKS",
+  "implication": "In-flight abort reaches transport; cooperative cancel of the model call is viable. GAP-WORKER-ISO-01 can allow shared-process cooperative workers (still isolate non-cooperative/subprocess).",
+  "note": "Local Ollama: closing the HTTP connection stops server-side generation. Remote/cloud providers need a separate per-capability confirmation that provider compute/billing stops."
+}

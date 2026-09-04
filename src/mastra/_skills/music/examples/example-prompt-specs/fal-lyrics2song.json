@@ -1,0 +1,21 @@
+{
+  "project_id": "demo-neon-rain",
+  "track_id": "track-01",
+  "prompt_version": "v1",
+  "generation_mode": "lyrics2song",
+  "language": "en",
+  "vocal_type": "female",
+  "style_prompt": "Late-night synthwave pop at 92 BPM with warm analog polysynth pads, tight electronic drums, a steady sidechain pulse, clean melodic female lead vocal, restrained reverb, and a hopeful chorus lift after intimate verses. Do not mention named recording artists; keep the mix glossy but not overcompressed.",
+  "lyrics": "Verse 1\nStreetlights shiver in the rain\nYour message glows and fades again\nI count the turns we never took\nLike folded maps inside a book\n\nChorus\nNeon rain, carry me home\nThrough every wire, every tone\nIf we get lost before the dawn\nLeave one light on, leave one light on\n\nVerse 2\nThe city hums beneath the glass\nI let the empty taxis pass\nA silver sky, a blue mistake\nA little more than hearts can take\n\nChorus\nNeon rain, carry me home\nThrough every wire, every tone\nIf we get lost before the dawn\nLeave one light on, leave one light on\n\nBridge\nNo ghost, no blame, no final scene\nJust all the roads we walked between\n\nFinal Chorus\nNeon rain, carry me home\nThrough every wire, every tone\nIf we get lost before the dawn\nLeave one light on, leave one light on",
+  "structure": [
+    "verse",
+    "chorus",
+    "verse",
+    "chorus",
+    "bridge",
+    "final_chorus"
+  ],
+  "length_ms": 190000,
+  "output_format": "mp3",
+  "reference_audio": []
+}

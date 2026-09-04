@@ -1,0 +1,11 @@
+---
+title: TITLE
+author: AUTHOR
+lang: en
+rights: This is a work of fiction.
+publisher: Publisher Name
+date: 2026
+cover-image: ../art/epub_front_cover.png
+css: epub_style.css
+titlepage: false
+...

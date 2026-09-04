@@ -1,0 +1,26 @@
+{
+  "blockId": "agentforge-webhook",
+  "description": "Send data to AgentForge API endpoint",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "{{agentForgeTaskEndpoint}}",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ type: 'webhook_event', source: $workflow.id, data: $json, timestamp: $now.toISO() }) }}",
+        "options": {}
+      },
+      "id": "agentforge_webhook",
+      "name": "AgentForge API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [0, 300]
+    }
+  ],
+  "params": {
+    "agentForgeTaskEndpoint": { "description": "Mastra task queue endpoint URL", "default": "http://localhost:4111/api/tasks", "required": false }
+  },
+  "outputNode": "AgentForge API"
+}

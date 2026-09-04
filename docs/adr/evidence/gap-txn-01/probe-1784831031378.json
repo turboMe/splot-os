@@ -1,0 +1,51 @@
+{
+  "boundary": [
+    {
+      "docs": 11,
+      "commitMs": 13
+    },
+    {
+      "docs": 19,
+      "commitMs": 13
+    },
+    {
+      "docs": 27,
+      "commitMs": 14
+    }
+  ],
+  "jobDocHotSpot": {
+    "concurrency": 48,
+    "totalMs": 316,
+    "retries": 1047,
+    "finalSeq": 48,
+    "lostUpdates": false
+  },
+  "perTaskDoc": {
+    "concurrency": 48,
+    "totalMs": 172,
+    "retries": 45
+  },
+  "nowInTransaction": true,
+  "spike": "GAP-TXN-01",
+  "at": "2026-07-23T18:23:51.378Z",
+  "env": {
+    "uri": "mongodb://localhost:27018/?replicaSet=rs0",
+    "driver": "7.x",
+    "topology": "ephemeral-replica-set",
+    "node": "v22.20.0"
+  },
+  "criteria": {
+    "noLostUpdates": true,
+    "boundaryWellUnderLimit": true,
+    "perTaskCheaper": true,
+    "nowInTxnWorks": true,
+    "maxCommitMs": 14
+  },
+  "verdict": "TXN_BOUNDARY_VIABLE",
+  "findings": {
+    "jobDocContention": "1047 retries across 48 concurrent job-doc CAS txns in 316ms",
+    "perTaskContention": "45 retries across 48 per-task CAS txns in 172ms",
+    "jobDocContentionMultiplier": 23.3
+  },
+  "recommendation": "Enforce maxBoundaryDocuments/TxnMs/OplogBytes < Mongo limits; keep sibling authority on per-task docs (GAP-JOBDOC-01) to avoid job-doc write-conflict storms; retry TransientTransactionError with bounded jitter and treat sustained hot-doc retries as a backpressure signal (§16.2)."
+}

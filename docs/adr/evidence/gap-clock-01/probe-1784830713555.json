@@ -1,0 +1,79 @@
+{
+  "spike": "GAP-CLOCK-01",
+  "at": "2026-07-23T18:18:33.554Z",
+  "env": {
+    "uri": "mongodb://localhost:27017",
+    "driver": "7.x",
+    "topology": "standalone",
+    "node": "v22.20.0"
+  },
+  "mechanisms": {
+    "M1_pipeline_$$NOW_guard": true,
+    "M2_$expr_$$NOW_filter": true
+  },
+  "results": {
+    "M1 pipeline: guard fires when now<deadline → PAUSED, gen++": {
+      "pass": true,
+      "detail": {
+        "state": "PAUSED",
+        "gen": 1
+      }
+    },
+    "M1 pipeline: guard blocks when now>=deadline → unchanged, gen stays": {
+      "pass": true,
+      "detail": {
+        "state": "RUNNING",
+        "gen": 0
+      }
+    },
+    "M2 $expr: fires when now<deadline → matched & PAUSED": {
+      "pass": true,
+      "detail": {
+        "doc": {
+          "_id": "m2-future",
+          "state": "PAUSED",
+          "deadlineAt": "2026-07-23T18:19:33.346Z",
+          "clockGen": 1,
+          "pausedAt": "2026-07-23T18:18:33.347Z"
+        }
+      }
+    },
+    "M2 $expr: no match when now>=deadline → not paused": {
+      "pass": true,
+      "detail": {
+        "matched": null,
+        "doc": {
+          "_id": "m2-past",
+          "state": "RUNNING",
+          "deadlineAt": "2026-07-23T18:17:33.347Z",
+          "clockGen": 0,
+          "pausedAt": null
+        }
+      }
+    },
+    "RACE: exactly one concurrent CAS pause wins, gen=1": {
+      "pass": true,
+      "detail": {
+        "winners": 1,
+        "gen": 1
+      }
+    },
+    "BOUNDARY: past deadline → due wins, pause fails guard, gen=1": {
+      "pass": true,
+      "detail": {
+        "pause": null,
+        "due": "TIMED_OUT",
+        "doc": {
+          "_id": "boundary",
+          "state": "TIMED_OUT",
+          "deadlineAt": "2026-07-23T18:18:33.502Z",
+          "clockGen": 1,
+          "pausedAt": null
+        }
+      }
+    }
+  },
+  "verdict": "STORE_TIME_IN_CAS_WORKS",
+  "recommendation": "Use $expr + $$NOW in the query filter: time predicate AND generation CAS in one conditional write (single-document authority). Pipeline-form ($$NOW guard) also works as a fallback. Multi-document boundaries (A/B) still need GAP-TXN-01 on a replica set.",
+  "note": "Single-document store-time authority. $$NOW is server time; app-provided Date is avoided in the guard so process clock skew is not authority."
+}

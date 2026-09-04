@@ -1,0 +1,46 @@
+{
+  "blockId": "error-handler",
+  "description": "Error trigger workflow that sends alerts to Telegram",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "error_trigger",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst error = items[0]?.json;\nconst msg = `*Workflow Error*\\n\\nWorkflow: ${error?.workflow?.name || 'Unknown'}\\nError: ${error?.execution?.error?.message || 'No message'}\\nTime: ${new Date().toISOString()}`;\nreturn [{ json: { telegramMessage: msg } }];"
+      },
+      "id": "format_error",
+      "name": "Format Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "chatId": "{{telegramChatId}}",
+        "text": "={{ $json.telegramMessage }}",
+        "additionalFields": { "parse_mode": "Markdown" }
+      },
+      "id": "telegram_alert",
+      "name": "Telegram Alert",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [750, 300],
+      "credentials": { "telegramApi": { "id": "1", "name": "Telegram Bot" } }
+    }
+  ],
+  "connections": {
+    "Error Trigger": { "main": [[{ "node": "Format Error", "type": "main", "index": 0 }]] },
+    "Format Error": { "main": [[{ "node": "Telegram Alert", "type": "main", "index": 0 }]] }
+  },
+  "params": {
+    "telegramChatId": { "description": "Telegram chat ID for alerts", "default": "", "required": true }
+  },
+  "outputNode": "Telegram Alert",
+  "isStandalone": true
+}

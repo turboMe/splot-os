@@ -1,0 +1,10 @@
+eval_logs/
+edit_logs/
+briefs/
+__pycache__/
+*.pyc
+.env
+.venv/
+typeset/*.pdf
+typeset/chapters_content.tex
+*.pdf

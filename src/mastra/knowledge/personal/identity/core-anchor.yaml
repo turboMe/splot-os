@@ -1,0 +1,10 @@
+# CORE IDENTITY ANCHOR (SZABLON GROUNDINGU)
+candidate_name: "Alex Doe"
+primary_email: "candidate@example.com"
+phone: "+1 (555) 019-2834"
+github_url: "https://github.com/turboMe"
+no_invented_linkedin: true
+default_locale: "en"
+constraints:
+  - "Never invent secondary phone numbers or addresses."
+  - "Ground all outreach claims in verified technical facts."

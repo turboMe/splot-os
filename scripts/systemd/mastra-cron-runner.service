@@ -1,0 +1,20 @@
+[Unit]
+Description=Mastra cron runner (including DuckDB observability retention)
+Wants=network-online.target
+After=network-online.target
+ConditionPathExists=/projekty/mastra-agentic-environment/agentic-agents/package.json
+
+[Service]
+Type=simple
+WorkingDirectory=/projekty/mastra-agentic-environment/agentic-agents
+ExecStart=/usr/bin/bash /projekty/mastra-agentic-environment/agentic-agents/scripts/with-node.sh npx tsx src/mastra/scripts/cron-runner.ts
+Restart=always
+RestartSec=10
+TimeoutStopSec=20
+KillSignal=SIGTERM
+UMask=0077
+StandardOutput=append:/projekty/mastra-agentic-environment/.deploy/logs/cron-runner-systemd.log
+StandardError=append:/projekty/mastra-agentic-environment/.deploy/logs/cron-runner-systemd.log
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,70 @@
+/**
+ * DESIGN TOKENS - AGENT CHAT PANEL
+ * Ujednolicony system zmiennych CSS dla motywu ciemnego i akcentów agentów.
+ */
+
+:root {
+  /* Paleta Tła (Warstwy głębokości) */
+  --bg-0: #080807;          /* Najgłębsze tło aplikacji */
+  --bg-1: #0E0E0C;          /* Panele główne, tło czatu */
+  --bg-2: #141411;          /* Karty, dymki, kontenery akordeonów */
+  --bg-3: #1B1B17;          /* Hover, aktywne elementy, wewnętrzne ramki */
+  --bg-4: #24241F;          /* Wyróżnione podświetlenia */
+
+  /* Linie i Ramki */
+  --line: #20201B;          /* Domyślne subtelne obramowanie */
+  --line-strong: #2D2D26;   /* Wyraźniejsze obramowanie (focus, active) */
+  --line-accent: rgba(255, 77, 0, 0.3);
+
+  /* Typografia i Kontrast Tekstu */
+  --ink: #EDECE4;           /* Główny tekst (High contrast) */
+  --ink-2: #C4C2B6;         /* Drugorzędny tekst, opisy, etykiety */
+  --muted: #7A786E;         /* Wygaszony tekst, placeholdery, drugorzędne metryki */
+  --faint: #44433D;         /* Bardzo słaby tekst, ikony dekoracyjne */
+
+  /* Sygnały i Statusy */
+  --signal: #FF4D00;        /* Główny sygnał (Safety Orange) */
+  --success: #2EE6A8;       /* Sukces, poprawne wykonanie narzędzia (Mint) */
+  --warning: #EAB308;       /* Ostrzeżenie, retry, oczekiwanie (Amber) */
+  --error: #FF3B30;         /* Błąd, timeout, niepowodzenie (Crimson) */
+  --info: #5B8DEF;          /* Informacja, research, podgląd (Electric Blue) */
+
+  /* Kolory Akcentowe Agentów (Mastra OS Agent Profiles) */
+  --accent-meta: #FF4D00;       /* metaAgent (Orkiestrator) */
+  --accent-researcher: #5B8DEF; /* researcherAgent (Research) */
+  --accent-analytics: #2EE6A8;  /* analyticsAgent (Analiza & Dane) */
+  --accent-automation: #EAB308; /* automationArchitect (n8n & Workflows) */
+  --accent-coding: #A855F7;     /* codingAgent (Kod & LSP) */
+  --accent-crm: #EC4899;        /* crmAgent (CRM & Pipeline) */
+  --accent-writer: #F97316;     /* writerAgent (Kopiowanie & Publikacje) */
+  --accent-design: #06B6D4;     /* designAgent (UI/UX) */
+  --accent-film: #8B5CF6;       /* filmAgent (Wideo & Scenariusze) */
+  --accent-chef: #10B981;       /* chefAgent (Gastronomia) */
+
+  /* Domyślny akcent aktualnej tury */
+  --accent: var(--accent-meta);
+
+  /* Typografia */
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', ui-monospace, monospace;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Promienie i Zaokrąglenia */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+
+  /* Płynne Przejścia i Krzywe Animacji */
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --trans-fast: 0.15s var(--ease-smooth);
+  --trans-normal: 0.25s var(--ease-smooth);
+  --trans-spring: 0.35s var(--ease-spring);
+
+  /* Cienie i Poświaty */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 28px rgba(0, 0, 0, 0.65);
+  --glow-accent: 0 0 16px rgba(255, 77, 0, 0.12);
+  --glow-success: 0 0 16px rgba(46, 230, 168, 0.12);
+}

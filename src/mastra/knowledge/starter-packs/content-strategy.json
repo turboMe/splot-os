@@ -1,0 +1,83 @@
+{
+  "notebookTitle": "content-strategy",
+  "category": "strategy",
+  "targetAgents": ["contentAgent", "writerAgent"],
+  "description": "Uniwersalna baza wiedzy strategii contentowej, copywritingu, anatomii hooków, formatów LinkedIn, Instagram, TikTok oraz psychologii wiralowości.",
+  "sources": [
+    {
+      "title": "'Contagious': Jonah Berger on Why Things Catch On - Knowledge at Wharton",
+      "type": "text",
+      "summary": "Psychologia wiralowości i zasada STEPPS (Social Currency, Triggers, Emotion, Public, Practical Value, Stories) autorstwa prof. Jonaha Bergera."
+    },
+    {
+      "title": "10 Viral Hook Templates for 1M+ Views (2026 Guide)",
+      "type": "text",
+      "summary": "Szablony hooków 3-sekundowych o najwyższym współczynniku zatrzymania uwagi (retention rate) dla krótkich form wideo i postów tekstowych."
+    },
+    {
+      "title": "Copywriting Formulas for Social Media: AIDA, PAS, and BAB Explained (2026 Guide)",
+      "type": "text",
+      "summary": "Praktyczne zastosowanie formuł AIDA (Attention-Interest-Desire-Action), PAS (Problem-Agitate-Solve) oraz BAB (Before-After-Bridge) w mediach społecznościowych."
+    },
+    {
+      "title": "Combining Copywriting Formulas with Storytelling Frameworks",
+      "type": "text",
+      "summary": "Łączenie klasycznych formuł perswazyjnych ze strukturami narracyjnymi (Bohater, Konflikt, Przemiana, Lekcja Biznesowa)."
+    },
+    {
+      "title": "Essays — Justin Welsh",
+      "type": "text",
+      "summary": "Frameworki budowania autorytetu, formatowania postów na LinkedIn, czytelności na urządzeniach mobilnych (whitespace) i lead generation."
+    },
+    {
+      "title": "LinkedIn Post Hooks: 100+ Examples by Type (2026)",
+      "type": "text",
+      "summary": "Katalog ponad 100 sprawdzonych nagłówków na LinkedIn podzielonych na kategorie: Kontrariańskie, Lekcje z Porażek, Metodologie Krok-po-Kroku, Dane Rynkowe."
+    },
+    {
+      "title": "Top 5 Proven Frameworks for Viral LinkedIn Hooks for 2026",
+      "type": "text",
+      "summary": "Zasady optymalizacji pierwszych 140 znaków posta przed przyciskiem '...zobacz więcej' w celu maksymalizacji wskaźnika klikalności."
+    },
+    {
+      "title": "Instagram Carousel Posts: 12 Best Practices & 2026 Guide",
+      "type": "text",
+      "summary": "Struktura skutecznej karuzeli na Instagramie: Slajd 1 (Prowokacyjny Hook), Slajdy 2-8 (Merytoryczna Wartość w 1 myśli na slajd), Slajd 9 (Podsumowanie), Slajd 10 (Niskotarciowe CTA)."
+    },
+    {
+      "title": "How to Write a TikTok Script That Goes Viral (2026 Guide)",
+      "type": "text",
+      "summary": "Struktura skryptu wideo: 0-3s (Wizualny i Werbalny Hook), 3-15s (Rozwinięcie problemu), 15-45s (Konkretna wskazówka bez lania wody), 45-60s (Call to Action)."
+    },
+    {
+      "title": "TikTok Hook Formulas That Drive 3-Second Holds - OpusClip Blog",
+      "type": "text",
+      "summary": "Analiza retencji wideo: techniki wzbudzania ciekawości, unikanie 'gadających głów' i dynamiczne tempo montażowe."
+    },
+    {
+      "title": "How to Write Social Media Captions That Actually Get Engagement",
+      "type": "text",
+      "summary": "Tworzenie angażujących opisów pod postami, strategiczne zadawanie pytań na końcu i budowanie dyskusji w komentarzach."
+    },
+    {
+      "title": "Social Media Caption Limits 2026: IG, TikTok, LinkedIn",
+      "type": "text",
+      "summary": "Techniczne limity długości znaków, optymalna długość treści oraz rekomendacje algorytmiczne per platforma w 2026 roku."
+    },
+    {
+      "title": "How to Storyboard a Video: A Guide for Short-form Creators + Filmmakers",
+      "type": "text",
+      "summary": "Tworzenie shot listów, storyboardów i planowania ujęć (B-roll, A-roll, kadrowanie) dla wideo social media."
+    },
+    {
+      "title": "Contagious content: STEPPS and the science of shareability",
+      "type": "text",
+      "summary": "Czynniki sprawiające, że odbiorcy dzielą się treściami ze swoimi znajomymi i w organizacjach (waluta społeczna i ładunek emocjonalny)."
+    },
+    {
+      "title": "Writing Frameworks for Marketing Content: AIDA, PAS, and More",
+      "type": "text",
+      "summary": "Zastosowanie frameworków perswazyjnych w marketingu treści i tworzeniu ofert konwertujących."
+    }
+  ]
+}

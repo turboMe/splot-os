@@ -1,0 +1,423 @@
+/**
+ * INSPECTORS - AGENT CHAT PANEL (SPLOT OS)
+ * Precyzyjnie ostylowane szuflady dla:
+ * 1. Pamięć Obserwacyjna (SystemKnowledge Cards, Substrat Pamięci, Semantyka)
+ * 2. Task Ledger & Konsola (Kolejki LaneRecord, Claims, Event Stream)
+ * 3. Artefakty i Pliki (ArtifactStore, Typy ARTIFACT_TYPES, Hashe SHA256)
+ */
+
+/* 1. INSPEKTOR PAMIĘCI ROBOCZEJ (WORKING MEMORY & SYSTEM KNOWLEDGE) */
+.mem-section {
+  margin-bottom: 22px;
+}
+
+.mem-sec-title {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 10px;
+}
+
+.mem-layer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.mem-layer .ml-ic {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 9.5px;
+  flex-shrink: 0;
+}
+
+.mem-layer .ml-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.mem-layer .ml-name {
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 11.5px;
+}
+
+.mem-layer .ml-sub {
+  font-size: 9.5px;
+  color: var(--muted);
+}
+
+.mem-meter {
+  width: 100%;
+  height: 3px;
+  background: var(--bg-3);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 3px;
+}
+
+.mem-meter i {
+  display: block;
+  height: 100%;
+  background: var(--signal);
+  border-radius: 2px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mem-layer .ml-val {
+  font-size: 10.5px;
+  color: var(--ink-2);
+  flex-shrink: 0;
+}
+
+/* Karty Wiedzy Systemowej (SystemKnowledge Cards) */
+.knowledge-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.knowledge-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--font-mono);
+  transition: var(--trans-fast);
+}
+
+.knowledge-card:hover {
+  background: var(--bg-3);
+  border-color: var(--line-strong);
+}
+
+.kc-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kc-type-tag {
+  font-size: 9.5px;
+  padding: 1px 6px;
+  border-radius: var(--radius-xs);
+  background: var(--bg-3);
+  color: var(--signal);
+  border: 1px solid var(--line);
+  font-weight: 600;
+}
+
+.kc-type-tag.type-architecture_decision { color: #A855F7; border-color: rgba(168,85,247,0.3); background: rgba(168,85,247,0.1); }
+.kc-type-tag.type-autoheal_recipe { color: #EAB308; border-color: rgba(234,179,8,0.3); background: rgba(234,179,8,0.1); }
+.kc-type-tag.type-tool_contract { color: #2EE6A8; border-color: rgba(46,230,168,0.3); background: rgba(46,230,168,0.1); }
+.kc-type-tag.type-coding_pattern { color: #5B8DEF; border-color: rgba(91,141,239,0.3); background: rgba(91,141,239,0.1); }
+.kc-type-tag.type-user_preference { color: #EC4899; border-color: rgba(236,72,153,0.3); background: rgba(236,72,153,0.1); }
+
+.kc-score {
+  font-size: 10px;
+  color: var(--success);
+  font-weight: 700;
+}
+
+.kc-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.kc-content {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.kc-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 2px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.kc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.kc-tag {
+  font-size: 9px;
+  color: var(--muted);
+  background: var(--bg-1);
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+
+.kc-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 9.5px;
+  color: var(--faint);
+}
+
+/* 2. KONSOLA TERMINALA I TASK LEDGERA (§3.2 LaneRecord) */
+.lane-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.lane-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--font-mono);
+}
+
+.lane-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lane-no {
+  font-weight: 700;
+  color: var(--signal);
+  font-size: 11.5px;
+}
+
+.lane-agent {
+  font-size: 11px;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.lane-state-pill {
+  font-size: 9.5px;
+  padding: 1px 6px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.lane-state-pill.running { background: rgba(255,77,0,0.15); color: var(--signal); border: 1px solid rgba(255,77,0,0.3); }
+.lane-state-pill.done { background: rgba(46,230,168,0.15); color: var(--success); border: 1px solid rgba(46,230,168,0.3); }
+.lane-state-pill.queued { background: rgba(234,179,8,0.15); color: #EAB308; border: 1px solid rgba(234,179,8,0.3); }
+
+.lane-goal {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--ink-2);
+  line-height: 1.4;
+}
+
+.lane-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 9.5px;
+}
+
+.lane-claims {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.lane-claim {
+  background: var(--bg-3);
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+}
+
+.lane-owner {
+  color: var(--faint);
+  text-align: right;
+}
+
+/* Event Logs Stream */
+.terminal-container {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.term-filters {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.term-filter-btn {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  transition: var(--trans-fast);
+}
+
+.term-filter-btn:hover, .term-filter-btn.active {
+  background: var(--bg-3);
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+
+.terminal-logs {
+  background: var(--bg-0);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  max-height: 280px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.log-line {
+  display: flex;
+  gap: 8px;
+  line-height: 1.4;
+  color: var(--ink-2);
+  font-size: 10.5px;
+}
+
+.log-time {
+  color: var(--faint);
+  flex-shrink: 0;
+}
+
+.log-agent {
+  color: var(--accent, var(--signal));
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.log-msg {
+  word-break: break-word;
+}
+
+.log-line.error .log-msg {
+  color: var(--error);
+}
+
+.log-line.warn .log-msg {
+  color: var(--warning);
+}
+
+/* 3. LISTA ARTEFAKTÓW (ArtifactStore & ARTIFACT_TYPES) */
+.artifact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.artifact-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: var(--font-mono);
+  transition: var(--trans-fast);
+  cursor: pointer;
+}
+
+.artifact-card:hover {
+  background: var(--bg-3);
+  border-color: var(--line-strong);
+}
+
+.artifact-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-xs);
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--signal);
+  font-size: 13px;
+  font-weight: bold;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.artifact-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.artifact-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.artifact-summary {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  color: var(--ink-2);
+  line-height: 1.4;
+}
+
+.artifact-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 9.5px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.art-type-pill {
+  padding: 1px 5px;
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  color: var(--signal);
+}

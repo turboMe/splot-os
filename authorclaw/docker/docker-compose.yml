@@ -1,0 +1,64 @@
+# AuthorClaw Docker Compose
+# Secure deployment with resource limits and isolation
+
+services:
+  authorclaw:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: authorclaw
+    restart: unless-stopped
+    ports:
+      - "3847:3847"  # All interfaces (needed for VirtualBox NAT port forwarding)
+    volumes:
+      # Persist workspace data
+      - authorclaw-workspace:/app/workspace
+      # Persist vault (encrypted credentials)
+      - authorclaw-vault:/app/config/.vault
+      # Author OS tools (read-only mount for templates/references)
+      - ${AUTHOR_OS_PATH:-~/author-os}:/app/author-os:ro
+    environment:
+      - NODE_ENV=production
+      - AUTHORCLAW_VAULT_KEY=${AUTHORCLAW_VAULT_KEY:-}
+    # Security: Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    # Security: No privilege escalation
+    security_opt:
+      - no-new-privileges:true
+    # Network: Allow outbound for AI APIs and research
+    networks:
+      - authorclaw-net
+
+  # Optional: Ollama for free local AI
+  # Uncomment to enable — requires 4-8GB extra RAM in the VM
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   container_name: authorclaw-ollama
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ollama-models:/root/.ollama
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '4.0'
+  #         memory: 8G
+  #   networks:
+  #     - authorclaw-net
+  #   # Pull default model on first run
+  #   # Run: docker exec authorclaw-ollama ollama pull llama3.2
+
+networks:
+  authorclaw-net:
+    driver: bridge
+
+volumes:
+  authorclaw-workspace:
+  authorclaw-vault:
+  # ollama-models:

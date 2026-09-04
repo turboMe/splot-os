@@ -1,0 +1,37 @@
+node_modules/
+gateway/dist/
+.env
+config/.vault/
+config/user.json
+
+# Workspace runtime data (user-generated, not code)
+workspace/projects/
+workspace/research/
+workspace/exports/
+workspace/.memory/
+workspace/.audit/
+workspace/.agent/
+workspace/.audio/
+workspace/audio/
+workspace/documents/
+workspace/memory/
+workspace/.config/
+workspace/.activity/
+workspace/test-upload.txt
+*.log
+.DS_Store
+nul
+
+# Claude Code config (local dev only)
+.claude/
+
+# Premium skill packs (purchased separately, not bundled)
+skills/premium/*/
+!skills/premium/README.md
+
+# Author OS tools (mounted at runtime)
+author-os/
+
+# Internal testing docs (not for repo)
+scripts/FULL-TEST-CHECKLIST.md
+ROADMAP.md

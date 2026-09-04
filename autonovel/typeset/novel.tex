@@ -1,0 +1,225 @@
+\documentclass[11pt, openany]{book}
+
+% === GEOMETRY: Trade paperback (5.5 x 8.5 inches) ===
+\usepackage[
+  paperwidth=5.5in,
+  paperheight=8.5in,
+  inner=0.85in,
+  outer=0.65in,
+  top=0.75in,
+  bottom=0.85in,
+  headheight=14pt
+]{geometry}
+
+% === FONTS ===
+\usepackage{fontspec}
+\setmainfont{EB Garamond}[
+  Ligatures=TeX,
+  Numbers=OldStyle
+]
+
+% === TYPOGRAPHY ===
+\usepackage{microtype}
+\usepackage{setspace}
+\setstretch{1.12}
+\usepackage{parskip}
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0pt}
+
+% === GRAPHICS ===
+\usepackage{graphicx}
+
+% === DROP CAPS ===
+\usepackage{lettrine}
+\setcounter{DefaultLines}{2}
+
+% === HEADERS AND FOOTERS ===
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\textsc{the second son of the house of bells}}
+\fancyhead[RO]{\small\textit{\leftmark}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+% === CHAPTER STYLE ===
+\usepackage{titlesec}
+
+% Ornamental bell motif (using dingbats)
+\newcommand{\bellornament}{%
+  \par\noindent\vspace{6pt}%
+  \hfill{\large\symbol{"2756}}\hfill\null%
+  \vspace{6pt}\par%
+}
+
+% Scene break ornament
+\newcommand{\scenebreak}{%
+  \par\vspace{0.6\baselineskip}%
+  \noindent\hfil%
+  \IfFileExists{../art/pdf/scene_break.pdf}{%
+    \includegraphics[width=1.2in]{../art/pdf/scene_break.pdf}%
+  }{%
+  \IfFileExists{../art/scene_break.png}{%
+    \includegraphics[width=1.2in]{../art/scene_break.png}%
+  }{%
+    {\small\symbol{"2022}\quad\symbol{"2022}\quad\symbol{"2022}}%
+  }}%
+  \hfil%
+  \par\vspace{0.6\baselineskip}%
+}
+
+\renewcommand{\thechapter}{\Roman{chapter}}
+\titleformat{\chapter}[display]
+  {\normalfont\centering}
+  {\vspace*{1.5in}\footnotesize\textsc{chapter \thechapter}}
+  {4pt}
+  {\Large\itshape}
+  [\vspace{8pt}{\small--- $\diamond$ ---}\vspace{0.5in}]
+
+\titlespacing*{\chapter}{0pt}{0pt}{0pt}
+
+% Lowercase chapter name in header
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+
+% === TITLE PAGE DESIGN ===
+\newcommand{\makenoveltitle}{%
+  \thispagestyle{empty}
+  \begin{center}
+  \vspace*{2in}
+  
+  {\small\textsc{the}}\\[0.15in]
+  
+  {\Huge\textsc{Second Son}}\\[0.1in]
+  
+  {\small\textsc{of the}}\\[0.15in]
+  
+  {\Huge\textsc{House of Bells}}\\[0.4in]
+  
+  {\small------\quad$\diamond$\quad------}\\[0.5in]
+  
+  {\large\textit{A Novel}}\\[1in]
+  
+  {\Large\textsc{Claude Hermes}}\\[1.5in]
+  
+  \end{center}
+  \clearpage
+}
+
+% === EPIGRAPH ===
+\newcommand{\makeepigraph}{%
+  \thispagestyle{empty}
+  \vspace*{2.5in}
+  \begin{center}
+  \begin{minipage}{3in}
+  \begin{center}
+  \itshape
+  You're not listening to the bell.\\
+  You're listening for what the bell\\
+  is trying to tell you it is.\\[12pt]
+  \end{center}
+  \end{minipage}
+  \end{center}
+  \clearpage
+}
+
+% === HALF TITLE ===
+\newcommand{\makehalftitle}{%
+  \thispagestyle{empty}
+  \vspace*{3in}
+  \begin{center}
+  {\large\textsc{The Second Son of the House of Bells}}
+  \end{center}
+  \clearpage
+}
+
+% === PDF METADATA ===
+\usepackage{hyperref}
+\hypersetup{
+  pdftitle={The Second Son of the House of Bells},
+  pdfauthor={Claude Hermes},
+  pdfsubject={Fantasy Novel},
+  hidelinks
+}
+
+% === BEGIN DOCUMENT ===
+\begin{document}
+
+\frontmatter
+
+% Full-bleed cover image (if exists)
+\IfFileExists{../art/cover.png}{%
+  \thispagestyle{empty}
+  \newgeometry{margin=0pt}
+  \noindent\includegraphics[width=\paperwidth, height=\paperheight, keepaspectratio]{../art/cover.png}
+  \restoregeometry
+  \clearpage
+}{}
+
+% Half title
+\makehalftitle
+
+% Blank verso
+\thispagestyle{empty}
+\mbox{}
+\clearpage
+
+% Title page
+\makenoveltitle
+
+% Copyright / colophon
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+
+{\small This is a work of fiction}\\[4pt]
+{\small created by Hermes Agent.}\\[18pt]
+
+{\small For full reproduction code and alternate formats}\\[2pt]
+{\small (ePub, audiobook) please visit:}\\[8pt]
+
+{\small\texttt{https://nousresearch.com/bells}}\\[16pt]
+
+\IfFileExists{../art/qr_bells.png}{%
+  \includegraphics[width=1in]{../art/qr_bells.png}
+}{}
+
+\end{center}
+\vspace*{\fill}
+\begin{center}
+\IfFileExists{../art/pdf/nous_logo.pdf}{%
+  \includegraphics[width=0.8in]{../art/pdf/nous_logo.pdf}
+}{}
+\end{center}
+\vspace{0.3in}
+\clearpage
+
+% Epigraph
+\makeepigraph
+
+% Blank verso before main text
+\thispagestyle{empty}
+\mbox{}
+\clearpage
+
+\mainmatter
+
+% === CHAPTERS ===
+\input{chapters_content.tex}
+
+% === END MATTER ===
+\backmatter
+
+\thispagestyle{empty}
+\vspace*{3in}
+\begin{center}
+{\small------\quad$\diamond$\quad------}\\[0.3in]
+{\small\textit{The bells rang on.}}
+\end{center}
+
+\end{document}

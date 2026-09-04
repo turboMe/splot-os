@@ -1,0 +1,45 @@
+# Splot OS Infrastructure:
+#  - MongoDB 7 (Replica Set rs0) — transactional agent memory, CRM, task ledger
+#  - n8n self-hosted             — workflow automation execution engine
+#
+# Quickstart:
+#   docker compose up -d
+#
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: splot-mongo
+    command: ["--replSet", "rs0", "--bind_ip_all"]
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: agentforge
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.hello().isWritablePrimary"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: splot-n8n
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - WEBHOOK_URL=http://localhost:5678/
+      - GENERIC_TIMEZONE=Europe/Warsaw
+      - N8N_RUNNERS_ENABLED=true
+    volumes:
+      - n8n_data:/home/node/.n8n
+    restart: unless-stopped
+
+volumes:
+  mongo-data:
+  n8n_data:
