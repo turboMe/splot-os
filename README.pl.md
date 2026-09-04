@@ -1,4 +1,8 @@
-# AI-Agentic-System (Splot OS) — Lokalny System Operacyjny dla Agentów AI
+# Splot OS — Lokalny System Operacyjny dla Agentów AI
+
+<p align="center">
+  <img src="public/splot-os-banner.png" alt="Splot OS - Lokalny System Operacyjny dla Agentów AI" width="100%">
+</p>
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x%20%2F%20Node.js%20%3E%3D22.13-blue.svg)](https://www.typescriptlang.org/)
 [![Fundament](https://img.shields.io/badge/Fundament-Mastra%20Core%20v1.31%2B-blueviolet.svg)](https://mastra.ai/)

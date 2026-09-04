@@ -1,4 +1,8 @@
-# AI-Agentic-System (Splot OS) — Local-First Agentic Operating System
+# Splot OS — Local-First Agentic Operating System
+
+<p align="center">
+  <img src="public/splot-os-banner.png" alt="Splot OS - Local-First Agentic Operating System" width="100%">
+</p>
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x%20%2F%20Node.js%20%3E%3D22.13-blue.svg)](https://www.typescriptlang.org/)
 [![Framework Base](https://img.shields.io/badge/Built%20On-Mastra%20Core%20v1.31%2B-blueviolet.svg)](https://mastra.ai/)
