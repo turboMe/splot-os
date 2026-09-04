@@ -1,1 +1,0 @@
-../../../references/ai-writing-patterns.md
